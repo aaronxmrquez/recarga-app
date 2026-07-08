@@ -39,7 +39,8 @@ struct TodayView: View {
                     .font(.title.bold())
                 if let plan = state.plan {
                     HStack(spacing: 8) {
-                        Label(plan.targets.dayType.label, systemImage: plan.targets.dayType.icono)
+                        let chip = chipDia(plan)
+                        Label(chip.0, systemImage: chip.1)
                             .font(.callout.weight(.semibold))
                             .padding(.horizontal, 10).padding(.vertical, 4)
                             .background(Capsule().fill(Color.orange.opacity(0.18)))
@@ -70,6 +71,17 @@ struct TodayView: View {
                 .help("Ajustes")
             }
             .buttonStyle(.bordered)
+        }
+    }
+
+    private func chipDia(_ plan: DayPlan) -> (String, String) {
+        switch plan.estadoCarrera {
+        case .diaDeCarrera(let c):
+            return ("Carrera: \(c.nombre)", "flag.checkered")
+        case .enCarga(let c, let dias):
+            return ("Carga — \(c.nombre) en \(dias) día\(dias == 1 ? "" : "s")", "fork.knife")
+        case .normal:
+            return (plan.targets.dayType.label, plan.targets.dayType.icono)
         }
     }
 
@@ -250,6 +262,10 @@ struct TodayView: View {
                 .monospacedDigit()
             if plan.tipoManana.esDuro {
                 Text("Mañana: \(plan.tipoManana.label) — la cena ya viene ajustada.")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+            if let prox = state.proximaCarrera, prox.dias > 0 {
+                Text("🏁 \(prox.carrera.nombre) (\(prox.carrera.distanciaTexto)): faltan \(prox.dias) día\(prox.dias == 1 ? "" : "s")\(prox.dias > prox.carrera.diasCarga ? " — la carga se activará sola \(prox.carrera.diasCarga) días antes." : ".")")
                     .font(.caption).foregroundStyle(.secondary)
             }
             Text("Orientativo, no es consejo médico. Reglas: ISSN/ACSM para deporte de resistencia.")

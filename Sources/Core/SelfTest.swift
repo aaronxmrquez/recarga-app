@@ -104,6 +104,32 @@ func runSelfTest() -> Int32 {
     let checklist = NutritionEngine.checklist(meals: plan)
     check(checklist.count == 4, "checklist incompleto")
 
+    // 7. Calendario de carreras
+    let maraton = Carrera(id: "m", nombre: "Maratón de Lima", fecha: "2026-10-18", distanciaKm: 42.2)
+    let diezK = Carrera(id: "d", nombre: "10K del trabajo", fecha: "2026-08-09", distanciaKm: 10)
+    let cs = [maraton, diezK]
+    func f(_ s: String) -> Date { Fechas.claveDia.date(from: s)! }
+    check(RaceCalendar.estado(para: f("2026-10-18"), carreras: cs) == .diaDeCarrera(maraton),
+          "día de carrera no detectado")
+    check(RaceCalendar.estado(para: f("2026-10-15"), carreras: cs) == .enCarga(maraton, diasRestantes: 3),
+          "la carga de maratón debería empezar 3 días antes")
+    check(RaceCalendar.estado(para: f("2026-10-14"), carreras: cs) == .normal,
+          "la carga de maratón empezó demasiado pronto")
+    check(RaceCalendar.estado(para: f("2026-08-08"), carreras: cs) == .enCarga(diezK, diasRestantes: 1),
+          "la carga de 10K debería ser solo la víspera")
+    check(RaceCalendar.estado(para: f("2026-08-07"), carreras: cs) == .normal,
+          "la carga de 10K empezó demasiado pronto")
+    check(!RaceCalendar.consejos(.diaDeCarrera(maraton), pesoKg: 70).isEmpty,
+          "sin consejos de día de carrera")
+    check(RaceCalendar.consejos(.enCarga(maraton, diasRestantes: 1), pesoKg: 70).count == 2,
+          "la víspera debería traer consejo extra de cena")
+    if let prox = RaceCalendar.proxima(desde: f("2026-09-01"), carreras: cs) {
+        check(prox.carrera.id == "m" && prox.dias == 47,
+              "próxima carrera mal calculada: \(prox.carrera.id) a \(prox.dias) días")
+    } else {
+        fallas.append("proxima() no encontró la carrera futura")
+    }
+
     // Reporte
     print("── Recarga selftest ──")
     print("Recetario: \(recetas.count) recetas ✓")
@@ -116,6 +142,7 @@ func runSelfTest() -> Int32 {
                      "•", m.slot.label, m.recipe.nombre, m.porciones, m.kcal, m.carbs, m.prot, m.grasa))
     }
     print(String(format: "  TOTAL: %.0f kcal · C %.0f · P %.0f", plan.reduce(0) { $0 + $1.kcal }, totC, totP))
+    print("Calendario de carreras: carga 3/2/1 días según distancia ✓")
 
     if fallas.isEmpty {
         print("\nSELFTEST OK ✓")

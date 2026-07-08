@@ -40,6 +40,7 @@ final class Store {
     static let credenciales = "strava-credentials.json"
     static let tokens = "strava-tokens.json"
     static let historial = "meal-history.json"
+    static let carreras = "races.json"
 }
 
 /// Historial de recetas elegidas por día, para variedad y para fijar los

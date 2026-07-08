@@ -13,6 +13,8 @@ struct SettingsView: View {
                     .tabItem { Label("Perfil", systemImage: "person.circle") }
                 SemanaTab()
                     .tabItem { Label("Semana", systemImage: "calendar") }
+                CarrerasTab()
+                    .tabItem { Label("Carreras", systemImage: "flag.checkered") }
             }
             .padding(.top, 8)
 
@@ -217,10 +219,90 @@ private struct SemanaTab: View {
                 }
             }
 
-            Text("«Carga» es para los 2–3 días previos a un maratón: carbohidratos al máximo (10–12 g/kg) sin entrenamiento fuerte.")
+            Text("«Carga» es para los 2–3 días previos a una carrera: carbohidratos al máximo (10–12 g/kg). Si registras tus carreras en la pestaña Carreras, la carga se activa sola — no necesitas tocar la plantilla.")
                 .font(.caption).foregroundStyle(.secondary)
             Spacer()
         }
         .padding(20)
+    }
+}
+
+// MARK: - Carreras
+
+private struct CarrerasTab: View {
+    @EnvironmentObject var state: AppState
+    @State private var nombre = ""
+    @State private var fecha = Calendar.current.date(byAdding: .day, value: 30, to: Date()) ?? Date()
+    @State private var distancia = 42.2
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text("Tus carreras").font(.headline)
+            Text("La app activa sola la carga de carbohidratos: 3 días antes en maratón, 2 en media, 1 en 10K o menos. El día de la carrera te da el protocolo de desayuno de competencia y la recuperación.")
+                .font(.callout).foregroundStyle(.secondary)
+
+            if state.carreras.isEmpty {
+                Text("Sin carreras registradas todavía.")
+                    .font(.callout).foregroundStyle(.tertiary)
+            } else {
+                ScrollView {
+                    VStack(spacing: 6) {
+                        ForEach(state.carreras.sorted { $0.fecha < $1.fecha }) { c in
+                            HStack(spacing: 10) {
+                                Image(systemName: "flag.checkered")
+                                    .foregroundStyle(.orange)
+                                VStack(alignment: .leading, spacing: 1) {
+                                    Text(c.nombre).font(.callout.weight(.semibold))
+                                    Text("\(fechaBonita(c)) · \(c.distanciaTexto) · carga \(c.diasCarga) día\(c.diasCarga == 1 ? "" : "s") antes")
+                                        .font(.caption).foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Button {
+                                    state.eliminarCarrera(c)
+                                } label: {
+                                    Image(systemName: "trash")
+                                }
+                                .buttonStyle(.borderless)
+                                .help("Eliminar carrera")
+                            }
+                            .padding(8)
+                            .background(RoundedRectangle(cornerRadius: 8).fill(.quaternary.opacity(0.5)))
+                        }
+                    }
+                }
+                .frame(maxHeight: 200)
+            }
+
+            Divider()
+
+            Text("Agregar carrera").font(.callout.weight(.semibold))
+            TextField("Nombre (ej. Maratón de Lima)", text: $nombre)
+                .textFieldStyle(.roundedBorder)
+            HStack(spacing: 14) {
+                DatePicker("Fecha", selection: $fecha, in: Date()..., displayedComponents: .date)
+                Picker("Distancia", selection: $distancia) {
+                    Text("5K").tag(5.0)
+                    Text("10K").tag(10.0)
+                    Text("Media (21K)").tag(21.1)
+                    Text("30K").tag(30.0)
+                    Text("Maratón (42K)").tag(42.2)
+                }
+                .frame(maxWidth: 190)
+            }
+            Button("Agregar") {
+                state.agregarCarrera(nombre: nombre, fecha: fecha, distanciaKm: distancia)
+                nombre = ""
+            }
+            .buttonStyle(.borderedProminent).tint(.orange)
+            .disabled(nombre.trimmingCharacters(in: .whitespaces).isEmpty)
+
+            Spacer()
+        }
+        .padding(20)
+    }
+
+    private func fechaBonita(_ c: Carrera) -> String {
+        guard let d = c.fechaDate else { return c.fecha }
+        return Fechas.tituloDia.string(from: d).capitalized
     }
 }

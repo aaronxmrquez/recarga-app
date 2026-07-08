@@ -1,10 +1,17 @@
 import SwiftUI
 import AppKit
 
+struct CarreraProxima {
+    let carrera: Carrera
+    let dias: Int
+}
+
 @MainActor
 final class AppState: ObservableObject {
     @Published var profile: UserProfile?
     @Published var template: TrainingTemplate = .porDefecto
+    @Published var carreras: [Carrera] = []
+    @Published var proximaCarrera: CarreraProxima?
     @Published var plan: DayPlan?
     @Published var actividadesHoy: [StravaActivity] = []
     @Published var stravaConectado = false
@@ -29,6 +36,7 @@ final class AppState: ObservableObject {
         }
         profile = store.load(UserProfile.self, de: Store.perfil)
         template = store.load(TrainingTemplate.self, de: Store.plantilla) ?? .porDefecto
+        carreras = store.load([Carrera].self, de: Store.carreras) ?? []
         history = store.load(MealHistory.self, de: Store.historial) ?? [:]
         strava.creds = store.load(StravaCredentials.self, de: Store.credenciales)
         strava.tokens = store.load(StravaTokens.self, de: Store.tokens)
@@ -56,6 +64,25 @@ final class AppState: ObservableObject {
         recomputar()
     }
 
+    // MARK: Carreras
+
+    func agregarCarrera(nombre: String, fecha: Date, distanciaKm: Double) {
+        let c = Carrera(
+            id: UUID().uuidString,
+            nombre: nombre.trimmingCharacters(in: .whitespacesAndNewlines),
+            fecha: Fechas.clave(fecha),
+            distanciaKm: distanciaKm)
+        carreras.append(c)
+        store.save(carreras, en: Store.carreras)
+        recomputar()
+    }
+
+    func eliminarCarrera(_ c: Carrera) {
+        carreras.removeAll { $0.id == c.id }
+        store.save(carreras, en: Store.carreras)
+        recomputar()
+    }
+
     // MARK: Plan del día
 
     /// Si aún no hay actividad subida (p. ej. son las 4 am), estima el gasto
@@ -78,14 +105,37 @@ final class AppState: ObservableObject {
         }
         let hoy = Date()
         let manana = Calendar.current.date(byAdding: .day, value: 1, to: hoy) ?? hoy
-        let plantillaHoy = template.tipo(para: hoy)
-        let tipoManana = template.tipo(para: manana)
 
-        let (tipo, esReal) = NutritionEngine.clasificarDia(
+        let estadoHoy = RaceCalendar.estado(para: hoy, carreras: carreras)
+        let estadoManana = RaceCalendar.estado(para: manana, carreras: carreras)
+        proximaCarrera = RaceCalendar.proxima(desde: hoy, carreras: carreras)
+            .map { CarreraProxima(carrera: $0.carrera, dias: $0.dias) }
+
+        var plantillaHoy = template.tipo(para: hoy)
+        if case .diaDeCarrera = estadoHoy { plantillaHoy = .largo }
+        if case .enCarga = estadoHoy { plantillaHoy = .carga }
+        var tipoManana = template.tipo(para: manana)
+        if case .diaDeCarrera = estadoManana { tipoManana = .largo }
+        if case .enCarga = estadoManana { tipoManana = .carga }
+
+        let (clasificado, esReal) = NutritionEngine.clasificarDia(
             actividades: actividadesHoy, plantilla: plantillaHoy)
-        let kcalEntreno = actividadesHoy.isEmpty
-            ? kcalEstimadaPlantilla(tipo, peso: p.pesoKg)
-            : NutritionEngine.trainingKcal(actividades: actividadesHoy, pesoKg: p.pesoKg)
+        var tipo = clasificado
+        // Un trote corto de activación no debe romper la carga pre-carrera,
+        // y el día de carrera es "largo" aunque la actividad aún no se suba.
+        if case .enCarga = estadoHoy { tipo = .carga }
+        if case .diaDeCarrera = estadoHoy, actividadesHoy.isEmpty { tipo = .largo }
+
+        let kcalEntreno: Double
+        if actividadesHoy.isEmpty {
+            if case .diaDeCarrera(let c) = estadoHoy {
+                kcalEntreno = c.distanciaKm * p.pesoKg
+            } else {
+                kcalEntreno = kcalEstimadaPlantilla(tipo, peso: p.pesoKg)
+            }
+        } else {
+            kcalEntreno = NutritionEngine.trainingKcal(actividades: actividadesHoy, pesoKg: p.pesoKg)
+        }
 
         let targets = NutritionEngine.dayTargets(profile: p, dayType: tipo, trainingKcal: kcalEntreno)
         let mealTargets = NutritionEngine.mealTargets(day: targets, manana: tipoManana)
@@ -99,11 +149,13 @@ final class AppState: ObservableObject {
         history[claveHoy] = deHoy
         store.save(history, en: Store.historial)
 
-        let consejos = NutritionEngine.consejos(
+        var consejos = RaceCalendar.consejos(estadoHoy, pesoKg: p.pesoKg)
+        consejos += NutritionEngine.consejos(
             day: targets, manana: tipoManana, huboActividad: esReal, pesoKg: p.pesoKg)
         plan = DayPlan(
             fecha: hoy, targets: targets, tipoManana: tipoManana, meals: meals,
-            consejos: consejos, checklist: NutritionEngine.checklist(meals: meals))
+            consejos: consejos, checklist: NutritionEngine.checklist(meals: meals),
+            estadoCarrera: estadoHoy)
     }
 
     /// Cambia la receta de una comida por otra alternativa.

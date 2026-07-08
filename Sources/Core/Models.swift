@@ -176,6 +176,7 @@ struct DayPlan {
     var meals: [PlannedMeal]
     var consejos: [String]
     var checklist: [ChecklistItem]
+    var estadoCarrera: EstadoCarrera = .normal
 
     var totalKcal: Double { meals.reduce(0) { $0 + $1.kcal } }
     var totalCarbs: Double { meals.reduce(0) { $0 + $1.carbs } }
