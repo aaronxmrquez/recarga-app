@@ -23,6 +23,19 @@ enum NutritionEngine {
         }
     }
 
+    /// Estimación del gasto de una sesión aún no corrida (según plantilla),
+    /// con distancias típicas de un maratonista.
+    static func kcalEstimada(tipo: DayType, pesoKg: Double) -> Double {
+        let km: Double
+        switch tipo {
+        case .suave: km = 10
+        case .moderado: km = 14
+        case .largo: km = 30
+        default: km = 0
+        }
+        return km * pesoKg
+    }
+
     // MARK: Clasificación del día
 
     /// Clasifica el día según las actividades reales; si no hay, cae a la

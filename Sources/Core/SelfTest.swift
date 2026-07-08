@@ -130,6 +130,38 @@ func runSelfTest() -> Int32 {
         fallas.append("proxima() no encontró la carrera futura")
     }
 
+    // 8. Proyección semanal (determinista) + lista de compras
+    let semana = WeekPlanner.proyectar(
+        desde: f("2026-07-09"), dias: 7, profile: perfil,
+        template: .porDefecto, carreras: [], recetas: recetas, historia: [:])
+    check(semana.count == 7, "proyección incompleta: \(semana.count) días")
+    check(semana.allSatisfy { $0.meals.count >= 4 }, "días proyectados con comidas incompletas")
+    let semana2 = WeekPlanner.proyectar(
+        desde: f("2026-07-09"), dias: 7, profile: perfil,
+        template: .porDefecto, carreras: [], recetas: recetas, historia: [:])
+    let ids1 = semana.flatMap { $0.meals.map(\.recipe.id) }
+    let ids2 = semana2.flatMap { $0.meals.map(\.recipe.id) }
+    check(ids1 == ids2, "la proyección no es determinista")
+
+    let lista = ShoppingList.generar(dias: semana)
+    let totalItems = lista.reduce(0) { $0 + $1.items.count }
+    check(!lista.isEmpty, "lista de compras vacía")
+    check(totalItems >= 15, "lista de compras sospechosamente corta: \(totalItems) ítems")
+    check(lista.flatMap(\.items).contains { $0.gramos > 0 },
+          "ningún ítem acumuló gramos — el parser de cantidades falló")
+    let sinCategoria = lista.first { $0.categoria == "Otros" }?.items.count ?? 0
+    check(sinCategoria <= totalItems / 3,
+          "demasiados ingredientes sin categoría (\(sinCategoria) de \(totalItems))")
+
+    // Con carrera dentro de la semana: la carga aparece en los días previos
+    let semCarrera = WeekPlanner.proyectar(
+        desde: f("2026-07-09"), dias: 7, profile: perfil, template: .porDefecto,
+        carreras: [Carrera(id: "x", nombre: "Test 42K", fecha: "2026-07-15", distanciaKm: 42.2)],
+        recetas: recetas, historia: [:])
+    check(semCarrera[3].tipo == .carga && semCarrera[5].tipo == .carga,
+          "la proyección no aplica la carga pre-carrera")
+    check(semCarrera[6].tipo == .largo, "el día de carrera proyectado no es largo")
+
     // Reporte
     print("── Recarga selftest ──")
     print("Recetario: \(recetas.count) recetas ✓")
@@ -143,6 +175,12 @@ func runSelfTest() -> Int32 {
     }
     print(String(format: "  TOTAL: %.0f kcal · C %.0f · P %.0f", plan.reduce(0) { $0 + $1.kcal }, totC, totP))
     print("Calendario de carreras: carga 3/2/1 días según distancia ✓")
+    print("Semana proyectada: 7 días · lista de compras: \(totalItems) ítems en \(lista.count) categorías ✓")
+    print("\nLista de compras de la semana proyectada:")
+    for (cat, items) in lista {
+        print("  [\(cat)]")
+        for it in items { print("    • \(it.nombre) — \(it.detalle)") }
+    }
 
     if fallas.isEmpty {
         print("\nSELFTEST OK ✓")

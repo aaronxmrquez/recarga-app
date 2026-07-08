@@ -10,6 +10,11 @@ App nativa de macOS que te dice **qué comer hoy** (desayuno, almuerzo, cena y s
 
 El día está pensado para quien entrena de madrugada: pre-entreno ligero ~4:15 am, desayuno como comida de recuperación al volver, y cena que carga glucógeno si mañana hay fondo.
 
+Además:
+
+- **Carreras** (⚙︎ → Carreras): registra nombre, fecha y distancia; la carga de carbohidratos (~11 g/kg) se activa sola los días previos — 3 para maratón, 2 para media, 1 para 10K — y el día D aplica el protocolo de desayuno de competencia.
+- **Semana y compras** (botón 🛒): proyecta los próximos 7 días con el mismo motor y consolida la **lista de compras** por categorías (frutas/verduras, menestras, soya, panes, despensa) con cantidades sumadas, lista para copiar y llevar al mercado.
+
 ## Conectar Strava (una sola vez, ~5 min)
 
 1. Entra a <https://www.strava.com/settings/api> y crea tu app personal:
@@ -45,8 +50,8 @@ Support/         # Info.plist
 
 ## Roadmap
 
-- **Fase 2**: lista de compras semanal, vista de la semana (carga vs ingesta), detección automática post-entreno, editor de recetas.
-- **Fase 3**: menús generativos con la API de Claude, asistente de carb-loading de semana de maratón, hidratación/sodio para fondos con calor, port a iOS (requiere Xcode), notificaciones de ventana de recuperación.
+- **Fase 2 (resto)**: vista de la semana pasada (carga vs ingesta real), detección automática post-entreno en segundo plano, editor de recetas en la app.
+- **Fase 3**: menús generativos con la API de Claude, hidratación/sodio para fondos con calor, port a iOS (requiere Xcode), notificaciones de ventana de recuperación.
 
 ## Nota
 

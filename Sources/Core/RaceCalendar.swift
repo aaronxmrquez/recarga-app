@@ -55,6 +55,15 @@ enum RaceCalendar {
         return .normal
     }
 
+    /// Tipo de día efectivo: el calendario de carreras manda sobre la plantilla.
+    static func tipoEfectivo(plantilla: DayType, estado: EstadoCarrera) -> DayType {
+        switch estado {
+        case .diaDeCarrera: return .largo
+        case .enCarga: return .carga
+        case .normal: return plantilla
+        }
+    }
+
     /// La carrera futura más próxima (incluye hoy) y a cuántos días está.
     static func proxima(desde date: Date, carreras: [Carrera]) -> (carrera: Carrera, dias: Int)? {
         var mejor: (Carrera, Int)?

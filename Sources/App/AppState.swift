@@ -85,19 +85,6 @@ final class AppState: ObservableObject {
 
     // MARK: Plan del día
 
-    /// Si aún no hay actividad subida (p. ej. son las 4 am), estima el gasto
-    /// de la sesión planificada para que los objetivos del día ya la incluyan.
-    private func kcalEstimadaPlantilla(_ tipo: DayType, peso: Double) -> Double {
-        let km: Double
-        switch tipo {
-        case .suave: km = 10
-        case .moderado: km = 14
-        case .largo: km = 30
-        default: km = 0
-        }
-        return km * peso
-    }
-
     func recomputar() {
         guard let p = profile, !recetas.isEmpty else {
             plan = nil
@@ -111,12 +98,10 @@ final class AppState: ObservableObject {
         proximaCarrera = RaceCalendar.proxima(desde: hoy, carreras: carreras)
             .map { CarreraProxima(carrera: $0.carrera, dias: $0.dias) }
 
-        var plantillaHoy = template.tipo(para: hoy)
-        if case .diaDeCarrera = estadoHoy { plantillaHoy = .largo }
-        if case .enCarga = estadoHoy { plantillaHoy = .carga }
-        var tipoManana = template.tipo(para: manana)
-        if case .diaDeCarrera = estadoManana { tipoManana = .largo }
-        if case .enCarga = estadoManana { tipoManana = .carga }
+        let plantillaHoy = RaceCalendar.tipoEfectivo(
+            plantilla: template.tipo(para: hoy), estado: estadoHoy)
+        let tipoManana = RaceCalendar.tipoEfectivo(
+            plantilla: template.tipo(para: manana), estado: estadoManana)
 
         let (clasificado, esReal) = NutritionEngine.clasificarDia(
             actividades: actividadesHoy, plantilla: plantillaHoy)
@@ -131,7 +116,7 @@ final class AppState: ObservableObject {
             if case .diaDeCarrera(let c) = estadoHoy {
                 kcalEntreno = c.distanciaKm * p.pesoKg
             } else {
-                kcalEntreno = kcalEstimadaPlantilla(tipo, peso: p.pesoKg)
+                kcalEntreno = NutritionEngine.kcalEstimada(tipo: tipo, pesoKg: p.pesoKg)
             }
         } else {
             kcalEntreno = NutritionEngine.trainingKcal(actividades: actividadesHoy, pesoKg: p.pesoKg)
@@ -156,6 +141,15 @@ final class AppState: ObservableObject {
             fecha: hoy, targets: targets, tipoManana: tipoManana, meals: meals,
             consejos: consejos, checklist: NutritionEngine.checklist(meals: meals),
             estadoCarrera: estadoHoy)
+    }
+
+    /// Proyecta los próximos días (desde mañana) para la vista de semana y compras.
+    func proyectarSemana(dias: Int = 7) -> [DiaProyectado] {
+        guard let p = profile, !recetas.isEmpty else { return [] }
+        let inicio = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
+        return WeekPlanner.proyectar(
+            desde: inicio, dias: dias, profile: p, template: template,
+            carreras: carreras, recetas: recetas, historia: history)
     }
 
     /// Cambia la receta de una comida por otra alternativa.

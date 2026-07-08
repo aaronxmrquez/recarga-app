@@ -3,6 +3,7 @@ import SwiftUI
 struct TodayView: View {
     @EnvironmentObject var state: AppState
     @Binding var mostrarAjustes: Bool
+    @State private var mostrarSemana = false
 
     var body: some View {
         ScrollView {
@@ -64,6 +65,13 @@ struct TodayView: View {
                 .help("Actualizar desde Strava")
 
                 Button {
+                    mostrarSemana = true
+                } label: {
+                    Image(systemName: "cart")
+                }
+                .help("Semana y lista de compras")
+
+                Button {
                     mostrarAjustes = true
                 } label: {
                     Image(systemName: "gearshape")
@@ -71,6 +79,9 @@ struct TodayView: View {
                 .help("Ajustes")
             }
             .buttonStyle(.bordered)
+        }
+        .sheet(isPresented: $mostrarSemana) {
+            WeekView().environmentObject(state)
         }
     }
 
