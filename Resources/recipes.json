@@ -1,0 +1,556 @@
+[
+  {
+    "id": "platano-datiles",
+    "nombre": "Plátano con dátiles",
+    "momentos": ["pre"],
+    "kcal": 215, "carbs": 52, "prot": 2, "grasa": 0.5,
+    "tiempoMin": 2,
+    "micros": [],
+    "ingredientes": ["1 plátano maduro", "3 dátiles", "agua o mate"],
+    "nota": "El clásico de madrugada: puro carbohidrato rápido, cero fibra pesada."
+  },
+  {
+    "id": "pan-mermelada",
+    "nombre": "Pan francés con mermelada",
+    "momentos": ["pre"],
+    "kcal": 275, "carbs": 60, "prot": 6, "grasa": 1.5,
+    "tiempoMin": 3,
+    "micros": [],
+    "ingredientes": ["2 panes franceses", "2 cdas de mermelada"],
+    "nota": "Fácil de digerir antes de correr. Evita mantequillas a esta hora."
+  },
+  {
+    "id": "chapo-platano",
+    "nombre": "Chapo de plátano caliente",
+    "momentos": ["pre"],
+    "kcal": 260, "carbs": 58, "prot": 3, "grasa": 2,
+    "tiempoMin": 10,
+    "micros": [],
+    "ingredientes": ["2 plátanos maduros", "canela y clavo", "agua"],
+    "nota": "Selvático y reconfortante a las 4 am. Se puede dejar listo la noche anterior."
+  },
+  {
+    "id": "avena-chancaca",
+    "nombre": "Avena rápida con chancaca",
+    "momentos": ["pre"],
+    "kcal": 310, "carbs": 62, "prot": 8, "grasa": 4,
+    "tiempoMin": 5,
+    "micros": [],
+    "ingredientes": ["60 g de avena", "1 trozo de chancaca (miel de caña)", "agua", "canela"],
+    "nota": "Para sesiones largas: energía sostenida. Cocínala aguada para digerir fácil."
+  },
+  {
+    "id": "tostadas-platano-canela",
+    "nombre": "Tostadas con plátano y canela",
+    "momentos": ["pre"],
+    "kcal": 290, "carbs": 62, "prot": 6, "grasa": 2,
+    "tiempoMin": 5,
+    "micros": [],
+    "ingredientes": ["2 tostadas de pan de molde", "1 plátano", "canela"],
+    "nota": null
+  },
+  {
+    "id": "mazamorra-maicena-manzana",
+    "nombre": "Mazamorra de maicena con manzana",
+    "momentos": ["pre"],
+    "kcal": 240, "carbs": 58, "prot": 1, "grasa": 0.5,
+    "tiempoMin": 10,
+    "micros": [],
+    "ingredientes": ["3 cdas de maicena", "1 manzana rallada", "azúcar", "canela"],
+    "nota": "Prácticamente cero fibra: ideal si el estómago se pone delicado antes de series."
+  },
+  {
+    "id": "datiles-sal",
+    "nombre": "Dátiles con pizca de sal",
+    "momentos": ["pre"],
+    "kcal": 185, "carbs": 45, "prot": 1, "grasa": 0.3,
+    "tiempoMin": 1,
+    "micros": [],
+    "ingredientes": ["6 dátiles", "pizca de sal"],
+    "nota": "El gel natural: la sal suma sodio para fondos con calor."
+  },
+  {
+    "id": "arroz-leche-soya",
+    "nombre": "Arroz con leche de soya",
+    "momentos": ["pre", "snack"],
+    "kcal": 320, "carbs": 64, "prot": 8, "grasa": 4,
+    "tiempoMin": 5,
+    "micros": ["calcio"],
+    "ingredientes": ["1 taza de arroz con leche preparado con leche de soya fortificada", "canela", "pasas"],
+    "nota": "Recalentado de la víspera funciona perfecto como pre-fondo."
+  },
+
+  {
+    "id": "batido-recuperador",
+    "nombre": "Batido recuperador de arveja, plátano y cacao",
+    "momentos": ["desayuno"],
+    "kcal": 525, "carbs": 78, "prot": 34, "grasa": 9,
+    "tiempoMin": 5,
+    "micros": ["calcio", "proteinaCompleta"],
+    "ingredientes": ["30 g de proteína de arveja", "2 plátanos", "50 g de avena", "1 cda de cacao", "400 ml de leche de soya fortificada"],
+    "nota": "La opción para justo al llegar del fondo: 3:1 carbo-proteína, se toma en 2 minutos."
+  },
+  {
+    "id": "avena-power",
+    "nombre": "Avena con plátano, chía y maca",
+    "momentos": ["desayuno"],
+    "kcal": 530, "carbs": 88, "prot": 16, "grasa": 13,
+    "tiempoMin": 10,
+    "micros": ["omega3", "calcio"],
+    "ingredientes": ["80 g de avena", "1 plátano", "1 cda de chía", "1 cdta de maca", "300 ml de leche de soya fortificada", "pasas"],
+    "nota": "La chía cubre omega-3 del día. La maca es puro amor propio serrano."
+  },
+  {
+    "id": "quinua-desayuno",
+    "nombre": "Quinua con leche de soya, manzana y pasas",
+    "momentos": ["desayuno"],
+    "kcal": 510, "carbs": 92, "prot": 18, "grasa": 8,
+    "tiempoMin": 20,
+    "micros": ["hierro", "calcio", "proteinaCompleta"],
+    "ingredientes": ["90 g de quinua cocida en leche de soya", "1 manzana", "pasas", "canela", "chancaca al gusto"],
+    "nota": "Quinua = proteína completa con los 9 aminoácidos. Desayuno de campeonato."
+  },
+  {
+    "id": "tofu-revuelto",
+    "nombre": "Tofu revuelto criollo con pan",
+    "momentos": ["desayuno"],
+    "kcal": 490, "carbs": 58, "prot": 28, "grasa": 16,
+    "tiempoMin": 15,
+    "micros": ["hierro", "calcio", "proteinaCompleta"],
+    "ingredientes": ["200 g de tofu firme desmenuzado", "cebolla, tomate y ají amarillo", "cúrcuma", "2 panes franceses"],
+    "nota": "Estilo revuelto criollo: el tomate suma vitamina C para absorber el hierro del tofu."
+  },
+  {
+    "id": "pan-palta-jugo",
+    "nombre": "Pan con palta y tomate + jugo de naranja",
+    "momentos": ["desayuno"],
+    "kcal": 520, "carbs": 74, "prot": 12, "grasa": 20,
+    "tiempoMin": 8,
+    "micros": ["vitC"],
+    "ingredientes": ["2 panes franceses", "1 palta chica", "tomate", "1 vaso de jugo de naranja"],
+    "nota": "El desayuno limeño de toda la vida, ya era vegano sin saberlo."
+  },
+  {
+    "id": "panqueques-avena",
+    "nombre": "Panqueques de avena y plátano con maní",
+    "momentos": ["desayuno"],
+    "kcal": 550, "carbs": 84, "prot": 18, "grasa": 16,
+    "tiempoMin": 20,
+    "micros": [],
+    "ingredientes": ["80 g de avena molida", "1 plátano", "leche de soya", "1 cda de mantequilla de maní", "miel de caña"],
+    "nota": "Para el día de descanso o post-rodaje suave, cuando hay tiempo de cocinar."
+  },
+  {
+    "id": "sanguche-hummus-papaya",
+    "nombre": "Sánguche de hummus + papaya",
+    "momentos": ["desayuno"],
+    "kcal": 490, "carbs": 76, "prot": 17, "grasa": 13,
+    "tiempoMin": 8,
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["2 panes integrales", "4 cdas de hummus", "tomate y pepino", "1 taza de papaya"],
+    "nota": "La papaya (vitamina C) ayuda a absorber el hierro del garbanzo."
+  },
+  {
+    "id": "bowl-kiwicha-lucuma",
+    "nombre": "Bowl de kiwicha con lúcuma",
+    "momentos": ["desayuno"],
+    "kcal": 490, "carbs": 86, "prot": 17, "grasa": 9,
+    "tiempoMin": 15,
+    "micros": ["calcio", "hierro"],
+    "ingredientes": ["80 g de kiwicha cocida", "pulpa de lúcuma", "300 ml de leche de soya fortificada", "plátano"],
+    "nota": "Kiwicha (amaranto): grano andino con lisina, el aminoácido que le falta a los cereales."
+  },
+  {
+    "id": "pan-mani-platano-soya",
+    "nombre": "Pan con mantequilla de maní y plátano + leche de soya",
+    "momentos": ["desayuno"],
+    "kcal": 610, "carbs": 82, "prot": 22, "grasa": 22,
+    "tiempoMin": 5,
+    "micros": ["calcio"],
+    "ingredientes": ["2 panes", "2 cdas de mantequilla de maní", "1 plátano", "300 ml de leche de soya fortificada"],
+    "nota": "El desayuno denso para días de doble sesión o mucha hambre."
+  },
+  {
+    "id": "humitas-dulces",
+    "nombre": "Humitas dulces de choclo",
+    "momentos": ["desayuno", "snack"],
+    "kcal": 420, "carbs": 68, "prot": 10, "grasa": 12,
+    "tiempoMin": 45,
+    "micros": [],
+    "ingredientes": ["2 humitas (choclo molido, pasas, canela — sin queso ni leche)", "café o emoliente"],
+    "nota": "Pide/prepara la versión sin queso. Congelan bien: haz tanda el fin de semana."
+  },
+
+  {
+    "id": "lentejitas-arroz",
+    "nombre": "Lentejitas con arroz y ensalada criolla",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 660, "carbs": 112, "prot": 26, "grasa": 12,
+    "tiempoMin": 35,
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["250 g de lentejas guisadas", "180 g de arroz", "ensalada criolla (cebolla, tomate, limón, culantro)"],
+    "nota": "El lunes de lentejas es ciencia: hierro + el limón de la criolla para absorberlo."
+  },
+  {
+    "id": "tacu-tacu",
+    "nombre": "Tacu tacu de frejol canario con salsa criolla",
+    "momentos": ["almuerzo"],
+    "kcal": 700, "carbs": 110, "prot": 24, "grasa": 18,
+    "tiempoMin": 25,
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["200 g de frejol canario cocido", "150 g de arroz cocido", "cebolla y ají amarillo", "salsa criolla con limón"],
+    "nota": "Nació para las sobras: frejoles y arroz de ayer, plancha, listo. Combustible de fondo."
+  },
+  {
+    "id": "aji-de-tofu",
+    "nombre": "Ají de tofu (estilo ají de gallina)",
+    "momentos": ["almuerzo"],
+    "kcal": 730, "carbs": 98, "prot": 30, "grasa": 24,
+    "tiempoMin": 40,
+    "micros": ["hierro", "calcio", "proteinaCompleta"],
+    "ingredientes": ["200 g de tofu deshilachado", "crema de ají amarillo con leche de soya y pan", "180 g de arroz", "papa sancochada", "aceitunas"],
+    "nota": "La crema espesa con pan y leche de soya — nadie nota la diferencia."
+  },
+  {
+    "id": "locro-zapallo-quinua",
+    "nombre": "Locro de zapallo con quinua y arroz",
+    "momentos": ["almuerzo"],
+    "kcal": 630, "carbs": 108, "prot": 18, "grasa": 14,
+    "tiempoMin": 35,
+    "micros": ["vitC", "hierro"],
+    "ingredientes": ["Locro de zapallo con choclo y habas (sin queso)", "80 g de quinua cocida", "150 g de arroz"],
+    "nota": "El zapallo loche manda. La quinua reemplaza la proteína del queso."
+  },
+  {
+    "id": "quinua-atamalada",
+    "nombre": "Quinua atamalada con papa",
+    "momentos": ["almuerzo"],
+    "kcal": 650, "carbs": 104, "prot": 22, "grasa": 16,
+    "tiempoMin": 40,
+    "micros": ["hierro", "proteinaCompleta"],
+    "ingredientes": ["150 g de quinua", "2 papas", "ají panca y ajo", "arvejitas", "maní tostado molido"],
+    "nota": "Plato de olla serrano: quinua guisada cremosa sin nada de origen animal."
+  },
+  {
+    "id": "estofado-garbanzos",
+    "nombre": "Estofado de garbanzos con arroz",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 675, "carbs": 110, "prot": 25, "grasa": 15,
+    "tiempoMin": 35,
+    "micros": ["hierro"],
+    "ingredientes": ["250 g de garbanzos cocidos", "zanahoria, arvejas y pimiento", "ají panca", "170 g de arroz"],
+    "nota": null
+  },
+  {
+    "id": "seco-frejoles",
+    "nombre": "Seco de frejoles con arroz y yuca",
+    "momentos": ["almuerzo"],
+    "kcal": 700, "carbs": 118, "prot": 26, "grasa": 14,
+    "tiempoMin": 45,
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["250 g de frejoles", "aderezo de culantro y ají amarillo", "150 g de arroz", "1 trozo de yuca", "salsa criolla"],
+    "nota": "El seco norteño en versión de frejol: culantro licuado y punto."
+  },
+  {
+    "id": "tallarines-rojos-soya",
+    "nombre": "Tallarines rojos con soya texturizada",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 700, "carbs": 105, "prot": 32, "grasa": 17,
+    "tiempoMin": 30,
+    "micros": ["hierro", "proteinaCompleta"],
+    "ingredientes": ["140 g de tallarines", "60 g de soya texturizada hidratada", "salsa de tomate con ají panca", "aceitunas"],
+    "nota": "La soya texturizada del mercado es barata y tiene ~50% de proteína en seco."
+  },
+  {
+    "id": "chaufa-tofu",
+    "nombre": "Arroz chaufa de verduras con tofu",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 665, "carbs": 96, "prot": 27, "grasa": 19,
+    "tiempoMin": 25,
+    "micros": ["hierro", "proteinaCompleta"],
+    "ingredientes": ["250 g de arroz cocido (mejor si es de ayer)", "150 g de tofu firme", "holantao, pimiento y cebolla china", "sillao", "kion"],
+    "nota": "Chifa en casa: el tofu dorado con sillao reemplaza al pollo sin drama."
+  },
+  {
+    "id": "olluquito-soya",
+    "nombre": "Olluquito con carne de soya",
+    "momentos": ["almuerzo"],
+    "kcal": 620, "carbs": 102, "prot": 24, "grasa": 13,
+    "tiempoMin": 35,
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["300 g de olluco en tiras", "50 g de soya texturizada fina", "ají panca y comino", "160 g de arroz"],
+    "nota": "El olluco trae vitamina C propia — combo redondo con el hierro de la soya."
+  },
+  {
+    "id": "causa-verduras",
+    "nombre": "Causa rellena de palta y verduras",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 560, "carbs": 78, "prot": 12, "grasa": 22,
+    "tiempoMin": 40,
+    "micros": ["vitC"],
+    "ingredientes": ["3 papas amarillas", "ají amarillo licuado y limón", "1 palta", "zanahoria y arvejas cocidas", "mayonesa vegana opcional"],
+    "nota": "La papa amarilla prensada con ají y limón es carbohidrato de calidad pre-fondo."
+  },
+  {
+    "id": "carapulcra-vegana",
+    "nombre": "Carapulcra vegana de papa seca y maní",
+    "momentos": ["almuerzo"],
+    "kcal": 745, "carbs": 108, "prot": 24, "grasa": 24,
+    "tiempoMin": 50,
+    "micros": ["hierro", "zinc"],
+    "ingredientes": ["150 g de papa seca remojada", "60 g de maní tostado molido", "ají panca, ajo y clavo", "champiñones", "150 g de arroz"],
+    "nota": "El maní le da la grasa y proteína que normalmente pone el chancho. Plato denso: ideal tras fondo."
+  },
+  {
+    "id": "menestron-pallares",
+    "nombre": "Menestrón vegano con pallares",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 590, "carbs": 98, "prot": 22, "grasa": 12,
+    "tiempoMin": 40,
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["200 g de pallares cocidos", "fideos canuto", "albahaca licuada con espinaca", "papa, zapallo y vainitas"],
+    "nota": "El pesto de albahaca-espinaca sin queso sigue siendo un golazo."
+  },
+  {
+    "id": "ceviche-champinones",
+    "nombre": "Ceviche de champiñones con camote y choclo",
+    "momentos": ["almuerzo"],
+    "kcal": 470, "carbs": 88, "prot": 12, "grasa": 8,
+    "tiempoMin": 25,
+    "micros": ["vitC"],
+    "ingredientes": ["250 g de champiñones", "jugo de 8 limones", "cebolla roja, ají limo y culantro", "1 camote", "1 choclo", "canchita"],
+    "nota": "Domingo post-fondo con familia: tú también comes ceviche. El camote y choclo reponen glucógeno."
+  },
+  {
+    "id": "pallares-guisados",
+    "nombre": "Pallares guisados con arroz",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 650, "carbs": 112, "prot": 24, "grasa": 12,
+    "tiempoMin": 40,
+    "micros": ["hierro"],
+    "ingredientes": ["250 g de pallares", "aderezo de cebolla, ajo y ají amarillo", "leche de soya para cremosidad", "160 g de arroz"],
+    "nota": "El pallar iqueño es mantequilla pura. Con un toque de leche de soya queda cremoso."
+  },
+  {
+    "id": "frejol-negro-platano",
+    "nombre": "Frejol negro con arroz y plátano frito",
+    "momentos": ["almuerzo"],
+    "kcal": 735, "carbs": 122, "prot": 24, "grasa": 17,
+    "tiempoMin": 35,
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["250 g de frejol negro", "170 g de arroz", "1 plátano maduro frito", "salsa criolla con limón"],
+    "nota": "Estilo costeño-caribeño: de los platos con más carbohidrato del recetario. Pre-fondo perfecto."
+  },
+  {
+    "id": "aji-lentejas",
+    "nombre": "Ají de lentejas con arroz integral",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 645, "carbs": 106, "prot": 26, "grasa": 13,
+    "tiempoMin": 35,
+    "micros": ["hierro"],
+    "ingredientes": ["250 g de lentejas", "crema de ají amarillo con leche de soya", "160 g de arroz integral", "aceitunas"],
+    "nota": null
+  },
+  {
+    "id": "wok-quinua-sacha",
+    "nombre": "Wok de quinua con verduras y sacha inchi",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 610, "carbs": 90, "prot": 22, "grasa": 18,
+    "tiempoMin": 25,
+    "micros": ["omega3", "hierro", "proteinaCompleta"],
+    "ingredientes": ["200 g de quinua cocida", "brócoli, pimiento y zanahoria", "30 g de sacha inchi tostado", "sillao y kion"],
+    "nota": "El sacha inchi amazónico es de las mejores fuentes vegetales de omega-3 que existen."
+  },
+
+  {
+    "id": "sopa-quinua",
+    "nombre": "Sopa de quinua con verduras y papa",
+    "momentos": ["cena"],
+    "kcal": 510, "carbs": 88, "prot": 17, "grasa": 10,
+    "tiempoMin": 30,
+    "micros": ["hierro", "proteinaCompleta"],
+    "ingredientes": ["100 g de quinua", "papa, zanahoria y apio", "habas verdes", "orégano", "pan al lado"],
+    "nota": "Cena ligera pero con sustancia: recuperas sin irte pesado a dormir a las 9."
+  },
+  {
+    "id": "solterito-tarwi",
+    "nombre": "Solterito arequipeño con tarwi",
+    "momentos": ["cena", "almuerzo"],
+    "kcal": 530, "carbs": 68, "prot": 28, "grasa": 16,
+    "tiempoMin": 20,
+    "micros": ["hierro", "vitC", "calcio", "proteinaCompleta"],
+    "ingredientes": ["150 g de tarwi (chocho) desamargado", "choclo desgranado", "habas, tomate y cebolla", "rocoto al gusto", "limón y aceite de oliva", "papa sancochada"],
+    "nota": "El tarwi tiene más proteína que casi cualquier legumbre del planeta (~19 g/100 g). Oro andino."
+  },
+  {
+    "id": "ensalada-tarwi-camote",
+    "nombre": "Ensalada de tarwi con camote asado",
+    "momentos": ["cena"],
+    "kcal": 550, "carbs": 76, "prot": 30, "grasa": 14,
+    "tiempoMin": 30,
+    "micros": ["hierro", "vitC", "proteinaCompleta"],
+    "ingredientes": ["150 g de tarwi", "1 camote grande asado", "tomate, cebolla y culantro", "limón", "pepitas de zambo o maní"],
+    "nota": "Camote = glucógeno para mañana; tarwi = reparación muscular esta noche."
+  },
+  {
+    "id": "huancaina-vegana",
+    "nombre": "Papa a la huancaína vegana",
+    "momentos": ["cena"],
+    "kcal": 580, "carbs": 82, "prot": 20, "grasa": 19,
+    "tiempoMin": 25,
+    "micros": ["calcio"],
+    "ingredientes": ["4 papas sancochadas", "salsa: tofu + ají amarillo + leche de soya + sal", "aceitunas", "lechuga"],
+    "nota": "La huancaína de tofu engaña a cualquier suegra. Papas = carga para mañana."
+  },
+  {
+    "id": "pure-camote-tofu",
+    "nombre": "Puré de camote con tofu a la plancha",
+    "momentos": ["cena"],
+    "kcal": 570, "carbs": 78, "prot": 28, "grasa": 16,
+    "tiempoMin": 25,
+    "micros": ["calcio", "proteinaCompleta"],
+    "ingredientes": ["2 camotes grandes", "chorrito de leche de soya", "200 g de tofu firme a la plancha con sillao", "ensalada verde"],
+    "nota": "La cena pre-fondo por excelencia: carbohidrato dulce, proteína completa, cero pesadez."
+  },
+  {
+    "id": "crema-zapallo",
+    "nombre": "Crema de zapallo con quinua pop",
+    "momentos": ["cena"],
+    "kcal": 480, "carbs": 80, "prot": 13, "grasa": 12,
+    "tiempoMin": 25,
+    "micros": ["vitC"],
+    "ingredientes": ["400 g de zapallo macre", "papa para espesar", "leche de soya", "quinua pop encima", "pan tostado"],
+    "nota": "Para noches de descanso o cuando el almuerzo ya fue pesado."
+  },
+  {
+    "id": "tortilla-garbanzo",
+    "nombre": "Tortilla de garbanzo con verduras",
+    "momentos": ["cena"],
+    "kcal": 545, "carbs": 74, "prot": 22, "grasa": 18,
+    "tiempoMin": 20,
+    "micros": ["hierro"],
+    "ingredientes": ["100 g de harina de garbanzo", "agua, cúrcuma y sal (reemplaza al huevo)", "espinaca, cebolla y tomate", "arroz o pan al lado"],
+    "nota": "La harina de garbanzo con agua cuaja igual que el huevo. Truco vegano nivel 1."
+  },
+  {
+    "id": "wraps-frejol-palta",
+    "nombre": "Wraps de frejol negro con palta",
+    "momentos": ["cena"],
+    "kcal": 610, "carbs": 86, "prot": 22, "grasa": 20,
+    "tiempoMin": 15,
+    "micros": ["hierro"],
+    "ingredientes": ["3 tortillas de trigo", "200 g de frejol negro refrito", "1/2 palta", "tomate y cebolla", "rocoto o ají al gusto"],
+    "nota": "Cena de 15 minutos para cuando llegas muerto. Cero cocina elaborada."
+  },
+  {
+    "id": "sopa-moron",
+    "nombre": "Sopa de morón con habas",
+    "momentos": ["cena"],
+    "kcal": 505, "carbs": 92, "prot": 18, "grasa": 7,
+    "tiempoMin": 40,
+    "micros": ["hierro"],
+    "ingredientes": ["100 g de morón (cebada pelada)", "habas secas", "papa y zanahoria", "hierbabuena"],
+    "nota": "La sopa de abuela serrana: cebada = carbohidrato lento, perfecto para descanso."
+  },
+  {
+    "id": "aguadito-garbanzos",
+    "nombre": "Aguadito verde de garbanzos",
+    "momentos": ["cena"],
+    "kcal": 550, "carbs": 90, "prot": 20, "grasa": 12,
+    "tiempoMin": 35,
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["200 g de garbanzos cocidos", "arroz", "culantro licuado", "arvejas, choclo y pimiento", "limón al servir"],
+    "nota": "El levantamuertos criollo, en verde y sin pollo. El limón activa el hierro del garbanzo."
+  },
+  {
+    "id": "pastel-papa-vegano",
+    "nombre": "Pastel de papa vegano",
+    "momentos": ["cena"],
+    "kcal": 595, "carbs": 88, "prot": 18, "grasa": 19,
+    "tiempoMin": 50,
+    "micros": ["calcio"],
+    "ingredientes": ["4 papas en láminas", "bechamel de leche de soya fortificada", "lenteja guisada entre capas", "orégano"],
+    "nota": "Hazlo en tanda el domingo: cena lista para dos noches de semana."
+  },
+
+  {
+    "id": "cancha-mani",
+    "nombre": "Cancha serrana con maní",
+    "momentos": ["snack"],
+    "kcal": 320, "carbs": 38, "prot": 11, "grasa": 14,
+    "tiempoMin": 10,
+    "micros": ["zinc"],
+    "ingredientes": ["50 g de maíz chulpe tostado", "30 g de maní tostado", "sal"],
+    "nota": "El snack de bolsillo peruano. Crocante, barato y con proteína."
+  },
+  {
+    "id": "chocho-limon",
+    "nombre": "Ceviche de chocho (tarwi al limón)",
+    "momentos": ["snack"],
+    "kcal": 250, "carbs": 22, "prot": 20, "grasa": 9,
+    "tiempoMin": 10,
+    "micros": ["hierro", "vitC", "proteinaCompleta"],
+    "ingredientes": ["120 g de tarwi desamargado", "limón", "cebolla, tomate y culantro", "cancha al lado"],
+    "nota": "20 g de proteína en un snack: el mejor cierre de tarde antes de la cena."
+  },
+  {
+    "id": "mazamorra-morada",
+    "nombre": "Mazamorra morada",
+    "momentos": ["snack"],
+    "kcal": 270, "carbs": 66, "prot": 1, "grasa": 0.5,
+    "tiempoMin": 5,
+    "micros": [],
+    "ingredientes": ["1 taza de mazamorra morada (maíz morado, piña, membrillo, guindones)"],
+    "nota": "Antocianinas del maíz morado + carbohidrato puro: postre que carga glucógeno."
+  },
+  {
+    "id": "mani-pasas",
+    "nombre": "Maní con pasas",
+    "momentos": ["snack"],
+    "kcal": 305, "carbs": 28, "prot": 10, "grasa": 17,
+    "tiempoMin": 1,
+    "micros": ["hierro", "zinc"],
+    "ingredientes": ["40 g de maní tostado", "30 g de pasas"],
+    "nota": null
+  },
+  {
+    "id": "batido-lucuma",
+    "nombre": "Batido de lúcuma con leche de soya",
+    "momentos": ["snack"],
+    "kcal": 300, "carbs": 52, "prot": 10, "grasa": 6,
+    "tiempoMin": 5,
+    "micros": ["calcio"],
+    "ingredientes": ["pulpa de lúcuma", "300 ml de leche de soya fortificada", "1 dátil o chancaca"],
+    "nota": "Lúcuma: postre y micronutrientes en uno. Va perfecto a media tarde."
+  },
+  {
+    "id": "pan-mantequilla-mani",
+    "nombre": "Pan con mantequilla de maní",
+    "momentos": ["snack"],
+    "kcal": 345, "carbs": 38, "prot": 12, "grasa": 16,
+    "tiempoMin": 3,
+    "micros": [],
+    "ingredientes": ["1 pan integral", "2 cdas de mantequilla de maní", "plátano opcional"],
+    "nota": null
+  },
+  {
+    "id": "sacha-inchi-tostado",
+    "nombre": "Sacha inchi tostado",
+    "momentos": ["snack"],
+    "kcal": 175, "carbs": 6, "prot": 9, "grasa": 13,
+    "tiempoMin": 1,
+    "micros": ["omega3"],
+    "ingredientes": ["30 g de sacha inchi tostado con sal"],
+    "nota": "Omega-3 vegetal amazónico en modo snack. Un puñado al día y listo."
+  },
+  {
+    "id": "fruta-nueces",
+    "nombre": "Fruta de estación con nueces",
+    "momentos": ["snack"],
+    "kcal": 255, "carbs": 34, "prot": 5, "grasa": 11,
+    "tiempoMin": 2,
+    "micros": ["omega3", "vitC"],
+    "ingredientes": ["1 mango, granadilla o mandarinas", "25 g de nueces"],
+    "nota": null
+  }
+]
