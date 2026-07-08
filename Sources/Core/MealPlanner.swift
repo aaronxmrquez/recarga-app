@@ -78,8 +78,10 @@ final class MealPlanner {
             if usadasHoy.contains(r.id) { score += 1.5 }
             switch antiguedad[r.id] {
             case 1: score += 0.9   // ayer
-            case 2: score += 0.5
-            case 3: score += 0.25
+            case 2: score += 0.55
+            case 3: score += 0.35
+            case 4: score += 0.2
+            case 5: score += 0.1
             default: break
             }
             if target.slot == .almuerzo && r.micros.contains("hierro") { score -= 0.12 }
@@ -118,10 +120,10 @@ final class MealPlanner {
         return UInt64(y * 10_000 + m * 100 + d)
     }
 
-    /// recipeId → hace cuántos días se usó (1–3), mirando el historial.
+    /// recipeId → hace cuántos días se usó (1–5), mirando el historial.
     private func recienteAntiguedad(fecha: Date) -> [String: Int] {
         var out: [String: Int] = [:]
-        for atras in 1...3 {
+        for atras in 1...5 {
             guard let d = Calendar.current.date(byAdding: .day, value: -atras, to: fecha) else { continue }
             let clave = Fechas.clave(d)
             for (_, id) in history[clave] ?? [:] {

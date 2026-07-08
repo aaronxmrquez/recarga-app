@@ -232,6 +232,24 @@ struct TodayView: View {
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
 
+                if let pasos = meal.recipe.preparacion, !pasos.isEmpty {
+                    DisclosureGroup {
+                        VStack(alignment: .leading, spacing: 4) {
+                            ForEach(Array(pasos.enumerated()), id: \.offset) { i, paso in
+                                Text("\(i + 1). \(paso)")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                        }
+                        .padding(.top, 4)
+                    } label: {
+                        Text("Cómo prepararlo · \(meal.recipe.tiempoMin) min")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.orange)
+                    }
+                }
+
                 if let nota = meal.recipe.nota {
                     Text(nota)
                         .font(.caption)

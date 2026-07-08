@@ -7,6 +7,10 @@
     "tiempoMin": 2,
     "micros": [],
     "ingredientes": ["1 plátano maduro", "3 dátiles", "agua o mate"],
+    "preparacion": [
+      "Pela el plátano y acompáñalo con los dátiles deshuesados.",
+      "Un vaso de agua o mate al lado; sales a correr en 30–45 min."
+    ],
     "nota": "El clásico de madrugada: puro carbohidrato rápido, cero fibra pesada."
   },
   {
@@ -17,6 +21,10 @@
     "tiempoMin": 3,
     "micros": [],
     "ingredientes": ["2 panes franceses", "2 cdas de mermelada"],
+    "preparacion": [
+      "Abre los panes y unta la mermelada.",
+      "A esta hora nadie cocina: come tranquilo y agua al lado."
+    ],
     "nota": "Fácil de digerir antes de correr. Evita mantequillas a esta hora."
   },
   {
@@ -27,6 +35,11 @@
     "tiempoMin": 10,
     "micros": [],
     "ingredientes": ["2 plátanos maduros", "canela y clavo", "agua"],
+    "preparacion": [
+      "La noche anterior: hierve los plátanos en trozos con canela y clavo ~15 min hasta que se deshagan.",
+      "Aplasta o licúa con parte del agua de cocción hasta que quede como colada.",
+      "En la madrugada solo recalienta 2 min."
+    ],
     "nota": "Selvático y reconfortante a las 4 am. Se puede dejar listo la noche anterior."
   },
   {
@@ -37,6 +50,10 @@
     "tiempoMin": 5,
     "micros": [],
     "ingredientes": ["60 g de avena", "1 trozo de chancaca (miel de caña)", "agua", "canela"],
+    "preparacion": [
+      "Hierve la avena con agua y canela 3–4 min: déjala aguada, se digiere más fácil.",
+      "Endulza con la chancaca rallada y revuelve hasta que se disuelva."
+    ],
     "nota": "Para sesiones largas: energía sostenida. Cocínala aguada para digerir fácil."
   },
   {
@@ -47,6 +64,10 @@
     "tiempoMin": 5,
     "micros": [],
     "ingredientes": ["2 tostadas de pan de molde", "1 plátano", "canela"],
+    "preparacion": [
+      "Tuesta el pan.",
+      "Plátano en rodajas encima y espolvorea canela."
+    ],
     "nota": null
   },
   {
@@ -57,6 +78,11 @@
     "tiempoMin": 10,
     "micros": [],
     "ingredientes": ["3 cdas de maicena", "1 manzana rallada", "azúcar", "canela"],
+    "preparacion": [
+      "Disuelve la maicena en 1 taza de agua fría.",
+      "Hierve otra taza de agua con la manzana rallada, azúcar y canela 5 min.",
+      "Agrega la maicena disuelta y revuelve 2–3 min hasta espesar. Puedes dejarla lista la noche anterior."
+    ],
     "nota": "Prácticamente cero fibra: ideal si el estómago se pone delicado antes de series."
   },
   {
@@ -67,6 +93,10 @@
     "tiempoMin": 1,
     "micros": [],
     "ingredientes": ["6 dátiles", "pizca de sal"],
+    "preparacion": [
+      "Deshuesa los dátiles y dales una pizca mínima de sal.",
+      "Van perfecto también en el bolsillo para fondos de más de 2 horas."
+    ],
     "nota": "El gel natural: la sal suma sodio para fondos con calor."
   },
   {
@@ -77,6 +107,10 @@
     "tiempoMin": 5,
     "micros": ["calcio"],
     "ingredientes": ["1 taza de arroz con leche preparado con leche de soya fortificada", "canela", "pasas"],
+    "preparacion": [
+      "Cocina arroz en leche de soya con canela y azúcar a fuego bajo ~20 min, o usa el que dejaste de la víspera.",
+      "Sirve tibio con pasas; recalentado queda igual de bien."
+    ],
     "nota": "Recalentado de la víspera funciona perfecto como pre-fondo."
   },
 
@@ -88,6 +122,10 @@
     "tiempoMin": 5,
     "micros": ["calcio", "proteinaCompleta"],
     "ingredientes": ["30 g de proteína de arveja", "2 plátanos", "50 g de avena", "1 cda de cacao", "400 ml de leche de soya fortificada"],
+    "preparacion": [
+      "Licúa todo 30–40 segundos.",
+      "Tómalo dentro de la primera hora post-entreno; si quedó muy espeso, suma agua o hielo."
+    ],
     "nota": "La opción para justo al llegar del fondo: 3:1 carbo-proteína, se toma en 2 minutos."
   },
   {
@@ -98,6 +136,11 @@
     "tiempoMin": 10,
     "micros": ["omega3", "calcio"],
     "ingredientes": ["80 g de avena", "1 plátano", "1 cda de chía", "1 cdta de maca", "300 ml de leche de soya fortificada", "pasas"],
+    "preparacion": [
+      "Cocina la avena en la leche de soya 3–4 min.",
+      "Fuera del fuego mezcla la chía y la maca (la maca cruda, para no amargarla).",
+      "Corona con plátano en rodajas y pasas."
+    ],
     "nota": "La chía cubre omega-3 del día. La maca es puro amor propio serrano."
   },
   {
@@ -108,6 +151,11 @@
     "tiempoMin": 20,
     "micros": ["hierro", "calcio", "proteinaCompleta"],
     "ingredientes": ["90 g de quinua cocida en leche de soya", "1 manzana", "pasas", "canela", "chancaca al gusto"],
+    "preparacion": [
+      "Lava la quinua frotándola hasta que el agua salga clara (quita el amargor).",
+      "Cocínala en la leche de soya con canela ~15 min hasta que el grano se abra.",
+      "Sirve con manzana picada, pasas y chancaca al gusto."
+    ],
     "nota": "Quinua = proteína completa con los 9 aminoácidos. Desayuno de campeonato."
   },
   {
@@ -118,6 +166,11 @@
     "tiempoMin": 15,
     "micros": ["hierro", "calcio", "proteinaCompleta"],
     "ingredientes": ["200 g de tofu firme desmenuzado", "cebolla, tomate y ají amarillo", "cúrcuma", "2 panes franceses"],
+    "preparacion": [
+      "Escurre el tofu y desmenúzalo con las manos.",
+      "Sofríe cebolla, ají amarillo y tomate en cuadritos 3–4 min.",
+      "Suma el tofu y la cúrcuma; saltea 5 min y sal al final. Con los panes calientes."
+    ],
     "nota": "Estilo revuelto criollo: el tomate suma vitamina C para absorber el hierro del tofu."
   },
   {
@@ -128,6 +181,11 @@
     "tiempoMin": 8,
     "micros": ["vitC"],
     "ingredientes": ["2 panes franceses", "1 palta chica", "tomate", "1 vaso de jugo de naranja"],
+    "preparacion": [
+      "Aplasta la palta sobre el pan con una pizca de sal.",
+      "Tomate en rodajas encima.",
+      "Exprime las naranjas y listo."
+    ],
     "nota": "El desayuno limeño de toda la vida, ya era vegano sin saberlo."
   },
   {
@@ -138,6 +196,11 @@
     "tiempoMin": 20,
     "micros": [],
     "ingredientes": ["80 g de avena molida", "1 plátano", "leche de soya", "1 cda de mantequilla de maní", "miel de caña"],
+    "preparacion": [
+      "Licúa la avena con el plátano y leche de soya hasta masa espesa; reposa 5 min.",
+      "Dora tandas en sartén antiadherente 2 min por lado a fuego medio.",
+      "Sirve con la mantequilla de maní y miel de caña encima."
+    ],
     "nota": "Para el día de descanso o post-rodaje suave, cuando hay tiempo de cocinar."
   },
   {
@@ -148,6 +211,11 @@
     "tiempoMin": 8,
     "micros": ["hierro", "vitC"],
     "ingredientes": ["2 panes integrales", "4 cdas de hummus", "tomate y pepino", "1 taza de papaya"],
+    "preparacion": [
+      "Unta el hummus generoso en el pan.",
+      "Rellena con tomate y pepino en láminas.",
+      "La papaya picada de entrada o al lado."
+    ],
     "nota": "La papaya (vitamina C) ayuda a absorber el hierro del garbanzo."
   },
   {
@@ -158,6 +226,11 @@
     "tiempoMin": 15,
     "micros": ["calcio", "hierro"],
     "ingredientes": ["80 g de kiwicha cocida", "pulpa de lúcuma", "300 ml de leche de soya fortificada", "plátano"],
+    "preparacion": [
+      "Cocina la kiwicha en agua ~12 min (queda tipo colada granulada).",
+      "Aparte, mezcla la pulpa de lúcuma con la leche de soya.",
+      "Junta todo en un bowl y corona con plátano."
+    ],
     "nota": "Kiwicha (amaranto): grano andino con lisina, el aminoácido que le falta a los cereales."
   },
   {
@@ -168,6 +241,10 @@
     "tiempoMin": 5,
     "micros": ["calcio"],
     "ingredientes": ["2 panes", "2 cdas de mantequilla de maní", "1 plátano", "300 ml de leche de soya fortificada"],
+    "preparacion": [
+      "Unta la mantequilla de maní y pon el plátano en rodajas encima.",
+      "Acompaña con el vaso grande de leche de soya, caliente o fría."
+    ],
     "nota": "El desayuno denso para días de doble sesión o mucha hambre."
   },
   {
@@ -178,6 +255,11 @@
     "tiempoMin": 45,
     "micros": [],
     "ingredientes": ["2 humitas (choclo molido, pasas, canela — sin queso ni leche)", "café o emoliente"],
+    "preparacion": [
+      "Si son compradas o congeladas: caliéntalas al vapor 10–15 min.",
+      "Para hacerlas: licúa choclo con un toque de leche de soya, azúcar, canela y pasas; envuelve en pancas y cocina al vapor 40 min.",
+      "Haz tanda doble un domingo y congela: desayunos listos para dos semanas."
+    ],
     "nota": "Pide/prepara la versión sin queso. Congelan bien: haz tanda el fin de semana."
   },
 
@@ -189,6 +271,11 @@
     "tiempoMin": 35,
     "micros": ["hierro", "vitC"],
     "ingredientes": ["250 g de lentejas guisadas", "180 g de arroz", "ensalada criolla (cebolla, tomate, limón, culantro)"],
+    "preparacion": [
+      "Aderezo: cebolla, ajo y comino dorados en un chorro de aceite.",
+      "Suma las lentejas (remojadas 1 hora si puedes) y agua que las cubra 2 dedos; cocina 25–30 min.",
+      "Criolla: cebolla en pluma lavada, tomate, culantro y bastante limón. Sirve todo sobre el arroz."
+    ],
     "nota": "El lunes de lentejas es ciencia: hierro + el limón de la criolla para absorberlo."
   },
   {
@@ -199,6 +286,11 @@
     "tiempoMin": 25,
     "micros": ["hierro", "vitC"],
     "ingredientes": ["200 g de frejol canario cocido", "150 g de arroz cocido", "cebolla y ají amarillo", "salsa criolla con limón"],
+    "preparacion": [
+      "Sofríe cebolla y ají amarillo picados; mezcla ahí el frejol con su jugo y el arroz de ayer.",
+      "Aplasta un poco y forma la masa; dórala en sartén bien caliente 4–5 min por lado hasta que haga costra.",
+      "Voltéalo con un plato y sirve con la criolla encima."
+    ],
     "nota": "Nació para las sobras: frejoles y arroz de ayer, plancha, listo. Combustible de fondo."
   },
   {
@@ -209,6 +301,12 @@
     "tiempoMin": 40,
     "micros": ["hierro", "calcio", "proteinaCompleta"],
     "ingredientes": ["200 g de tofu deshilachado", "crema de ají amarillo con leche de soya y pan", "180 g de arroz", "papa sancochada", "aceitunas"],
+    "preparacion": [
+      "Deshilacha el tofu con un tenedor.",
+      "Licúa 2–3 ajíes amarillos limpios con un pan remojado en leche de soya.",
+      "Cocina esa crema sobre un aderezo de cebolla y ajo 5 min; entra el tofu 5 min más, sal y pimienta.",
+      "Sirve sobre papa sancochada con arroz y aceitunas."
+    ],
     "nota": "La crema espesa con pan y leche de soya — nadie nota la diferencia."
   },
   {
@@ -219,6 +317,11 @@
     "tiempoMin": 35,
     "micros": ["vitC", "hierro"],
     "ingredientes": ["Locro de zapallo con choclo y habas (sin queso)", "80 g de quinua cocida", "150 g de arroz"],
+    "preparacion": [
+      "Sofríe cebolla, ajo y un toque de ají amarillo.",
+      "Agrega el zapallo en cubos con media taza de agua; tapa y deshaz a fuego medio ~15 min.",
+      "Suma choclo, habas y la quinua cocida; 5 min más, punto de sal y orégano. Con arroz."
+    ],
     "nota": "El zapallo loche manda. La quinua reemplaza la proteína del queso."
   },
   {
@@ -229,6 +332,12 @@
     "tiempoMin": 40,
     "micros": ["hierro", "proteinaCompleta"],
     "ingredientes": ["150 g de quinua", "2 papas", "ají panca y ajo", "arvejitas", "maní tostado molido"],
+    "preparacion": [
+      "Aderezo de ají panca, cebolla y ajo bien dorado.",
+      "Entra la quinua lavada con 2 partes de agua; cocina 15 min.",
+      "Suma papa en cubos y arvejitas hasta que ablanden.",
+      "Termina con el maní molido y deja que espese cremoso."
+    ],
     "nota": "Plato de olla serrano: quinua guisada cremosa sin nada de origen animal."
   },
   {
@@ -239,6 +348,11 @@
     "tiempoMin": 35,
     "micros": ["hierro"],
     "ingredientes": ["250 g de garbanzos cocidos", "zanahoria, arvejas y pimiento", "ají panca", "170 g de arroz"],
+    "preparacion": [
+      "Aderezo de cebolla, ajo y ají panca 5 min.",
+      "Suma zanahoria y pimiento; luego los garbanzos con un poco de su caldo.",
+      "Cocina 15 min hasta que espese; arvejas al final. Con arroz."
+    ],
     "nota": null
   },
   {
@@ -249,6 +363,12 @@
     "tiempoMin": 45,
     "micros": ["hierro", "vitC"],
     "ingredientes": ["250 g de frejoles", "aderezo de culantro y ají amarillo", "150 g de arroz", "1 trozo de yuca", "salsa criolla"],
+    "preparacion": [
+      "Licúa un atado de culantro con poca agua.",
+      "Sofríe cebolla, ajo y ají amarillo; entra el culantro licuado 3 min hasta que oscurezca.",
+      "Suma el frejol cocido y cocina 10 min a fuego bajo.",
+      "Sirve con arroz, yuca sancochada y criolla."
+    ],
     "nota": "El seco norteño en versión de frejol: culantro licuado y punto."
   },
   {
@@ -259,6 +379,11 @@
     "tiempoMin": 30,
     "micros": ["hierro", "proteinaCompleta"],
     "ingredientes": ["140 g de tallarines", "60 g de soya texturizada hidratada", "salsa de tomate con ají panca", "aceitunas"],
+    "preparacion": [
+      "Hidrata la soya 10 min en agua caliente; escurre y exprime bien.",
+      "Dórala con ajo; suma tomate licuado con ají panca y cocina 10 min.",
+      "Mezcla con los tallarines cocidos al dente y las aceitunas."
+    ],
     "nota": "La soya texturizada del mercado es barata y tiene ~50% de proteína en seco."
   },
   {
@@ -269,6 +394,12 @@
     "tiempoMin": 25,
     "micros": ["hierro", "proteinaCompleta"],
     "ingredientes": ["250 g de arroz cocido (mejor si es de ayer)", "150 g de tofu firme", "holantao, pimiento y cebolla china", "sillao", "kion"],
+    "preparacion": [
+      "Dora el tofu en cubos con un chorro de sillao hasta que haga costra; reserva.",
+      "Saltea holantao y pimiento a fuego máximo 2 min.",
+      "Entra el arroz frío con sillao y kion rallado; saltea 3 min sin dejar de mover.",
+      "Regresa el tofu y termina con cebolla china."
+    ],
     "nota": "Chifa en casa: el tofu dorado con sillao reemplaza al pollo sin drama."
   },
   {
@@ -279,6 +410,11 @@
     "tiempoMin": 35,
     "micros": ["hierro", "vitC"],
     "ingredientes": ["300 g de olluco en tiras", "50 g de soya texturizada fina", "ají panca y comino", "160 g de arroz"],
+    "preparacion": [
+      "Hidrata la soya fina 10 min y exprímela.",
+      "Aderezo de ají panca, ajo y comino; dora ahí la soya.",
+      "Entra el olluco en tiras (suelta su propio jugo): tapa y cocina 15 min a fuego medio. Con arroz."
+    ],
     "nota": "El olluco trae vitamina C propia — combo redondo con el hierro de la soya."
   },
   {
@@ -289,6 +425,12 @@
     "tiempoMin": 40,
     "micros": ["vitC"],
     "ingredientes": ["3 papas amarillas", "ají amarillo licuado y limón", "1 palta", "zanahoria y arvejas cocidas", "mayonesa vegana opcional"],
+    "preparacion": [
+      "Sancocha las papas y prénsalas en caliente.",
+      "Amasa con ají amarillo licuado, limón, sal y un chorro de aceite hasta masa suave.",
+      "Arma capas: masa, palta en láminas y verdura cocida (con mayonesa vegana si quieres), masa encima.",
+      "Refrigera 20 min antes de servir."
+    ],
     "nota": "La papa amarilla prensada con ají y limón es carbohidrato de calidad pre-fondo."
   },
   {
@@ -299,6 +441,12 @@
     "tiempoMin": 50,
     "micros": ["hierro", "zinc"],
     "ingredientes": ["150 g de papa seca remojada", "60 g de maní tostado molido", "ají panca, ajo y clavo", "champiñones", "150 g de arroz"],
+    "preparacion": [
+      "Tuesta la papa seca en sartén 3 min y remójala 30 min (o 2 h sin tostar).",
+      "Aderezo fuerte: ají panca, ajo, clavo y comino; suma los champiñones en cuartos.",
+      "Entra la papa seca escurrida con agua o caldo que la cubra; cocina 30 min removiendo de vez en cuando.",
+      "Termina con el maní molido y reposa 5 min. Con arroz blanco."
+    ],
     "nota": "El maní le da la grasa y proteína que normalmente pone el chancho. Plato denso: ideal tras fondo."
   },
   {
@@ -309,6 +457,11 @@
     "tiempoMin": 40,
     "micros": ["hierro", "vitC"],
     "ingredientes": ["200 g de pallares cocidos", "fideos canuto", "albahaca licuada con espinaca", "papa, zapallo y vainitas"],
+    "preparacion": [
+      "Hierve papa, zapallo y vainitas en caldo o agua con sal.",
+      "Licúa albahaca y espinaca con un cucharón del caldo; agrégalo a la olla.",
+      "Suma pallares cocidos y los fideos; 8–10 min hasta que el fideo esté listo."
+    ],
     "nota": "El pesto de albahaca-espinaca sin queso sigue siendo un golazo."
   },
   {
@@ -319,6 +472,11 @@
     "tiempoMin": 25,
     "micros": ["vitC"],
     "ingredientes": ["250 g de champiñones", "jugo de 8 limones", "cebolla roja, ají limo y culantro", "1 camote", "1 choclo", "canchita"],
+    "preparacion": [
+      "Lamina los champiñones y pásalos 1 min por agua hirviendo; enfría de inmediato.",
+      "Mézclalos con el limón, cebolla en pluma, ají limo, culantro y sal; reposa 10 min en frío.",
+      "Sirve con camote sancochado, choclo desgranado y canchita."
+    ],
     "nota": "Domingo post-fondo con familia: tú también comes ceviche. El camote y choclo reponen glucógeno."
   },
   {
@@ -329,6 +487,11 @@
     "tiempoMin": 40,
     "micros": ["hierro"],
     "ingredientes": ["250 g de pallares", "aderezo de cebolla, ajo y ají amarillo", "leche de soya para cremosidad", "160 g de arroz"],
+    "preparacion": [
+      "Remoja los pallares desde la víspera y cocínalos hasta que estén cremosos (~40 min en olla normal, 15 en olla a presión).",
+      "Aderezo de cebolla, ajo y ají amarillo; junta ahí los pallares con algo de su caldo.",
+      "Un chorro de leche de soya al final y punto de sal. Con arroz."
+    ],
     "nota": "El pallar iqueño es mantequilla pura. Con un toque de leche de soya queda cremoso."
   },
   {
@@ -339,6 +502,11 @@
     "tiempoMin": 35,
     "micros": ["hierro", "vitC"],
     "ingredientes": ["250 g de frejol negro", "170 g de arroz", "1 plátano maduro frito", "salsa criolla con limón"],
+    "preparacion": [
+      "Cocina el frejol negro (remojado) con ajo, comino y hoja de laurel si tienes, ~40 min.",
+      "Fríe el plátano maduro en tajadas hasta que caramelice.",
+      "Arma el plato con arroz y una criolla con bastante limón."
+    ],
     "nota": "Estilo costeño-caribeño: de los platos con más carbohidrato del recetario. Pre-fondo perfecto."
   },
   {
@@ -349,6 +517,11 @@
     "tiempoMin": 35,
     "micros": ["hierro"],
     "ingredientes": ["250 g de lentejas", "crema de ají amarillo con leche de soya", "160 g de arroz integral", "aceitunas"],
+    "preparacion": [
+      "Cocina las lentejas 25 min y escúrrelas.",
+      "Crema: ají amarillo licuado con leche de soya y un pan remojado, cocida 5 min sobre aderezo de cebolla.",
+      "Junta las lentejas con la crema 5 min. Sobre arroz integral, con aceitunas."
+    ],
     "nota": null
   },
   {
@@ -359,6 +532,11 @@
     "tiempoMin": 25,
     "micros": ["omega3", "hierro", "proteinaCompleta"],
     "ingredientes": ["200 g de quinua cocida", "brócoli, pimiento y zanahoria", "30 g de sacha inchi tostado", "sillao y kion"],
+    "preparacion": [
+      "Saltea brócoli, pimiento y zanahoria a fuego alto 3 min.",
+      "Suma la quinua cocida con sillao y kion rallado; 2 min más.",
+      "Apaga y recién ahí mezcla el sacha inchi (si se quema, amarga)."
+    ],
     "nota": "El sacha inchi amazónico es de las mejores fuentes vegetales de omega-3 que existen."
   },
 
@@ -370,6 +548,11 @@
     "tiempoMin": 30,
     "micros": ["hierro", "proteinaCompleta"],
     "ingredientes": ["100 g de quinua", "papa, zanahoria y apio", "habas verdes", "orégano", "pan al lado"],
+    "preparacion": [
+      "Sofríe cebolla, ajo y orégano.",
+      "Agrega agua o caldo con la papa y zanahoria; a los 10 min entra la quinua lavada.",
+      "Cocina 15 min más; habas al final y punto de sal. Pan al lado."
+    ],
     "nota": "Cena ligera pero con sustancia: recuperas sin irte pesado a dormir a las 9."
   },
   {
@@ -380,6 +563,11 @@
     "tiempoMin": 20,
     "micros": ["hierro", "vitC", "calcio", "proteinaCompleta"],
     "ingredientes": ["150 g de tarwi (chocho) desamargado", "choclo desgranado", "habas, tomate y cebolla", "rocoto al gusto", "limón y aceite de oliva", "papa sancochada"],
+    "preparacion": [
+      "Enjuaga el tarwi (el del mercado ya viene desamargado).",
+      "Pica tomate, cebolla y rocoto en cuadritos; desgrana el choclo cocido.",
+      "Mezcla todo con las habas, limón, aceite de oliva y sal. Papa sancochada al lado."
+    ],
     "nota": "El tarwi tiene más proteína que casi cualquier legumbre del planeta (~19 g/100 g). Oro andino."
   },
   {
@@ -390,6 +578,11 @@
     "tiempoMin": 30,
     "micros": ["hierro", "vitC", "proteinaCompleta"],
     "ingredientes": ["150 g de tarwi", "1 camote grande asado", "tomate, cebolla y culantro", "limón", "pepitas de zambo o maní"],
+    "preparacion": [
+      "Asa el camote entero al horno 35–40 min (o en rodajas a la sartén tapada, 15 min).",
+      "Mezcla el tarwi con tomate, cebolla, culantro y bastante limón.",
+      "Sirve sobre el camote caliente con las pepitas tostadas encima."
+    ],
     "nota": "Camote = glucógeno para mañana; tarwi = reparación muscular esta noche."
   },
   {
@@ -400,6 +593,11 @@
     "tiempoMin": 25,
     "micros": ["calcio"],
     "ingredientes": ["4 papas sancochadas", "salsa: tofu + ají amarillo + leche de soya + sal", "aceitunas", "lechuga"],
+    "preparacion": [
+      "Soasa los ajíes amarillos limpios en sartén 3 min.",
+      "Licúalos con el tofu, leche de soya, sal y un chorro de aceite hasta crema lisa.",
+      "Sancocha las papas y báñalas con la crema; aceitunas y lechuga."
+    ],
     "nota": "La huancaína de tofu engaña a cualquier suegra. Papas = carga para mañana."
   },
   {
@@ -410,6 +608,11 @@
     "tiempoMin": 25,
     "micros": ["calcio", "proteinaCompleta"],
     "ingredientes": ["2 camotes grandes", "chorrito de leche de soya", "200 g de tofu firme a la plancha con sillao", "ensalada verde"],
+    "preparacion": [
+      "Sancocha los camotes pelados 15 min y aplástalos con un chorro de leche de soya y sal.",
+      "Marca el tofu en tajadas gruesas con sillao en sartén bien caliente, 3 min por lado.",
+      "Sirve con la ensalada verde."
+    ],
     "nota": "La cena pre-fondo por excelencia: carbohidrato dulce, proteína completa, cero pesadez."
   },
   {
@@ -420,6 +623,11 @@
     "tiempoMin": 25,
     "micros": ["vitC"],
     "ingredientes": ["400 g de zapallo macre", "papa para espesar", "leche de soya", "quinua pop encima", "pan tostado"],
+    "preparacion": [
+      "Cocina el zapallo y la papa en poca agua 15 min.",
+      "Licúa con la leche de soya, regresa a la olla y ajusta sal.",
+      "Sirve con quinua pop encima y pan tostado al lado."
+    ],
     "nota": "Para noches de descanso o cuando el almuerzo ya fue pesado."
   },
   {
@@ -430,6 +638,11 @@
     "tiempoMin": 20,
     "micros": ["hierro"],
     "ingredientes": ["100 g de harina de garbanzo", "agua, cúrcuma y sal (reemplaza al huevo)", "espinaca, cebolla y tomate", "arroz o pan al lado"],
+    "preparacion": [
+      "Bate la harina de garbanzo con agua (misma cantidad), cúrcuma y sal; reposa 10 min.",
+      "Mezcla la espinaca, cebolla y tomate picados en la masa.",
+      "Cuaja en sartén aceitada a fuego medio, 4 min por lado. Con arroz o pan."
+    ],
     "nota": "La harina de garbanzo con agua cuaja igual que el huevo. Truco vegano nivel 1."
   },
   {
@@ -440,6 +653,11 @@
     "tiempoMin": 15,
     "micros": ["hierro"],
     "ingredientes": ["3 tortillas de trigo", "200 g de frejol negro refrito", "1/2 palta", "tomate y cebolla", "rocoto o ají al gusto"],
+    "preparacion": [
+      "Aplasta el frejol cocido en sartén con comino hasta pasta (refrito).",
+      "Calienta las tortillas 20 segundos por lado.",
+      "Arma: frejol, palta, tomate, cebolla y ají; enrolla y a la mesa."
+    ],
     "nota": "Cena de 15 minutos para cuando llegas muerto. Cero cocina elaborada."
   },
   {
@@ -450,6 +668,11 @@
     "tiempoMin": 40,
     "micros": ["hierro"],
     "ingredientes": ["100 g de morón (cebada pelada)", "habas secas", "papa y zanahoria", "hierbabuena"],
+    "preparacion": [
+      "Remoja el morón 30 min.",
+      "Hiérvelo con las habas ~30 min en agua o caldo con un aderezo simple.",
+      "Suma papa y zanahoria hasta que ablanden; hierbabuena picada al final."
+    ],
     "nota": "La sopa de abuela serrana: cebada = carbohidrato lento, perfecto para descanso."
   },
   {
@@ -460,6 +683,12 @@
     "tiempoMin": 35,
     "micros": ["hierro", "vitC"],
     "ingredientes": ["200 g de garbanzos cocidos", "arroz", "culantro licuado", "arvejas, choclo y pimiento", "limón al servir"],
+    "preparacion": [
+      "Licúa un buen atado de culantro con poca agua.",
+      "Sofríe cebolla, ajo y ají; entra el culantro licuado 3 min.",
+      "Agrega caldo, el arroz y las verduras; cocina 15 min.",
+      "Garbanzos al final para que no se deshagan; limón al servir."
+    ],
     "nota": "El levantamuertos criollo, en verde y sin pollo. El limón activa el hierro del garbanzo."
   },
   {
@@ -470,6 +699,12 @@
     "tiempoMin": 50,
     "micros": ["calcio"],
     "ingredientes": ["4 papas en láminas", "bechamel de leche de soya fortificada", "lenteja guisada entre capas", "orégano"],
+    "preparacion": [
+      "Lamina las papas bien finito.",
+      "Bechamel: espesa la leche de soya con 2 cdas de maicena, sal y orégano, 5 min a fuego bajo.",
+      "Arma capas en fuente: papa, lenteja guisada, bechamel; repite y termina con bechamel.",
+      "Horno a 200 °C: 40 min tapado con papel aluminio + 10 min destapado. Rinde para dos noches."
+    ],
     "nota": "Hazlo en tanda el domingo: cena lista para dos noches de semana."
   },
 
@@ -481,6 +716,10 @@
     "tiempoMin": 10,
     "micros": ["zinc"],
     "ingredientes": ["50 g de maíz chulpe tostado", "30 g de maní tostado", "sal"],
+    "preparacion": [
+      "Tuesta el chulpe en olla tapada con un chorrito de aceite, moviendo hasta que dore y truene.",
+      "Sal al final y mezcla con el maní tostado."
+    ],
     "nota": "El snack de bolsillo peruano. Crocante, barato y con proteína."
   },
   {
@@ -491,6 +730,10 @@
     "tiempoMin": 10,
     "micros": ["hierro", "vitC", "proteinaCompleta"],
     "ingredientes": ["120 g de tarwi desamargado", "limón", "cebolla, tomate y culantro", "cancha al lado"],
+    "preparacion": [
+      "Mezcla el tarwi con cebolla en pluma, tomate, culantro y bastante limón.",
+      "Reposa 5 min y cómelo con cancha."
+    ],
     "nota": "20 g de proteína en un snack: el mejor cierre de tarde antes de la cena."
   },
   {
@@ -501,6 +744,10 @@
     "tiempoMin": 5,
     "micros": [],
     "ingredientes": ["1 taza de mazamorra morada (maíz morado, piña, membrillo, guindones)"],
+    "preparacion": [
+      "Si es del mercado o de la abuela: solo sirve y agradece.",
+      "Casera: hierve maíz morado con piña, membrillo y canela 30 min; cuela, endulza y espesa con chuño o maicena 5 min; suma los guindones."
+    ],
     "nota": "Antocianinas del maíz morado + carbohidrato puro: postre que carga glucógeno."
   },
   {
@@ -511,6 +758,10 @@
     "tiempoMin": 1,
     "micros": ["hierro", "zinc"],
     "ingredientes": ["40 g de maní tostado", "30 g de pasas"],
+    "preparacion": [
+      "Si el maní es crudo, tuéstalo 5 min en sartén seca moviendo.",
+      "Mezcla con las pasas; viaja perfecto en un frasquito a la oficina."
+    ],
     "nota": null
   },
   {
@@ -521,6 +772,10 @@
     "tiempoMin": 5,
     "micros": ["calcio"],
     "ingredientes": ["pulpa de lúcuma", "300 ml de leche de soya fortificada", "1 dátil o chancaca"],
+    "preparacion": [
+      "Licúa la pulpa de lúcuma con la leche de soya y el dátil.",
+      "Si la lúcuma es fresca: pélala y quita la pepa antes; si es congelada, directo."
+    ],
     "nota": "Lúcuma: postre y micronutrientes en uno. Va perfecto a media tarde."
   },
   {
@@ -531,6 +786,10 @@
     "tiempoMin": 3,
     "micros": [],
     "ingredientes": ["1 pan integral", "2 cdas de mantequilla de maní", "plátano opcional"],
+    "preparacion": [
+      "Unta la mantequilla de maní en el pan.",
+      "Plátano en rodajas encima si el hambre es seria."
+    ],
     "nota": null
   },
   {
@@ -541,6 +800,10 @@
     "tiempoMin": 1,
     "micros": ["omega3"],
     "ingredientes": ["30 g de sacha inchi tostado con sal"],
+    "preparacion": [
+      "Del mercado o tienda naturista ya viene tostado: la porción es un puñado (30 g).",
+      "Si lo consigues crudo: sartén seca a fuego bajo 8–10 min moviendo — crudo no se come."
+    ],
     "nota": "Omega-3 vegetal amazónico en modo snack. Un puñado al día y listo."
   },
   {
@@ -551,6 +814,10 @@
     "tiempoMin": 2,
     "micros": ["omega3", "vitC"],
     "ingredientes": ["1 mango, granadilla o mandarinas", "25 g de nueces"],
+    "preparacion": [
+      "Pica la fruta que haya en casa.",
+      "Suma el puñado de nueces y listo."
+    ],
     "nota": null
   }
 ]

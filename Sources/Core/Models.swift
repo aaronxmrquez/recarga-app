@@ -127,6 +127,7 @@ struct Recipe: Codable, Identifiable, Hashable {
     let tiempoMin: Int
     let micros: [String]   // "hierro", "vitC", "omega3", "calcio", "zinc", "proteinaCompleta"
     let ingredientes: [String]
+    let preparacion: [String]?
     let nota: String?
 }
 

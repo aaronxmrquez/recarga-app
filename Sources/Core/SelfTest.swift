@@ -20,6 +20,7 @@ func runSelfTest() -> Int32 {
               "\(r.id): macros no cuadran (\(Int(kcalCalc)) vs \(Int(r.kcal)) kcal)")
         check(!r.momentos.isEmpty, "\(r.id): sin momentos")
         check(r.kcal > 0 && r.carbs >= 0 && r.prot >= 0 && r.grasa >= 0, "\(r.id): macros inválidos")
+        check((r.preparacion?.count ?? 0) >= 2, "\(r.id): sin preparación paso a paso")
     }
     for slot in MealSlot.orden {
         let n = recetas.filter { $0.momentos.contains(slot) }.count
