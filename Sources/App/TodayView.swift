@@ -99,6 +99,9 @@ struct TodayView: View {
     private func lineaEntreno(_ plan: DayPlan) -> String {
         if state.actividadesHoy.isEmpty {
             if plan.targets.dayType == .descanso { return "Sin entreno hoy" }
+            if let w = state.garminPlan[Fechas.clave(Date())], GarminPlan.tipoDe(w) != nil {
+                return String(format: "Garmin: %@ · ~%@ kcal", w.titulo, Fmt.kcal(plan.targets.trainingKcal))
+            }
             return String(format: "según plantilla · ~%@ kcal estimadas", Fmt.kcal(plan.targets.trainingKcal))
         }
         let runs = state.actividadesHoy

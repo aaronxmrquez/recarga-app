@@ -162,6 +162,35 @@ func runSelfTest() -> Int32 {
           "la proyección no aplica la carga pre-carrera")
     check(semCarrera[6].tipo == .largo, "el día de carrera proyectado no es largo")
 
+    // 9. Plan de Garmin: mapeo de entrenos programados a tipo de día
+    let wLargo = GarminWorkout(fecha: "2026-07-10", titulo: "Long Run 26K", deporte: "running",
+                               duracionSeg: 7800, distanciaM: 26000, intervalos: false)
+    let wSeries = GarminWorkout(fecha: "2026-07-11", titulo: "8x800", deporte: "running",
+                                duracionSeg: 3600, distanciaM: 12000, intervalos: true)
+    let wSuave = GarminWorkout(fecha: "2026-07-12", titulo: "Easy", deporte: "running",
+                               duracionSeg: 2700, distanciaM: 8000, intervalos: false)
+    let wFuerza = GarminWorkout(fecha: "2026-07-13", titulo: "Gym", deporte: "strength_training",
+                                duracionSeg: 2400, distanciaM: nil, intervalos: false)
+    check(GarminPlan.tipoDe(wLargo) == .largo, "workout largo de Garmin mal clasificado")
+    check(GarminPlan.tipoDe(wSeries) == .moderado, "workout de series de Garmin mal clasificado")
+    check(GarminPlan.tipoDe(wSuave) == .suave, "workout suave de Garmin mal clasificado")
+    check(GarminPlan.tipoDe(wFuerza) == nil, "la fuerza no debería cambiar el tipo de día")
+    check(abs((GarminPlan.kcalEstimada(wLargo, pesoKg: 66) ?? 0) - 26 * 66) < 1,
+          "kcal estimada del workout de Garmin falló")
+    let mapa = GarminPlan.mapa(de: [wFuerza, GarminWorkout(
+        fecha: "2026-07-13", titulo: "Rodaje", deporte: "running",
+        duracionSeg: 3000, distanciaM: 10000, intervalos: false)])
+    check(mapa["2026-07-13"]?.esRun == true, "en día doble debería ganar el entreno de correr")
+
+    // La proyección respeta el plan de Garmin sobre la plantilla
+    let semGarmin = WeekPlanner.proyectar(
+        desde: f("2026-07-09"), dias: 7, profile: perfil, template: .porDefecto,
+        carreras: [], recetas: recetas, historia: [:],
+        garmin: ["2026-07-10": wLargo])
+    check(semGarmin[1].tipo == .largo, "la proyección no usa el entreno programado de Garmin")
+    check(semGarmin[1].notaEntreno == "Long Run 26K", "falta el título del entreno de Garmin")
+    check(semGarmin[0].tipo == .moderado, "el día sin plan de Garmin debería usar la plantilla")
+
     // Reporte
     print("── Recarga selftest ──")
     print("Recetario: \(recetas.count) recetas ✓")

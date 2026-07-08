@@ -83,6 +83,12 @@ struct WeekView: View {
                                 Text(fmtDia.string(from: dia.fecha).capitalized)
                                     .font(.callout.weight(.semibold))
                                 etiquetaDia(dia)
+                                if let nota = dia.notaEntreno {
+                                    Text("· \(nota)")
+                                        .font(.caption)
+                                        .foregroundStyle(.tertiary)
+                                        .lineLimit(1)
+                                }
                             }
                             ForEach(dia.meals) { m in
                                 Text("\(m.slot.label): \(m.recipe.nombre)\(m.porciones != 1 ? " \(Fmt.porciones(m.porciones))" : "")")

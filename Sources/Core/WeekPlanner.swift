@@ -7,6 +7,8 @@ struct DiaProyectado: Identifiable {
     let tipo: DayType
     let estado: EstadoCarrera
     let meals: [PlannedMeal]
+    /// Título del entreno programado en Garmin, si existe.
+    let notaEntreno: String?
     var id: String { Fechas.clave(fecha) }
 }
 
@@ -23,24 +25,34 @@ enum WeekPlanner {
         template: TrainingTemplate,
         carreras: [Carrera],
         recetas: [Recipe],
-        historia: MealHistory
+        historia: MealHistory,
+        garmin: [String: GarminWorkout] = [:]
     ) -> [DiaProyectado] {
         var hist = historia
         var out: [DiaProyectado] = []
         let cal = Calendar.current
 
+        // Prioridad por día: carrera > entreno programado en Garmin > plantilla.
+        func base(_ fecha: Date) -> DayType {
+            garmin[Fechas.clave(fecha)].flatMap { GarminPlan.tipoDe($0) } ?? template.tipo(para: fecha)
+        }
+
         for i in 0..<nDias {
             guard let fecha = cal.date(byAdding: .day, value: i, to: inicio) else { continue }
             let estado = RaceCalendar.estado(para: fecha, carreras: carreras)
-            let tipo = RaceCalendar.tipoEfectivo(plantilla: template.tipo(para: fecha), estado: estado)
+            let tipo = RaceCalendar.tipoEfectivo(plantilla: base(fecha), estado: estado)
+            let planWatch = garmin[Fechas.clave(fecha)]
 
             let sig = cal.date(byAdding: .day, value: 1, to: fecha) ?? fecha
             let estadoSig = RaceCalendar.estado(para: sig, carreras: carreras)
-            let tipoSig = RaceCalendar.tipoEfectivo(plantilla: template.tipo(para: sig), estado: estadoSig)
+            let tipoSig = RaceCalendar.tipoEfectivo(plantilla: base(sig), estado: estadoSig)
 
             let kcal: Double
             if case .diaDeCarrera(let c) = estado {
                 kcal = c.distanciaKm * profile.pesoKg
+            } else if let w = planWatch, GarminPlan.tipoDe(w) != nil,
+                      let est = GarminPlan.kcalEstimada(w, pesoKg: profile.pesoKg) {
+                kcal = est
             } else {
                 kcal = NutritionEngine.kcalEstimada(tipo: tipo, pesoKg: profile.pesoKg)
             }
@@ -55,7 +67,9 @@ enum WeekPlanner {
             for m in meals { registro[m.slot.rawValue] = m.recipe.id }
             hist[Fechas.clave(fecha)] = registro
 
-            out.append(DiaProyectado(fecha: fecha, tipo: tipo, estado: estado, meals: meals))
+            out.append(DiaProyectado(
+                fecha: fecha, tipo: tipo, estado: estado, meals: meals,
+                notaEntreno: planWatch?.titulo))
         }
         return out
     }

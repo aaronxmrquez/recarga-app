@@ -21,6 +21,12 @@ final class AppState: ObservableObject {
     @Published var errorMsg: String?
     @Published var recetasError: String?
 
+    @Published var garminConectado = false
+    @Published var conectandoGarmin = false
+    @Published var garminEstado: String?
+    @Published var garminPlan: [String: GarminWorkout] = [:]
+    private var ultimoFetchGarmin: Date?
+
     let store = Store()
     let strava = StravaClient()
     private(set) var recetas: [Recipe] = []
@@ -47,6 +53,10 @@ final class AppState: ObservableObject {
         }
         stravaConectado = strava.conectado
         atleta = strava.tokens?.athleteName
+        garminConectado = GarminHelper.hayTokens()
+        if let cache: [GarminWorkout] = store.load([GarminWorkout].self, de: Store.garminCache) {
+            garminPlan = GarminPlan.mapa(de: cache)
+        }
         recomputar()
     }
 
@@ -98,10 +108,13 @@ final class AppState: ObservableObject {
         proximaCarrera = RaceCalendar.proxima(desde: hoy, carreras: carreras)
             .map { CarreraProxima(carrera: $0.carrera, dias: $0.dias) }
 
-        let plantillaHoy = RaceCalendar.tipoEfectivo(
-            plantilla: template.tipo(para: hoy), estado: estadoHoy)
-        let tipoManana = RaceCalendar.tipoEfectivo(
-            plantilla: template.tipo(para: manana), estado: estadoManana)
+        // Prioridad: carrera > entreno programado en Garmin > plantilla.
+        let garminHoy = garminPlan[Fechas.clave(hoy)]
+        let garminManana = garminPlan[Fechas.clave(manana)]
+        let baseHoy = garminHoy.flatMap { GarminPlan.tipoDe($0) } ?? template.tipo(para: hoy)
+        let baseManana = garminManana.flatMap { GarminPlan.tipoDe($0) } ?? template.tipo(para: manana)
+        let plantillaHoy = RaceCalendar.tipoEfectivo(plantilla: baseHoy, estado: estadoHoy)
+        let tipoManana = RaceCalendar.tipoEfectivo(plantilla: baseManana, estado: estadoManana)
 
         let (clasificado, esReal) = NutritionEngine.clasificarDia(
             actividades: actividadesHoy, plantilla: plantillaHoy)
@@ -115,6 +128,9 @@ final class AppState: ObservableObject {
         if actividadesHoy.isEmpty {
             if case .diaDeCarrera(let c) = estadoHoy {
                 kcalEntreno = c.distanciaKm * p.pesoKg
+            } else if let w = garminHoy, GarminPlan.tipoDe(w) != nil,
+                      let est = GarminPlan.kcalEstimada(w, pesoKg: p.pesoKg) {
+                kcalEntreno = est
             } else {
                 kcalEntreno = NutritionEngine.kcalEstimada(tipo: tipo, pesoKg: p.pesoKg)
             }
@@ -149,7 +165,7 @@ final class AppState: ObservableObject {
         let inicio = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
         return WeekPlanner.proyectar(
             desde: inicio, dias: dias, profile: p, template: template,
-            carreras: carreras, recetas: recetas, historia: history)
+            carreras: carreras, recetas: recetas, historia: history, garmin: garminPlan)
     }
 
     /// Cambia la receta de una comida por otra alternativa.
@@ -169,9 +185,57 @@ final class AppState: ObservableObject {
         recomputar()
     }
 
+    // MARK: Garmin (entrenos programados)
+
+    func conectarGarmin(email: String, password: String, mfa: String?) async {
+        conectandoGarmin = true
+        defer { conectandoGarmin = false }
+        garminEstado = nil
+        do {
+            if !GarminHelper.venvListo() {
+                garminEstado = "Instalando dependencias (una sola vez, ~30 s)…"
+                try await GarminHelper.crearVenv()
+            }
+            garminEstado = "Conectando con Garmin…"
+            let nombre = try await GarminHelper.login(
+                email: email.trimmingCharacters(in: .whitespacesAndNewlines),
+                password: password,
+                mfa: mfa?.isEmpty == false ? mfa : nil)
+            garminConectado = true
+            garminEstado = "Conectado\(nombre.map { " como \($0)" } ?? "")"
+            await fetchGarmin(forzar: true)
+        } catch {
+            garminEstado = error.localizedDescription
+        }
+    }
+
+    func fetchGarmin(forzar: Bool = false) async {
+        guard garminConectado else { return }
+        if !forzar, let u = ultimoFetchGarmin, Date().timeIntervalSince(u) < 15 * 60 { return }
+        do {
+            let ws = try await GarminHelper.fetch(dias: 14)
+            garminPlan = GarminPlan.mapa(de: ws)
+            store.save(ws, en: Store.garminCache)
+            ultimoFetchGarmin = Date()
+            recomputar()
+        } catch {
+            garminEstado = error.localizedDescription
+        }
+    }
+
+    func desconectarGarmin() {
+        GarminHelper.desconectar()
+        store.delete(Store.garminCache)
+        garminConectado = false
+        garminPlan = [:]
+        garminEstado = nil
+        recomputar()
+    }
+
     // MARK: Strava
 
     func refresh() async {
+        await fetchGarmin()
         guard strava.conectado else {
             recomputar()
             return

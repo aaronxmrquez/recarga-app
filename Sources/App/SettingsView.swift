@@ -9,6 +9,8 @@ struct SettingsView: View {
             TabView {
                 StravaTab()
                     .tabItem { Label("Strava", systemImage: "bolt.horizontal.circle") }
+                GarminTab()
+                    .tabItem { Label("Garmin", systemImage: "applewatch.radiowaves.left.and.right") }
                 PerfilTab()
                     .tabItem { Label("Perfil", systemImage: "person.circle") }
                 SemanaTab()
@@ -97,6 +99,92 @@ private struct StravaTab: View {
                 clientSecret = c.clientSecret
             }
         }
+    }
+}
+
+// MARK: - Garmin
+
+private struct GarminTab: View {
+    @EnvironmentObject var state: AppState
+    @State private var email = ""
+    @State private var password = ""
+    @State private var mfa = ""
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            if state.garminConectado {
+                Label {
+                    Text("Garmin Connect conectado").font(.headline)
+                } icon: {
+                    Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
+                }
+                Text("Recarga lee tus entrenos **programados** (los que TrainingPeaks manda a tu reloj) y los usa en vez de la plantilla: así la cena de hoy ya sabe qué toca mañana de verdad.")
+                    .font(.callout).foregroundStyle(.secondary)
+
+                let proximos = state.garminPlan.values
+                    .filter { $0.fecha >= Fechas.clave(Date()) }
+                    .sorted { $0.fecha < $1.fecha }
+                if proximos.isEmpty {
+                    Text("No veo entrenos programados en tu calendario de Garmin para los próximos 14 días. Revisa en la app Garmin Connect → Calendario que tus workouts de TrainingPeaks estén llegando.")
+                        .font(.callout).foregroundStyle(.orange)
+                } else {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Próximos entrenos leídos (\(proximos.count)):")
+                            .font(.callout.weight(.semibold))
+                        ForEach(proximos.prefix(5), id: \.fecha) { w in
+                            Text("• \(w.fecha) — \(w.titulo)")
+                                .font(.caption).foregroundStyle(.secondary)
+                        }
+                    }
+                }
+
+                HStack {
+                    Button("Sincronizar ahora") {
+                        Task { await state.fetchGarmin(forzar: true) }
+                    }
+                    Button("Desconectar", role: .destructive) {
+                        state.desconectarGarmin()
+                    }
+                }
+            } else {
+                Text("Conectar Garmin Connect").font(.headline)
+                Text("Para saber qué te toca **mañana** (y no depender de la plantilla), Recarga lee los entrenos programados de tu calendario de Garmin — los mismos que TrainingPeaks empuja a tu reloj.")
+                    .font(.callout).foregroundStyle(.secondary)
+
+                TextField("Email de Garmin", text: $email)
+                    .textFieldStyle(.roundedBorder)
+                SecureField("Contraseña de Garmin", text: $password)
+                    .textFieldStyle(.roundedBorder)
+                TextField("Código MFA (solo si tu cuenta lo usa)", text: $mfa)
+                    .textFieldStyle(.roundedBorder)
+
+                HStack(spacing: 10) {
+                    Button {
+                        Task {
+                            await state.conectarGarmin(email: email, password: password, mfa: mfa)
+                            if state.garminConectado { password = ""; mfa = "" }
+                        }
+                    } label: {
+                        Text(state.conectandoGarmin ? "Conectando…" : "Conectar con Garmin")
+                    }
+                    .buttonStyle(.borderedProminent).tint(.orange)
+                    .disabled(email.isEmpty || password.isEmpty || state.conectandoGarmin)
+
+                    if state.conectandoGarmin {
+                        ProgressView().controlSize(.small)
+                    }
+                }
+                Text("No es la API oficial (Garmin solo la da a empresas): se usa la misma vía que el app móvil, con tu propia cuenta. La contraseña viaja solo a Garmin; aquí quedan únicamente tokens de sesión (~1 año) en tu Mac. Si Garmin cambia algo, se reconecta y listo.")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+
+            if let e = state.garminEstado {
+                Text(e).font(.callout)
+                    .foregroundStyle(e.hasPrefix("Conectado") ? .green : .orange)
+            }
+            Spacer()
+        }
+        .padding(20)
     }
 }
 

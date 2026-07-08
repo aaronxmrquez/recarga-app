@@ -41,6 +41,7 @@ final class Store {
     static let tokens = "strava-tokens.json"
     static let historial = "meal-history.json"
     static let carreras = "races.json"
+    static let garminCache = "garmin-week.json"
 }
 
 /// Historial de recetas elegidas por día, para variedad y para fijar los
