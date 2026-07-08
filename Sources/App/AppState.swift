@@ -151,12 +151,20 @@ final class AppState: ObservableObject {
         store.save(history, en: Store.historial)
 
         var consejos = RaceCalendar.consejos(estadoHoy, pesoKg: p.pesoKg)
+        if actividadesHoy.isEmpty && plantillaHoy.esEntreno && tipo == .descanso {
+            let quePlan = garminHoy.flatMap { GarminPlan.tipoDe($0) != nil ? "«\($0.titulo)»" : nil }
+                ?? "«\(plantillaHoy.label)»"
+            consejos.insert(
+                "Hoy tocaba \(quePlan), pero no veo la actividad en Strava y ya pasó la mañana — dejé el día en descanso para no alimentar un entreno que no fue. ¿Sí corriste? Toca ↻ cuando aparezca en Strava y recalculo.",
+                at: 0)
+        }
         consejos += NutritionEngine.consejos(
             day: targets, manana: tipoManana, huboActividad: esReal, pesoKg: p.pesoKg)
+        let tituloManana = garminManana.flatMap { GarminPlan.tipoDe($0) != nil ? $0.titulo : nil }
         plan = DayPlan(
             fecha: hoy, targets: targets, tipoManana: tipoManana, meals: meals,
             consejos: consejos, checklist: NutritionEngine.checklist(meals: meals),
-            estadoCarrera: estadoHoy)
+            estadoCarrera: estadoHoy, tituloManana: tituloManana)
     }
 
     /// Proyecta los próximos días (desde mañana) para la vista de semana y compras.

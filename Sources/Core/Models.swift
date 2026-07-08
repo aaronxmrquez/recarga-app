@@ -177,6 +177,8 @@ struct DayPlan {
     var consejos: [String]
     var checklist: [ChecklistItem]
     var estadoCarrera: EstadoCarrera = .normal
+    /// Título del entreno de Garmin de mañana, cuando es el que define el día.
+    var tituloManana: String? = nil
 
     var totalKcal: Double { meals.reduce(0) { $0 + $1.kcal } }
     var totalCarbs: Double { meals.reduce(0) { $0 + $1.carbs } }

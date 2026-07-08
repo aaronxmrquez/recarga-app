@@ -49,6 +49,9 @@ struct TodayView: View {
                             .font(.callout)
                             .foregroundStyle(.secondary)
                     }
+                    Label(lineaManana(plan), systemImage: "arrow.turn.down.right")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
                 }
             }
             Spacer()
@@ -83,6 +86,19 @@ struct TodayView: View {
         .sheet(isPresented: $mostrarSemana) {
             WeekView().environmentObject(state)
         }
+    }
+
+    private func lineaManana(_ plan: DayPlan) -> String {
+        var texto = "Mañana: \(plan.tipoManana.label)"
+        if let t = plan.tituloManana {
+            texto += " — \(t) (Garmin)"
+        } else {
+            texto += " (plantilla)"
+        }
+        if plan.tipoManana.esDuro {
+            texto += " · la cena de hoy ya viene cargada"
+        }
+        return texto
     }
 
     private func chipDia(_ plan: DayPlan) -> (String, String) {
@@ -274,10 +290,6 @@ struct TodayView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .monospacedDigit()
-            if plan.tipoManana.esDuro {
-                Text("Mañana: \(plan.tipoManana.label) — la cena ya viene ajustada.")
-                    .font(.caption).foregroundStyle(.secondary)
-            }
             if let prox = state.proximaCarrera, prox.dias > 0 {
                 Text("🏁 \(prox.carrera.nombre) (\(prox.carrera.distanciaTexto)): faltan \(prox.dias) día\(prox.dias == 1 ? "" : "s")\(prox.dias > prox.carrera.diasCarga ? " — la carga se activará sola \(prox.carrera.diasCarga) días antes." : ".")")
                     .font(.caption).foregroundStyle(.secondary)
