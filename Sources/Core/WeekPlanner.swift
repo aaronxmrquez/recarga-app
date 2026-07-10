@@ -48,16 +48,25 @@ enum WeekPlanner {
             let tipoSig = RaceCalendar.tipoEfectivo(plantilla: base(sig), estado: estadoSig)
 
             let kcal: Double
+            let horas: Double
             if case .diaDeCarrera(let c) = estado {
                 kcal = c.distanciaKm * profile.pesoKg
-            } else if let w = planWatch, GarminPlan.tipoDe(w) != nil,
-                      let est = GarminPlan.kcalEstimada(w, pesoKg: profile.pesoKg) {
-                kcal = est
+                horas = c.distanciaKm / 10
+            } else if tipo == .descanso || tipo == .carga {
+                kcal = 0
+                horas = 0
+            } else if let w = planWatch, GarminPlan.tipoDe(w) != nil {
+                kcal = GarminPlan.kcalEstimada(w, pesoKg: profile.pesoKg)
+                    ?? NutritionEngine.kcalEstimada(tipo: tipo, pesoKg: profile.pesoKg)
+                horas = w.duracionSeg.map { Double($0) / 3600 }
+                    ?? NutritionEngine.horasEstimadas(tipo: tipo)
             } else {
                 kcal = NutritionEngine.kcalEstimada(tipo: tipo, pesoKg: profile.pesoKg)
+                horas = NutritionEngine.horasEstimadas(tipo: tipo)
             }
 
-            let targets = NutritionEngine.dayTargets(profile: profile, dayType: tipo, trainingKcal: kcal)
+            let targets = NutritionEngine.dayTargets(
+                profile: profile, dayType: tipo, trainingKcal: kcal, horasEntreno: horas)
             let mealTargets = NutritionEngine.mealTargets(day: targets, manana: tipoSig)
             let planner = MealPlanner(recetas: recetas, history: hist)
             let meals = planner.plan(

@@ -141,6 +141,8 @@ struct DayTargets {
     var grasa: Double
     var trainingKcal: Double
     var carbsGkg: Double
+    var horasEntreno: Double
+    var aguaLitros: Double
 }
 
 struct MealTarget {

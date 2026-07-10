@@ -36,7 +36,7 @@ struct TodayView: View {
     private var encabezado: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 6) {
-                Text(Fechas.tituloDia.string(from: Date()).capitalized)
+                Text(Fechas.tituloDia.string(from: state.plan?.fecha ?? Date()).capitalized)
                     .font(.title.bold())
                 if let plan = state.plan {
                     HStack(spacing: 8) {
@@ -139,13 +139,18 @@ struct TodayView: View {
     // MARK: Objetivos
 
     private func objetivosView(_ plan: DayPlan) -> some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 10) {
             tarjeta(valor: Fmt.kcal(plan.targets.kcal), unidad: "kcal", titulo: "Energía", color: .orange)
             tarjeta(valor: Fmt.g(plan.targets.carbs),
                     unidad: String(format: "%.0f g/kg", plan.targets.carbsGkg),
                     titulo: "Carbohidratos", color: .blue)
             tarjeta(valor: Fmt.g(plan.targets.prot), unidad: "reparar", titulo: "Proteína", color: .green)
             tarjeta(valor: Fmt.g(plan.targets.grasa), unidad: "mínimo sano", titulo: "Grasa", color: .purple)
+            tarjeta(valor: String(format: "%.1f L", plan.targets.aguaLitros),
+                    unidad: plan.targets.horasEntreno > 0
+                        ? String(format: "incl. %.1f h de entreno", plan.targets.horasEntreno)
+                        : "día sin entreno",
+                    titulo: "Agua", color: .teal)
         }
     }
 

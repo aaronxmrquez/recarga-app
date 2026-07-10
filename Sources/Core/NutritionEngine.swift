@@ -36,6 +36,16 @@ enum NutritionEngine {
         return km * pesoKg
     }
 
+    /// Duración estimada de la sesión según plantilla (para hidratación).
+    static func horasEstimadas(tipo: DayType) -> Double {
+        switch tipo {
+        case .suave: return 1.0
+        case .moderado: return 1.2
+        case .largo: return 2.7
+        default: return 0
+        }
+    }
+
     // MARK: Clasificación del día
 
     /// Clasifica el día según las actividades reales; si no hay, cae a la
@@ -64,7 +74,9 @@ enum NutritionEngine {
 
     // MARK: Objetivos del día
 
-    static func dayTargets(profile p: UserProfile, dayType: DayType, trainingKcal: Double) -> DayTargets {
+    static func dayTargets(
+        profile p: UserProfile, dayType: DayType, trainingKcal: Double, horasEntreno: Double = 0
+    ) -> DayTargets {
         let carbs = dayType.carbsGkg * p.pesoKg
         let prot = p.proteinaGkg * p.pesoKg
         var kcal = bmr(p) * p.factorActividad + trainingKcal
@@ -74,9 +86,13 @@ enum NutritionEngine {
             grasa = grasaMin
             kcal = (carbs + prot) * 4 + grasa * 9
         }
+        // Hidratación: base ~35 ml/kg/día + ~1.1 L por hora de carrera
+        // (sudor ~1 L/h repuesto con margen). Redondeado a 0.1 L.
+        let agua = ((0.035 * p.pesoKg + 1.1 * horasEntreno) * 10).rounded() / 10
         return DayTargets(
             dayType: dayType, kcal: kcal, carbs: carbs, prot: prot,
-            grasa: grasa, trainingKcal: trainingKcal, carbsGkg: dayType.carbsGkg
+            grasa: grasa, trainingKcal: trainingKcal, carbsGkg: dayType.carbsGkg,
+            horasEntreno: horasEntreno, aguaLitros: agua
         )
     }
 
@@ -141,8 +157,12 @@ enum NutritionEngine {
                 ? "Empieza la carga: sube carbohidratos y baja fibra desde hoy."
                 : "Mañana toca fondo: la cena de hoy va cargada de carbohidratos y más ligera en fibra y grasa, para amanecer con el glucógeno lleno.")
         }
-        if day.dayType == .largo {
-            out.append("Hidratación post-fondo: repón con agua + sodio (una pizca de sal en la comida o bebida con electrolitos), ~1.5× el peso perdido.")
+        if day.horasEntreno >= 1.3 || day.dayType == .largo {
+            let litros = String(format: "%.1f", day.aguaLitros)
+            let sodio = day.horasEntreno >= 2
+                ? " con sodio (electrolitos o una pizca de sal)"
+                : ""
+            out.append("Hidratación: ~\(litros) L en el día. Antes de correr ~500 ml; durante, 400–700 ml por hora\(sodio); al terminar repón ~1.5× el peso que perdiste y reparte el resto hasta la noche.")
         }
         if day.dayType == .descanso {
             out.append("Descanso ≠ restricción: la proteína se mantiene (\(String(format: "%.1f", day.prot / pesoKg)) g/kg) para reparar; solo bajan los carbohidratos.")

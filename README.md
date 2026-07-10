@@ -5,7 +5,7 @@ App nativa de macOS que te dice **qué comer hoy** (desayuno, almuerzo, cena y s
 ## Cómo funciona
 
 1. **Tu plantilla semanal** (Ajustes → Semana) dice qué toca cada día: rodaje suave, series, fondo, descanso o carga pre-maratón. Strava sabe lo que *ya corriste*; la plantilla sabe lo que *viene* — con ambas, la cena de hoy se adelanta al fondo de mañana.
-2. **El motor de nutrición** calcula los objetivos del día: BMR (Mifflin-St Jeor) + gasto del entreno (calorías de Strava, o ~1 kcal × kg × km si no hay dato). Carbohidratos periodizados por tipo de día (descanso 4 g/kg → fondo 9 g/kg → carga 11 g/kg), proteína 1.8–2.0 g/kg repartida en 4–5 tomas, grasa con piso de 0.8 g/kg. Reglas de los position stands ISSN/ACSM.
+2. **El motor de nutrición** calcula los objetivos del día: BMR (Mifflin-St Jeor) + gasto del entreno (calorías de Strava, o ~1 kcal × kg × km si no hay dato). Carbohidratos periodizados por tipo de día (descanso 4 g/kg → fondo 9 g/kg → carga 11 g/kg), proteína 1.8–2.0 g/kg repartida en 4–5 tomas, grasa con piso de 0.8 g/kg, e hidratación diaria (35 ml/kg + ~1.1 L por hora de entreno, con pauta de sodio en sesiones >2 h). Reglas de los position stands ISSN/ACSM.
 3. **El planificador** elige del recetario (55 platos veganos peruanos etiquetados con macros) la combinación que cubre cada comida, escala porciones, evita repetir lo de los últimos 3 días y cuida el checklist vegano-runner: hierro + vitamina C, omega-3 (sacha inchi, chía), calcio y recordatorio de B12.
 
 El día está pensado para quien entrena de madrugada: pre-entreno ligero ~4:15 am, desayuno como comida de recuperación al volver, y cena que carga glucógeno si mañana hay fondo.

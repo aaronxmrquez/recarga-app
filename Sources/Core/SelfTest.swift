@@ -46,11 +46,18 @@ func runSelfTest() -> Int32 {
     let kcalEntreno = NutritionEngine.trainingKcal(actividades: [fondo], pesoKg: perfil.pesoKg)
     check(abs(kcalEntreno - 28 * 66) < 1, "estimación kcal de carrera falló: \(kcalEntreno)")
 
-    let targets = NutritionEngine.dayTargets(profile: perfil, dayType: .largo, trainingKcal: kcalEntreno)
+    let targets = NutritionEngine.dayTargets(
+        profile: perfil, dayType: .largo, trainingKcal: kcalEntreno, horasEntreno: 8400.0 / 3600)
     check(targets.carbs == 9 * 66, "carbos de día largo: \(targets.carbs)")
     check(targets.prot == 1.8 * 66, "proteína: \(targets.prot)")
     check(targets.kcal > 3400 && targets.kcal < 4400, "kcal día fondo fuera de rango: \(targets.kcal)")
     check(targets.grasa >= 0.8 * 66, "grasa por debajo del mínimo: \(targets.grasa)")
+    check(targets.aguaLitros > 4.4 && targets.aguaLitros < 5.4,
+          "agua de día fondo fuera de rango: \(targets.aguaLitros) L")
+    let consejosFondo = NutritionEngine.consejos(
+        day: targets, manana: .suave, huboActividad: true, pesoKg: 66)
+    check(consejosFondo.contains { $0.contains("Hidratación") },
+          "falta el consejo de hidratación en día de fondo")
 
     // 3. Reparto por comidas: la cena sube cuando mañana toca fondo
     let mealsNormal = NutritionEngine.mealTargets(day: targets, manana: .suave)
@@ -63,6 +70,8 @@ func runSelfTest() -> Int32 {
     let descanso = NutritionEngine.dayTargets(profile: perfil, dayType: .descanso, trainingKcal: 0)
     let mealsDescanso = NutritionEngine.mealTargets(day: descanso, manana: .suave)
     check(mealsDescanso.count == 4, "día de descanso no debería tener pre-entreno")
+    check(abs(descanso.aguaLitros - 2.3) < 0.15,
+          "agua de descanso fuera de rango: \(descanso.aguaLitros) L")
     for m in mealsNormal {
         let suma = mealsNormal.reduce(0.0) { $0 + $1.carbs }
         check(abs(suma - targets.carbs) < 1, "reparto de carbos no suma: \(suma) vs \(targets.carbs)")
@@ -196,8 +205,8 @@ func runSelfTest() -> Int32 {
     print("── Recarga selftest ──")
     print("Recetario: \(recetas.count) recetas ✓")
     print(String(format: "Perfil demo: 66 kg · BMR %.0f kcal", bmr))
-    print(String(format: "Día FONDO 28 km → %.0f kcal · C %.0f g (9 g/kg) · P %.0f g · G %.0f g",
-                 targets.kcal, targets.carbs, targets.prot, targets.grasa))
+    print(String(format: "Día FONDO 28 km → %.0f kcal · C %.0f g (9 g/kg) · P %.0f g · G %.0f g · Agua %.1f L",
+                 targets.kcal, targets.carbs, targets.prot, targets.grasa, targets.aguaLitros))
     print("\nPlan de ejemplo:")
     for m in plan {
         print(String(format: "  %@ %@ — %@ (×%.2g) · %.0f kcal · C %.0f · P %.0f · G %.0f",

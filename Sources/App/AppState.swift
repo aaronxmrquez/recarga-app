@@ -33,6 +33,7 @@ final class AppState: ObservableObject {
     private var history: MealHistory = [:]
     private var oauthServer: OAuthCallbackServer?
     private var ultimoRefresh: Date?
+    private var timerDia: Timer?
 
     init() {
         do {
@@ -58,6 +59,35 @@ final class AppState: ObservableObject {
             garminPlan = GarminPlan.mapa(de: cache)
         }
         recomputar()
+        vigilarCambioDeDia()
+    }
+
+    // MARK: Cambio de día
+
+    /// La app puede quedarse abierta días: al pasar la medianoche (o despertar
+    /// la Mac en otro día) hay que recalcular, si no se queda el plan de ayer.
+    private func vigilarCambioDeDia() {
+        timerDia = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            Task { @MainActor in self?.verificarCambioDeDia() }
+        }
+        NotificationCenter.default.addObserver(
+            forName: .NSCalendarDayChanged, object: nil, queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.verificarCambioDeDia() }
+        }
+        NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didWakeNotification, object: nil, queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in self?.verificarCambioDeDia() }
+        }
+    }
+
+    private func verificarCambioDeDia() {
+        guard let plan, !ocupado,
+              Fechas.clave(plan.fecha) != Fechas.clave(Date())
+        else { return }
+        actividadesHoy = []   // las de "hoy" eran de ayer
+        Task { await refresh() }
     }
 
     // MARK: Perfil y plantilla
@@ -125,20 +155,28 @@ final class AppState: ObservableObject {
         if case .diaDeCarrera = estadoHoy, actividadesHoy.isEmpty { tipo = .largo }
 
         let kcalEntreno: Double
-        if actividadesHoy.isEmpty {
-            if case .diaDeCarrera(let c) = estadoHoy {
-                kcalEntreno = c.distanciaKm * p.pesoKg
-            } else if let w = garminHoy, GarminPlan.tipoDe(w) != nil,
-                      let est = GarminPlan.kcalEstimada(w, pesoKg: p.pesoKg) {
-                kcalEntreno = est
-            } else {
-                kcalEntreno = NutritionEngine.kcalEstimada(tipo: tipo, pesoKg: p.pesoKg)
-            }
-        } else {
+        let horasEntreno: Double
+        if !actividadesHoy.isEmpty {
             kcalEntreno = NutritionEngine.trainingKcal(actividades: actividadesHoy, pesoKg: p.pesoKg)
+            horasEntreno = Double(actividadesHoy.reduce(0) { $0 + $1.movingTime }) / 3600
+        } else if case .diaDeCarrera(let c) = estadoHoy {
+            kcalEntreno = c.distanciaKm * p.pesoKg
+            horasEntreno = c.distanciaKm / 10
+        } else if tipo == .descanso || tipo == .carga {
+            kcalEntreno = 0
+            horasEntreno = 0
+        } else if let w = garminHoy, GarminPlan.tipoDe(w) != nil {
+            kcalEntreno = GarminPlan.kcalEstimada(w, pesoKg: p.pesoKg)
+                ?? NutritionEngine.kcalEstimada(tipo: tipo, pesoKg: p.pesoKg)
+            horasEntreno = w.duracionSeg.map { Double($0) / 3600 }
+                ?? NutritionEngine.horasEstimadas(tipo: tipo)
+        } else {
+            kcalEntreno = NutritionEngine.kcalEstimada(tipo: tipo, pesoKg: p.pesoKg)
+            horasEntreno = NutritionEngine.horasEstimadas(tipo: tipo)
         }
 
-        let targets = NutritionEngine.dayTargets(profile: p, dayType: tipo, trainingKcal: kcalEntreno)
+        let targets = NutritionEngine.dayTargets(
+            profile: p, dayType: tipo, trainingKcal: kcalEntreno, horasEntreno: horasEntreno)
         let mealTargets = NutritionEngine.mealTargets(day: targets, manana: tipoManana)
 
         let claveHoy = Fechas.clave(hoy)
