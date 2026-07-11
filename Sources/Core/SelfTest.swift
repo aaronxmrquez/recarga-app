@@ -133,6 +133,18 @@ func runSelfTest() -> Int32 {
     check(plan.allSatisfy { $0.recipe.dietaMin == .vegano },
           "el plan vegano incluyó una receta no vegana")
 
+    // Al cambiar a una dieta más estricta, una comida fijada que ya no
+    // cumple (ej. lomo saltado tras pasar a vegetariano) se reemplaza sola.
+    if let carnivora = recetas.first(where: { $0.dietaMin == .omnivoro && $0.momentos.contains(.almuerzo) }) {
+        let plannerV = MealPlanner(recetas: veganas, history: [:])
+        let planV = plannerV.plan(fecha: base, targets: mealsNormal,
+                                  fijadas: ["almuerzo": carnivora.id])
+        check(planV.first { $0.slot == .almuerzo }?.recipe.dietaMin == .vegano,
+              "una comida fijada no compatible no fue reemplazada al cambiar de dieta")
+    } else {
+        fallas.append("no encontré receta omnívora de almuerzo para el test de cambio de dieta")
+    }
+
     // 7. Calendario de carreras
     let maraton = Carrera(id: "m", nombre: "Maratón de Lima", fecha: "2026-10-18", distanciaKm: 42.2)
     let diezK = Carrera(id: "d", nombre: "10K del trabajo", fecha: "2026-08-09", distanciaKm: 10)

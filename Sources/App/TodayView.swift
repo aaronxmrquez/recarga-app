@@ -318,6 +318,10 @@ struct TodayView: View {
                 Text("🏁 \(prox.carrera.nombre) (\(prox.carrera.distanciaTexto)): faltan \(prox.dias) día\(prox.dias == 1 ? "" : "s")\(prox.dias > prox.carrera.diasCarga ? " — la carga se activará sola \(prox.carrera.diasCarga) días antes." : ".")")
                     .font(.caption).foregroundStyle(.secondary)
             }
+            if let dieta = state.profile?.dieta {
+                Text("Dieta: \(dieta.label) · \(state.recetasParaDieta.count) recetas activas — cámbiala en ⚙︎ → Perfil")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
             Text("Orientativo, no es consejo médico. Reglas: ISSN/ACSM para deporte de resistencia.")
                 .font(.caption2).foregroundStyle(.tertiary)
         }
