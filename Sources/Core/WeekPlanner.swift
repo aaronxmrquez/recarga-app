@@ -116,7 +116,7 @@ struct ItemCompra: Identifiable {
 enum ShoppingList {
 
     static let ordenCategorias = [
-        "Frutas y verduras", "Menestras y granos", "Soya y proteínas",
+        "Frutas y verduras", "Menestras y granos", "Proteínas",
         "Panes y fideos", "Despensa", "Otros",
     ]
 
@@ -191,12 +191,25 @@ enum ShoppingList {
         Def(nombre: "Maíz chulpe / cancha", categoria: "Menestras y granos", claves: ["maíz chulpe", "canchita", "cancha"]),
         Def(nombre: "Maíz morado", categoria: "Menestras y granos", claves: ["maíz morado"]),
         // Soya y proteínas
-        Def(nombre: "Tofu firme", categoria: "Soya y proteínas", claves: ["tofu"]),
-        Def(nombre: "Leche de soya fortificada", categoria: "Soya y proteínas", claves: ["leche de soya"]),
-        Def(nombre: "Soya texturizada", categoria: "Soya y proteínas", claves: ["soya texturizada"]),
-        Def(nombre: "Proteína de arveja", categoria: "Soya y proteínas", claves: ["proteína de arveja"]),
-        Def(nombre: "Hummus", categoria: "Soya y proteínas", claves: ["hummus"]),
-        Def(nombre: "Mayonesa vegana", categoria: "Soya y proteínas", claves: ["mayonesa vegana"]),
+        Def(nombre: "Tofu firme", categoria: "Proteínas", claves: ["tofu"]),
+        Def(nombre: "Leche de soya fortificada", categoria: "Proteínas", claves: ["leche de soya"]),
+        Def(nombre: "Soya texturizada", categoria: "Proteínas", claves: ["soya texturizada"]),
+        Def(nombre: "Proteína de arveja", categoria: "Proteínas", claves: ["proteína de arveja"]),
+        Def(nombre: "Hummus", categoria: "Proteínas", claves: ["hummus"]),
+        Def(nombre: "Mayonesa vegana", categoria: "Proteínas", claves: ["mayonesa vegana"]),
+        Def(nombre: "Huevos", categoria: "Proteínas", claves: ["huevo duro", "huevos fritos", "huevo frito", "huevos", "huevo"]),
+        Def(nombre: "Pollo", categoria: "Proteínas", claves: ["pechuga de pollo", "pollo deshilachado", "presa de pollo", "pechuga", "pollo"]),
+        Def(nombre: "Pavita", categoria: "Proteínas", claves: ["pavita"]),
+        Def(nombre: "Carne de res", categoria: "Proteínas", claves: ["carne molida", "lomo o bistec", "bistec", "lomo"]),
+        Def(nombre: "Pescado", categoria: "Proteínas", claves: ["pescado fresco", "bonito o jurel", "pescado", "bonito", "jurel"]),
+        Def(nombre: "Atún", categoria: "Proteínas", claves: ["atún"]),
+        Def(nombre: "Queso fresco", categoria: "Proteínas", claves: ["queso fresco", "queso"]),
+        Def(nombre: "Yogurt", categoria: "Proteínas", claves: ["yogurt griego", "yogurt"]),
+        Def(nombre: "Leche", categoria: "Proteínas", claves: ["leche evaporada", "leche entera", "leche"]),
+        Def(nombre: "Granola", categoria: "Despensa", claves: ["granola"]),
+        Def(nombre: "Mayonesa", categoria: "Despensa", claves: ["mayonesa"]),
+        Def(nombre: "Galletas de soda", categoria: "Despensa", claves: ["galletas de soda"]),
+        Def(nombre: "Vinagre", categoria: "Despensa", claves: ["vinagre"]),
         // Panes y fideos
         Def(nombre: "Pan", categoria: "Panes y fideos", claves: ["panes franceses", "panes integrales", "pan de molde", "pan francés", "pan integral", "pan tostado", "tostadas", "panes", "pan"]),
         Def(nombre: "Tallarines", categoria: "Panes y fideos", claves: ["tallarines"]),

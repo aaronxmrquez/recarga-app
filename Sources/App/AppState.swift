@@ -30,6 +30,12 @@ final class AppState: ObservableObject {
     let store = Store()
     let strava = StravaClient()
     private(set) var recetas: [Recipe] = []
+
+    /// Recetario filtrado según la dieta del usuario (vegano ⊂ vegetariano ⊂ omnívoro).
+    var recetasParaDieta: [Recipe] {
+        let d = profile?.dieta ?? .vegano
+        return recetas.filter { d.permite($0) }
+    }
     private var history: MealHistory = [:]
     private var oauthServer: OAuthCallbackServer?
     private var ultimoRefresh: Date?
@@ -180,7 +186,7 @@ final class AppState: ObservableObject {
         let mealTargets = NutritionEngine.mealTargets(day: targets, manana: tipoManana)
 
         let claveHoy = Fechas.clave(hoy)
-        let planner = MealPlanner(recetas: recetas, history: history)
+        let planner = MealPlanner(recetas: recetasParaDieta, history: history)
         let meals = planner.plan(fecha: hoy, targets: mealTargets, fijadas: history[claveHoy] ?? [:])
 
         var deHoy: [String: String] = [:]
@@ -201,7 +207,8 @@ final class AppState: ObservableObject {
         let tituloManana = garminManana.flatMap { GarminPlan.tipoDe($0) != nil ? $0.titulo : nil }
         plan = DayPlan(
             fecha: hoy, targets: targets, tipoManana: tipoManana, meals: meals,
-            consejos: consejos, checklist: NutritionEngine.checklist(meals: meals),
+            consejos: consejos,
+            checklist: NutritionEngine.checklist(meals: meals, dieta: p.dieta),
             estadoCarrera: estadoHoy, tituloManana: tituloManana)
     }
 
@@ -211,7 +218,7 @@ final class AppState: ObservableObject {
         let inicio = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
         return WeekPlanner.proyectar(
             desde: inicio, dias: dias, profile: p, template: template,
-            carreras: carreras, recetas: recetas, historia: history, garmin: garminPlan)
+            carreras: carreras, recetas: recetasParaDieta, historia: history, garmin: garminPlan)
     }
 
     /// Cambia la receta de una comida por otra alternativa.
@@ -222,7 +229,7 @@ final class AppState: ObservableObject {
               let actual = plan.meals.first(where: { $0.slot == slot })?.recipe.id
         else { return }
         let otras = Set(plan.meals.filter { $0.slot != slot }.map(\.recipe.id))
-        let planner = MealPlanner(recetas: recetas, history: history)
+        let planner = MealPlanner(recetas: recetasParaDieta, history: history)
         guard let nueva = planner.alternativa(
             fecha: plan.fecha, target: target, actual: actual, otrasDeHoy: otras)
         else { return }

@@ -172,37 +172,55 @@ enum NutritionEngine {
 
     // MARK: Checklist vegano-runner
 
-    static func checklist(meals: [PlannedMeal]) -> [ChecklistItem] {
+    static func checklist(meals: [PlannedMeal], dieta: Dieta) -> [ChecklistItem] {
         let micros = Set(meals.flatMap { $0.recipe.micros })
         let hierroConC = meals.contains { $0.recipe.micros.contains("hierro") && $0.recipe.micros.contains("vitC") }
             || (micros.contains("hierro") && micros.contains("vitC"))
-        return [
+
+        var items = [
             ChecklistItem(
                 nombre: "Hierro + vitamina C",
                 cubierto: hierroConC,
                 detalle: hierroConC
-                    ? "Cubierto — el limón/tomate ayuda a absorber el hierro de legumbres. Café y té lejos de esas comidas."
+                    ? (dieta == .omnivoro
+                        ? "Cubierto — la carne y el pescado traen hierro hemo, el de mejor absorción."
+                        : "Cubierto — el limón/tomate ayuda a absorber el hierro de legumbres. Café y té lejos de esas comidas.")
                     : "Suma limón, tomate o naranja a la comida con legumbres."
             ),
             ChecklistItem(
                 nombre: "Omega-3",
                 cubierto: micros.contains("omega3"),
                 detalle: micros.contains("omega3")
-                    ? "Cubierto con chía, linaza, nueces o sacha inchi."
-                    : "Agrega 1 cda de chía/linaza molida o un puñado de sacha inchi."
+                    ? "Cubierto (pescado azul, chía, nueces o sacha inchi)."
+                    : (dieta == .omnivoro
+                        ? "Pescado azul (bonito, jurel) 2–3×/semana, o chía/sacha inchi."
+                        : "Agrega 1 cda de chía/linaza molida o un puñado de sacha inchi.")
             ),
             ChecklistItem(
                 nombre: "Calcio",
                 cubierto: micros.contains("calcio"),
                 detalle: micros.contains("calcio")
-                    ? "Cubierto (soya fortificada / tofu)."
-                    : "Suma leche de soya fortificada o tofu hecho con calcio."
+                    ? "Cubierto (lácteos, soya fortificada o tofu)."
+                    : "Suma lácteos, leche de soya fortificada o tofu hecho con calcio."
             ),
-            ChecklistItem(
+        ]
+
+        switch dieta {
+        case .vegano:
+            items.append(ChecklistItem(
                 nombre: "B12 (suplemento)",
                 cubierto: false,
                 detalle: "No sale de la comida: suplemento diario o 2–3×/semana de alta dosis. Tómalo con el desayuno."
-            ),
-        ]
+            ))
+        case .vegetariano:
+            items.append(ChecklistItem(
+                nombre: "B12 (vigilar)",
+                cubierto: false,
+                detalle: "Huevos y lácteos aportan algo de B12; en deportistas vegetarianos conviene chequear niveles una vez al año."
+            ))
+        case .omnivoro:
+            break
+        }
+        return items
     }
 }

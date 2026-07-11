@@ -13,7 +13,18 @@ func runSelfTest() -> Int32 {
         print("SELFTEST FALLÓ: \(error.localizedDescription)")
         return 1
     }
-    check(recetas.count >= 45, "recetario muy chico: \(recetas.count)")
+    check(recetas.count >= 75, "recetario muy chico: \(recetas.count)")
+
+    // Dietas: vegano ⊂ vegetariano ⊂ omnívoro
+    let veganas = recetas.filter { Dieta.vegano.permite($0) }
+    let vegetarianas = recetas.filter { Dieta.vegetariano.permite($0) }
+    let todas = recetas.filter { Dieta.omnivoro.permite($0) }
+    check(veganas.allSatisfy { $0.dietaMin == .vegano }, "el filtro vegano dejó pasar recetas no veganas")
+    check(recetas.contains { $0.dietaMin == .vegetariano }, "no hay recetas vegetarianas")
+    check(recetas.contains { $0.dietaMin == .omnivoro }, "no hay recetas omnívoras")
+    check(veganas.count < vegetarianas.count && vegetarianas.count < todas.count,
+          "la jerarquía de dietas no filtra: \(veganas.count)/\(vegetarianas.count)/\(todas.count)")
+    check(todas.count == recetas.count, "el omnívoro debería ver todo el recetario")
     for r in recetas {
         let kcalCalc = r.carbs * 4 + r.prot * 4 + r.grasa * 9
         check(abs(kcalCalc - r.kcal) <= r.kcal * 0.18,
@@ -23,8 +34,8 @@ func runSelfTest() -> Int32 {
         check((r.preparacion?.count ?? 0) >= 2, "\(r.id): sin preparación paso a paso")
     }
     for slot in MealSlot.orden {
-        let n = recetas.filter { $0.momentos.contains(slot) }.count
-        check(n >= 5, "pocas recetas para \(slot.label): \(n)")
+        let n = veganas.filter { $0.momentos.contains(slot) }.count
+        check(n >= 5, "pocas recetas veganas para \(slot.label): \(n)")
     }
 
     // 2. Motor con un perfil de ejemplo
@@ -85,7 +96,7 @@ func runSelfTest() -> Int32 {
     var planesPorDia: [[PlannedMeal]] = []
     for dia in 0..<3 {
         let fecha = cal.date(byAdding: .day, value: dia, to: base)!
-        let planner = MealPlanner(recetas: recetas, history: historia)
+        let planner = MealPlanner(recetas: veganas, history: historia)
         let plan = planner.plan(fecha: fecha, targets: mealsNormal, fijadas: [:])
         check(plan.count == mealsNormal.count, "día \(dia): faltan comidas (\(plan.count))")
         var delDia: [String: String] = [:]
@@ -110,9 +121,17 @@ func runSelfTest() -> Int32 {
     check(abs(totP - targets.prot) / targets.prot < 0.25,
           "proteína del plan lejos del objetivo: \(Int(totP)) vs \(Int(targets.prot))")
 
-    // 6. Checklist
-    let checklist = NutritionEngine.checklist(meals: plan)
-    check(checklist.count == 4, "checklist incompleto")
+    // 6. Checklist según dieta
+    let checklist = NutritionEngine.checklist(meals: plan, dieta: .vegano)
+    check(checklist.count == 4, "checklist vegano incompleto")
+    check(NutritionEngine.checklist(meals: plan, dieta: .omnivoro).count == 3,
+          "el omnívoro no debería tener ítem de B12")
+    check(NutritionEngine.checklist(meals: plan, dieta: .vegetariano)
+            .contains { $0.nombre.hasPrefix("B12") },
+          "el vegetariano debería tener aviso de B12")
+    // El plan vegano nunca incluye recetas no veganas
+    check(plan.allSatisfy { $0.recipe.dietaMin == .vegano },
+          "el plan vegano incluyó una receta no vegana")
 
     // 7. Calendario de carreras
     let maraton = Carrera(id: "m", nombre: "Maratón de Lima", fecha: "2026-10-18", distanciaKm: 42.2)
@@ -143,12 +162,12 @@ func runSelfTest() -> Int32 {
     // 8. Proyección semanal (determinista) + lista de compras
     let semana = WeekPlanner.proyectar(
         desde: f("2026-07-09"), dias: 7, profile: perfil,
-        template: .porDefecto, carreras: [], recetas: recetas, historia: [:])
+        template: .porDefecto, carreras: [], recetas: veganas, historia: [:])
     check(semana.count == 7, "proyección incompleta: \(semana.count) días")
     check(semana.allSatisfy { $0.meals.count >= 4 }, "días proyectados con comidas incompletas")
     let semana2 = WeekPlanner.proyectar(
         desde: f("2026-07-09"), dias: 7, profile: perfil,
-        template: .porDefecto, carreras: [], recetas: recetas, historia: [:])
+        template: .porDefecto, carreras: [], recetas: veganas, historia: [:])
     let ids1 = semana.flatMap { $0.meals.map(\.recipe.id) }
     let ids2 = semana2.flatMap { $0.meals.map(\.recipe.id) }
     check(ids1 == ids2, "la proyección no es determinista")
@@ -167,7 +186,7 @@ func runSelfTest() -> Int32 {
     let semCarrera = WeekPlanner.proyectar(
         desde: f("2026-07-09"), dias: 7, profile: perfil, template: .porDefecto,
         carreras: [Carrera(id: "x", nombre: "Test 42K", fecha: "2026-07-15", distanciaKm: 42.2)],
-        recetas: recetas, historia: [:])
+        recetas: veganas, historia: [:])
     check(semCarrera[3].tipo == .carga && semCarrera[5].tipo == .carga,
           "la proyección no aplica la carga pre-carrera")
     check(semCarrera[6].tipo == .largo, "el día de carrera proyectado no es largo")
@@ -195,7 +214,7 @@ func runSelfTest() -> Int32 {
     // La proyección respeta el plan de Garmin sobre la plantilla
     let semGarmin = WeekPlanner.proyectar(
         desde: f("2026-07-09"), dias: 7, profile: perfil, template: .porDefecto,
-        carreras: [], recetas: recetas, historia: [:],
+        carreras: [], recetas: veganas, historia: [:],
         garmin: ["2026-07-10": wLargo])
     check(semGarmin[1].tipo == .largo, "la proyección no usa el entreno programado de Garmin")
     check(semGarmin[1].notaEntreno == "Long Run 26K", "falta el título del entreno de Garmin")

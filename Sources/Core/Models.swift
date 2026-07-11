@@ -8,15 +8,66 @@ enum Sexo: String, Codable, CaseIterable, Identifiable {
     var label: String { self == .masculino ? "Masculino" : "Femenino" }
 }
 
+enum Dieta: String, Codable, CaseIterable, Identifiable {
+    case omnivoro, vegetariano, vegano
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .omnivoro: return "Como de todo"
+        case .vegetariano: return "Vegetariano"
+        case .vegano: return "Vegano"
+        }
+    }
+
+    /// Qué tan permisiva es la dieta (más alto = menos restricciones).
+    private var rango: Int {
+        switch self {
+        case .vegano: return 0
+        case .vegetariano: return 1
+        case .omnivoro: return 2
+        }
+    }
+
+    /// Un vegano solo come recetas veganas; un vegetariano, veganas y
+    /// vegetarianas; un omnívoro, todas.
+    func permite(_ r: Recipe) -> Bool { r.dietaMin.rango <= rango }
+}
+
 struct UserProfile: Codable {
     var pesoKg: Double
     var alturaCm: Double
     var edad: Int
     var sexo: Sexo
-    /// Objetivo de proteína en g/kg/día (vegano endurance: 1.8–2.0)
+    var dieta: Dieta
+    /// Objetivo de proteína en g/kg/día (plant-based endurance: rango alto)
     var proteinaGkg: Double
     /// Multiplicador de actividad diaria fuera del entrenamiento (trabajo de oficina ≈ 1.4)
     var factorActividad: Double
+
+    init(pesoKg: Double, alturaCm: Double, edad: Int, sexo: Sexo,
+         dieta: Dieta = .vegano, proteinaGkg: Double, factorActividad: Double) {
+        self.pesoKg = pesoKg
+        self.alturaCm = alturaCm
+        self.edad = edad
+        self.sexo = sexo
+        self.dieta = dieta
+        self.proteinaGkg = proteinaGkg
+        self.factorActividad = factorActividad
+    }
+
+    // Decodifica perfiles guardados antes de que existiera `dieta` (default vegano).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        pesoKg = try c.decode(Double.self, forKey: .pesoKg)
+        alturaCm = try c.decode(Double.self, forKey: .alturaCm)
+        edad = try c.decode(Int.self, forKey: .edad)
+        sexo = try c.decode(Sexo.self, forKey: .sexo)
+        dieta = try c.decodeIfPresent(Dieta.self, forKey: .dieta) ?? .vegano
+        proteinaGkg = try c.decode(Double.self, forKey: .proteinaGkg)
+        factorActividad = try c.decode(Double.self, forKey: .factorActividad)
+    }
 }
 
 // MARK: - Tipos de día de entrenamiento
@@ -129,6 +180,10 @@ struct Recipe: Codable, Identifiable, Hashable {
     let ingredientes: [String]
     let preparacion: [String]?
     let nota: String?
+    /// Dieta mínima que puede comerla: "vegano" (default), "vegetariano" u "omnivoro".
+    let dieta: String?
+
+    var dietaMin: Dieta { Dieta(rawValue: dieta ?? "") ?? .vegano }
 }
 
 // MARK: - Objetivos y plan del día

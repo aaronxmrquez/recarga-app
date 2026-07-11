@@ -284,7 +284,8 @@ struct TodayView: View {
 
     private func checklistView(_ plan: DayPlan) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Checklist vegano-runner").font(.title3.bold())
+            Text(state.profile?.dieta == .vegano ? "Checklist vegano-runner" : "Checklist runner")
+                .font(.title3.bold())
             ForEach(plan.checklist) { item in
                 HStack(alignment: .top, spacing: 10) {
                     Image(systemName: item.nombre.hasPrefix("B12")

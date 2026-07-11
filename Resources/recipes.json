@@ -819,5 +819,417 @@
       "Suma el puñado de nueces y listo."
     ],
     "nota": null
+  },
+
+  {
+    "id": "huevos-revueltos-pan",
+    "nombre": "Huevos revueltos con tomate y pan",
+    "momentos": ["desayuno"],
+    "kcal": 520, "carbs": 55, "prot": 26, "grasa": 22,
+    "tiempoMin": 10,
+    "micros": ["proteinaCompleta"],
+    "ingredientes": ["3 huevos", "tomate y cebolla", "2 panes franceses"],
+    "preparacion": [
+      "Sofríe cebolla y tomate 2 min.",
+      "Bate los huevos y cuájalos ahí a fuego bajo, moviendo.",
+      "Con los panes calientes."
+    ],
+    "nota": "Clásico de recuperación: proteína completa en 10 minutos.",
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "avena-leche-platano",
+    "nombre": "Avena con leche y plátano",
+    "momentos": ["desayuno"],
+    "kcal": 540, "carbs": 86, "prot": 20, "grasa": 13,
+    "tiempoMin": 8,
+    "micros": ["calcio"],
+    "ingredientes": ["80 g de avena", "300 ml de leche entera", "1 plátano", "canela y pasas"],
+    "preparacion": [
+      "Cocina la avena en la leche 3–4 min.",
+      "Plátano en rodajas, canela y pasas encima."
+    ],
+    "nota": null,
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "yogurt-granola",
+    "nombre": "Yogurt griego con granola y fruta",
+    "momentos": ["desayuno", "snack"],
+    "kcal": 480, "carbs": 64, "prot": 22, "grasa": 15,
+    "tiempoMin": 3,
+    "micros": ["calcio", "proteinaCompleta"],
+    "ingredientes": ["200 g de yogurt griego natural", "60 g de granola", "fruta de estación"],
+    "preparacion": [
+      "Sirve el yogurt en un bowl.",
+      "Granola y fruta picada encima."
+    ],
+    "nota": "Post-entreno exprés cuando no hay tiempo ni de cocinar.",
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "pan-huevo-palta",
+    "nombre": "Pan con huevo frito y palta",
+    "momentos": ["desayuno"],
+    "kcal": 560, "carbs": 58, "prot": 22, "grasa": 26,
+    "tiempoMin": 8,
+    "micros": ["proteinaCompleta"],
+    "ingredientes": ["2 panes", "2 huevos", "1/2 palta"],
+    "preparacion": [
+      "Fríe los huevos con poco aceite.",
+      "Aplasta la palta en el pan con sal y monta los huevos."
+    ],
+    "nota": null,
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "huancaina-clasica",
+    "nombre": "Papa a la huancaína clásica",
+    "momentos": ["cena"],
+    "kcal": 620, "carbs": 82, "prot": 22, "grasa": 22,
+    "tiempoMin": 25,
+    "micros": ["calcio"],
+    "ingredientes": ["4 papas sancochadas", "150 g de queso fresco", "ají amarillo", "leche evaporada", "galletas de soda", "aceitunas y huevo duro"],
+    "preparacion": [
+      "Soasa los ajíes 3 min y licúalos con el queso fresco, un chorro de leche y 2 galletas hasta crema.",
+      "Sancocha las papas.",
+      "Baña las papas; decora con aceitunas y huevo duro."
+    ],
+    "nota": "La de toda la vida. Papas = glucógeno para mañana.",
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "tortilla-huevo-verduras",
+    "nombre": "Tortilla de huevo con verduras",
+    "momentos": ["cena"],
+    "kcal": 560, "carbs": 50, "prot": 28, "grasa": 27,
+    "tiempoMin": 15,
+    "micros": ["proteinaCompleta"],
+    "ingredientes": ["3 huevos", "espinaca, cebolla y tomate", "pan o arroz al lado"],
+    "preparacion": [
+      "Bate los huevos y mezcla la verdura picada.",
+      "Cuaja en sartén a fuego medio 3–4 min por lado.",
+      "Con pan o arroz."
+    ],
+    "nota": null,
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "arroz-cubana",
+    "nombre": "Arroz a la cubana",
+    "momentos": ["almuerzo"],
+    "kcal": 720, "carbs": 102, "prot": 22, "grasa": 24,
+    "tiempoMin": 20,
+    "micros": ["proteinaCompleta"],
+    "ingredientes": ["200 g de arroz cocido", "2 huevos fritos", "1 plátano frito", "salsa de tomate opcional"],
+    "preparacion": [
+      "Fríe el plátano en tajadas hasta dorar.",
+      "Fríe los huevos.",
+      "Monta todo sobre el arroz."
+    ],
+    "nota": "El plato de emergencia peruano: 20 minutos y quedas cargado.",
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "tacu-tacu-huevo",
+    "nombre": "Tacu tacu a lo pobre (con huevo y plátano)",
+    "momentos": ["almuerzo"],
+    "kcal": 750, "carbs": 108, "prot": 28, "grasa": 22,
+    "tiempoMin": 25,
+    "micros": ["hierro", "vitC", "proteinaCompleta"],
+    "ingredientes": ["tacu tacu de frejol y arroz", "1 huevo frito", "plátano frito", "salsa criolla"],
+    "preparacion": [
+      "Haz el tacu tacu: frejol con su jugo + arroz de ayer, dorado en sartén hasta costra.",
+      "Corónalo con el huevo frito y el plátano.",
+      "Criolla con bastante limón al lado."
+    ],
+    "nota": "El post-fondo contundente por excelencia.",
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "solterito-queso",
+    "nombre": "Solterito arequipeño con queso fresco",
+    "momentos": ["cena", "almuerzo"],
+    "kcal": 560, "carbs": 66, "prot": 26, "grasa": 21,
+    "tiempoMin": 20,
+    "micros": ["calcio", "vitC"],
+    "ingredientes": ["150 g de queso fresco en cubos", "choclo, habas, tomate y cebolla", "rocoto", "limón y aceite", "papa sancochada"],
+    "preparacion": [
+      "Pica todo en cuadritos parejos.",
+      "Mezcla con limón, aceite y sal; reposa 5 min.",
+      "Papa sancochada al lado."
+    ],
+    "nota": null,
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "pan-queso-snack",
+    "nombre": "Pan con queso fresco",
+    "momentos": ["snack"],
+    "kcal": 340, "carbs": 40, "prot": 14, "grasa": 14,
+    "tiempoMin": 3,
+    "micros": ["calcio"],
+    "ingredientes": ["1 pan integral", "80 g de queso fresco", "rodajas de tomate"],
+    "preparacion": [
+      "Arma el pan con el queso y tomate.",
+      "Pizca de sal y orégano si quieres."
+    ],
+    "nota": null,
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "locro-con-queso",
+    "nombre": "Locro de zapallo con queso y arroz",
+    "momentos": ["almuerzo"],
+    "kcal": 680, "carbs": 104, "prot": 22, "grasa": 19,
+    "tiempoMin": 35,
+    "micros": ["vitC", "calcio"],
+    "ingredientes": ["locro de zapallo con choclo y habas", "100 g de queso fresco", "160 g de arroz"],
+    "preparacion": [
+      "Sofríe cebolla, ajo y ají; deshaz el zapallo en cubos con poca agua ~15 min.",
+      "Suma choclo y habas; al final el queso fresco en cubos, que apenas se funda.",
+      "Con arroz."
+    ],
+    "nota": null,
+    "dieta": "vegetariano"
+  },
+  {
+    "id": "pastel-choclo",
+    "nombre": "Pastel de choclo con queso",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 640, "carbs": 88, "prot": 24, "grasa": 21,
+    "tiempoMin": 50,
+    "micros": ["calcio"],
+    "ingredientes": ["4 choclos molidos", "2 huevos", "150 g de queso fresco", "leche y azúcar al gusto"],
+    "preparacion": [
+      "Licúa el choclo con la leche, huevos y una pizca de azúcar y sal.",
+      "Vierte la mitad en fuente, capa de queso, y el resto encima.",
+      "Horno a 180 °C ~40 min hasta dorar. Rinde para dos comidas."
+    ],
+    "nota": "Hazlo en tanda: sirve de almuerzo hoy y cena mañana.",
+    "dieta": "vegetariano"
+  },
+
+  {
+    "id": "lomo-saltado",
+    "nombre": "Lomo saltado con arroz",
+    "momentos": ["almuerzo"],
+    "kcal": 760, "carbs": 88, "prot": 42, "grasa": 26,
+    "tiempoMin": 30,
+    "micros": ["hierro", "vitC", "proteinaCompleta"],
+    "ingredientes": ["180 g de lomo o bistec en tiras", "cebolla, tomate y ají amarillo", "sillao y vinagre", "papas fritas o doradas", "150 g de arroz"],
+    "preparacion": [
+      "Sella la carne en tandas a fuego máximo, 1–2 min; reserva.",
+      "Saltea cebolla y tomate en gajos 2 min; regresa la carne con sillao y vinagre.",
+      "Junta las papas, culantro encima. Con arroz."
+    ],
+    "nota": "Hierro hemo + carbohidrato doble (papa y arroz): plato de recuperación seria.",
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "pollo-plancha-arroz",
+    "nombre": "Pechuga a la plancha con arroz y ensalada",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 640, "carbs": 82, "prot": 45, "grasa": 14,
+    "tiempoMin": 20,
+    "micros": ["proteinaCompleta"],
+    "ingredientes": ["180 g de pechuga de pollo", "170 g de arroz", "ensalada de tomate, pepino y lechuga", "limón"],
+    "preparacion": [
+      "Sazona la pechuga con sal, comino y limón; plancha 4–5 min por lado.",
+      "Arma con el arroz y la ensalada aliñada con limón."
+    ],
+    "nota": "La opción simple y limpia para cualquier noche de semana.",
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "aji-de-gallina",
+    "nombre": "Ají de gallina",
+    "momentos": ["almuerzo"],
+    "kcal": 730, "carbs": 92, "prot": 36, "grasa": 24,
+    "tiempoMin": 45,
+    "micros": ["calcio", "proteinaCompleta"],
+    "ingredientes": ["200 g de pechuga deshilachada", "crema de ají amarillo con pan y leche", "180 g de arroz", "papa sancochada", "aceitunas y huevo"],
+    "preparacion": [
+      "Sancocha y deshilacha la pechuga (guarda el caldo).",
+      "Licúa ají amarillo con pan remojado en leche; cocínalo sobre aderezo de cebolla y ajo.",
+      "Suma el pollo con un poco de caldo, 5–8 min.",
+      "Sobre papa y arroz, con aceituna y huevo."
+    ],
+    "nota": null,
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "arroz-con-pollo",
+    "nombre": "Arroz con pollo y salsa criolla",
+    "momentos": ["almuerzo"],
+    "kcal": 700, "carbs": 98, "prot": 36, "grasa": 18,
+    "tiempoMin": 45,
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["1 presa de pollo", "arroz verde (culantro licuado)", "arvejas, zanahoria y pimiento", "salsa criolla"],
+    "preparacion": [
+      "Dora la presa y reserva; en la misma olla haz aderezo con culantro licuado.",
+      "Suma el arroz, verduras y caldo; regresa el pollo encima.",
+      "Cocina tapado ~20 min. Criolla al servir."
+    ],
+    "nota": null,
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "ceviche-pescado",
+    "nombre": "Ceviche de pescado con camote y choclo",
+    "momentos": ["almuerzo"],
+    "kcal": 500, "carbs": 68, "prot": 38, "grasa": 8,
+    "tiempoMin": 20,
+    "micros": ["vitC", "proteinaCompleta"],
+    "ingredientes": ["200 g de pescado fresco en cubos", "jugo de 8 limones", "cebolla, ají limo y culantro", "1 camote", "1 choclo", "canchita"],
+    "preparacion": [
+      "Corta el pescado en cubos parejos y sálalo.",
+      "Mézclalo con el limón, cebolla, ají limo y culantro; reposa 5–10 min en frío.",
+      "Con camote sancochado, choclo y canchita."
+    ],
+    "nota": "El almuerzo dominical post-fondo: proteína limpia + camote para el glucógeno.",
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "pescado-plancha-camote",
+    "nombre": "Pescado a la plancha con puré de camote",
+    "momentos": ["cena"],
+    "kcal": 540, "carbs": 58, "prot": 40, "grasa": 16,
+    "tiempoMin": 25,
+    "micros": ["omega3", "proteinaCompleta"],
+    "ingredientes": ["200 g de bonito o jurel", "2 camotes", "ensalada verde", "limón"],
+    "preparacion": [
+      "Sancocha y aplasta los camotes con sal.",
+      "Plancha el pescado 3–4 min por lado con sal y limón.",
+      "Sirve con la ensalada."
+    ],
+    "nota": "Bonito y jurel son pescado azul peruano barato: omega-3 de verdad.",
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "seco-de-pollo",
+    "nombre": "Seco de pollo con frejoles y arroz",
+    "momentos": ["almuerzo"],
+    "kcal": 680, "carbs": 90, "prot": 38, "grasa": 18,
+    "tiempoMin": 45,
+    "micros": ["vitC", "hierro"],
+    "ingredientes": ["1 presa de pollo", "culantro licuado", "frejoles cocidos", "150 g de arroz", "salsa criolla"],
+    "preparacion": [
+      "Dora la presa; agrega aderezo con culantro licuado y un poco de caldo.",
+      "Cocina tapado 25 min hasta que el pollo esté suave.",
+      "Sirve con frejoles, arroz y criolla."
+    ],
+    "nota": null,
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "tallarin-saltado-pollo",
+    "nombre": "Tallarín saltado de pollo",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 700, "carbs": 92, "prot": 36, "grasa": 20,
+    "tiempoMin": 25,
+    "micros": ["proteinaCompleta"],
+    "ingredientes": ["140 g de tallarines", "150 g de pollo en tiras", "cebolla, tomate y ají amarillo", "sillao y kion"],
+    "preparacion": [
+      "Saltea el pollo a fuego máximo hasta dorar; reserva.",
+      "Saltea la verdura 2 min, regresa el pollo con sillao y kion.",
+      "Mezcla con los tallarines cocidos."
+    ],
+    "nota": null,
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "sopa-criolla",
+    "nombre": "Sopa criolla",
+    "momentos": ["cena"],
+    "kcal": 560, "carbs": 62, "prot": 28, "grasa": 22,
+    "tiempoMin": 30,
+    "micros": ["hierro"],
+    "ingredientes": ["120 g de carne molida", "fideos cabello de ángel", "leche evaporada", "ají panca", "1 huevo", "pan tostado"],
+    "preparacion": [
+      "Aderezo de cebolla, ajo y ají panca; dora la carne molida.",
+      "Agrega caldo y los fideos, 5 min.",
+      "Apaga, suma un chorro de leche y el huevo para que cuaje con el calor. Pan tostado encima."
+    ],
+    "nota": "La cena criolla reconfortante de siempre — perfecta la noche previa a rodaje suave.",
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "causa-atun",
+    "nombre": "Causa rellena de atún",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 580, "carbs": 70, "prot": 28, "grasa": 20,
+    "tiempoMin": 40,
+    "micros": ["omega3", "vitC"],
+    "ingredientes": ["3 papas amarillas", "ají amarillo y limón", "1 lata de atún", "mayonesa", "palta"],
+    "preparacion": [
+      "Prensa las papas sancochadas; amasa con ají licuado, limón y sal.",
+      "Mezcla el atún escurrido con mayonesa.",
+      "Arma capas papa-atún-palta-papa; refrigera 20 min."
+    ],
+    "nota": null,
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "sanguche-pollo",
+    "nombre": "Sánguche de pollo deshilachado con palta",
+    "momentos": ["desayuno"],
+    "kcal": 540, "carbs": 58, "prot": 32, "grasa": 20,
+    "tiempoMin": 10,
+    "micros": ["proteinaCompleta"],
+    "ingredientes": ["2 panes franceses", "120 g de pollo deshilachado (de ayer)", "1/2 palta", "salsa criolla"],
+    "preparacion": [
+      "Aplasta la palta en el pan.",
+      "Rellena con el pollo deshilachado y criolla."
+    ],
+    "nota": "Usa el pollo que sobró de ayer: desayuno de recuperación en 10 min.",
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "atun-arroz-express",
+    "nombre": "Atún con arroz y verduras salteadas",
+    "momentos": ["cena", "almuerzo"],
+    "kcal": 600, "carbs": 76, "prot": 40, "grasa": 14,
+    "tiempoMin": 15,
+    "micros": ["omega3", "proteinaCompleta"],
+    "ingredientes": ["2 latas de atún en agua", "180 g de arroz cocido", "brócoli, zanahoria y pimiento", "sillao"],
+    "preparacion": [
+      "Saltea las verduras a fuego alto 3 min.",
+      "Suma el arroz y el atún escurrido con un chorro de sillao; 2 min y listo."
+    ],
+    "nota": "La cena de 15 minutos con proteína y omega-3 cuando llegas sin ganas de cocinar.",
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "pavita-saltada",
+    "nombre": "Pavita saltada con arroz",
+    "momentos": ["almuerzo"],
+    "kcal": 680, "carbs": 90, "prot": 38, "grasa": 18,
+    "tiempoMin": 25,
+    "micros": ["proteinaCompleta", "hierro"],
+    "ingredientes": ["180 g de filete de pavita en tiras", "cebolla, tomate y ají amarillo", "sillao y vinagre", "160 g de arroz"],
+    "preparacion": [
+      "Sella la pavita a fuego máximo 2 min; reserva.",
+      "Saltea cebolla y tomate; regresa la pavita con sillao y vinagre.",
+      "Culantro encima y arroz al lado."
+    ],
+    "nota": "Versión más magra del saltado — mismos carbohidratos, menos grasa.",
+    "dieta": "omnivoro"
+  },
+  {
+    "id": "escabeche-pollo",
+    "nombre": "Escabeche de pollo",
+    "momentos": ["almuerzo"],
+    "kcal": 690, "carbs": 88, "prot": 34, "grasa": 22,
+    "tiempoMin": 40,
+    "micros": ["vitC"],
+    "ingredientes": ["1 presa de pollo", "cebolla en gajos gruesos", "ají amarillo y ají panca", "vinagre", "camote sancochado", "arroz"],
+    "preparacion": [
+      "Dora la presa y reserva.",
+      "Sofríe la cebolla en gajos con ají amarillo, panca y un buen chorro de vinagre.",
+      "Regresa el pollo 10 min tapado. Con camote y arroz."
+    ],
+    "nota": null,
+    "dieta": "omnivoro"
   }
 ]

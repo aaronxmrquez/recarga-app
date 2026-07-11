@@ -7,6 +7,7 @@ struct OnboardingView: View {
     @State private var altura = ""
     @State private var edad = ""
     @State private var sexo: Sexo = .masculino
+    @State private var dieta: Dieta = .vegano
     @State private var proteina = 1.8
     @State private var error: String?
 
@@ -17,11 +18,19 @@ struct OnboardingView: View {
                     .font(.system(size: 56))
                     .foregroundStyle(.orange)
                 Text("Recarga").font(.largeTitle.bold())
-                Text("Qué comer según tu entrenamiento — vegano y peruano")
+                Text("Qué comer según tu entrenamiento — recetario runner peruano")
                     .foregroundStyle(.secondary)
             }
 
             VStack(alignment: .leading, spacing: 14) {
+                HStack {
+                    Text("¿Cómo comes?").frame(width: 110, alignment: .leading)
+                    Picker("", selection: $dieta) {
+                        ForEach(Dieta.allCases) { d in Text(d.label).tag(d) }
+                    }
+                    .pickerStyle(.segmented)
+                    .labelsHidden()
+                }
                 campo("Peso (kg)", texto: $peso, placeholder: "66")
                 campo("Altura (cm)", texto: $altura, placeholder: "172")
                 campo("Edad", texto: $edad, placeholder: "32")
@@ -42,8 +51,13 @@ struct OnboardingView: View {
                         .monospacedDigit()
                         .frame(width: 70, alignment: .trailing)
                 }
-                Text("Para veganos de fondo se recomienda el rango alto (1.8–2.0).")
+                Text(dieta == .vegano
+                     ? "Para veganos de fondo se recomienda el rango alto (1.8–2.0)."
+                     : "Para corredores de fondo: 1.6–1.8 g/kg (sube en bloques de volumen).")
                     .font(.caption).foregroundStyle(.secondary)
+                    .onChange(of: dieta) { _, nueva in
+                        proteina = nueva == .vegano ? 1.8 : 1.7
+                    }
 
                 Label("Asumo que entrenas de madrugada (~5:00–7:30 am): el plan incluye pre-entreno al despertar y el desayuno como comida de recuperación.",
                       systemImage: "sunrise")
@@ -94,7 +108,7 @@ struct OnboardingView: View {
             return
         }
         state.guardarPerfil(UserProfile(
-            pesoKg: p, alturaCm: a, edad: Int(e), sexo: sexo,
+            pesoKg: p, alturaCm: a, edad: Int(e), sexo: sexo, dieta: dieta,
             proteinaGkg: (proteina * 10).rounded() / 10,
             factorActividad: 1.4))
     }

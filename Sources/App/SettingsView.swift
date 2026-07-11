@@ -196,12 +196,22 @@ private struct PerfilTab: View {
     @State private var altura = ""
     @State private var edad = ""
     @State private var sexo: Sexo = .masculino
+    @State private var dieta: Dieta = .vegano
     @State private var proteina = 1.8
     @State private var guardado = false
     @State private var error: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
+            HStack {
+                Text("Dieta").frame(width: 110, alignment: .leading)
+                Picker("", selection: $dieta) {
+                    ForEach(Dieta.allCases) { d in Text(d.label).tag(d) }
+                }
+                .pickerStyle(.segmented).labelsHidden()
+            }
+            Text("Las recetas se filtran según tu dieta: un vegano ve solo platos veganos; un omnívoro ve todo el recetario.")
+                .font(.caption).foregroundStyle(.secondary)
             campo("Peso (kg)", $peso)
             campo("Altura (cm)", $altura)
             campo("Edad", $edad)
@@ -250,6 +260,7 @@ private struct PerfilTab: View {
         altura = String(format: "%.0f", p.alturaCm)
         edad = "\(p.edad)"
         sexo = p.sexo
+        dieta = p.dieta
         proteina = p.proteinaGkg
     }
 
@@ -267,7 +278,7 @@ private struct PerfilTab: View {
         }
         error = nil
         state.guardarPerfil(UserProfile(
-            pesoKg: p, alturaCm: a, edad: Int(e), sexo: sexo,
+            pesoKg: p, alturaCm: a, edad: Int(e), sexo: sexo, dieta: dieta,
             proteinaGkg: (proteina * 10).rounded() / 10,
             factorActividad: state.profile?.factorActividad ?? 1.4))
         guardado = true
