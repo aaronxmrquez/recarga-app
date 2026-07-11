@@ -99,8 +99,15 @@ final class AppState: ObservableObject {
     // MARK: Perfil y plantilla
 
     func guardarPerfil(_ p: UserProfile) {
+        let dietaCambio = profile != nil && profile?.dieta != p.dieta
         profile = p
         store.save(p, en: Store.perfil)
+        if dietaCambio {
+            // El usuario cambió de dieta: soltar las comidas fijadas de hoy
+            // para que el día se regenere completo con el recetario nuevo.
+            history[Fechas.clave(Date())] = nil
+            store.save(history, en: Store.historial)
+        }
         recomputar()
     }
 

@@ -209,8 +209,14 @@ private struct PerfilTab: View {
                     ForEach(Dieta.allCases) { d in Text(d.label).tag(d) }
                 }
                 .pickerStyle(.segmented).labelsHidden()
+                .onChange(of: dieta) { _, nueva in
+                    guard let p = state.profile, p.dieta != nueva else { return }
+                    var actualizado = p
+                    actualizado.dieta = nueva
+                    state.guardarPerfil(actualizado)
+                }
             }
-            Text("Las recetas se filtran según tu dieta: un vegano ve solo platos veganos; un omnívoro ve todo el recetario.")
+            Text("Se aplica al instante: el plan de hoy se regenera con el recetario de la dieta elegida (un vegano ve solo platos veganos; un omnívoro, todo).")
                 .font(.caption).foregroundStyle(.secondary)
             campo("Peso (kg)", $peso)
             campo("Altura (cm)", $altura)

@@ -145,6 +145,23 @@ func runSelfTest() -> Int32 {
         fallas.append("no encontré receta omnívora de almuerzo para el test de cambio de dieta")
     }
 
+    // Vegano → omnívoro: con el día liberado (sin fijadas) y el historial de
+    // ayer lleno de platos veganos, el recetario ampliado debe aparecer en
+    // los próximos días (simulación de 3 días).
+    var historiaOmni: MealHistory = historia   // los 3 días veganos previos
+    var aparecioNoVegana = false
+    for dia in 3..<6 {
+        let fecha = cal.date(byAdding: .day, value: dia, to: base)!
+        let plannerO = MealPlanner(recetas: todas, history: historiaOmni)
+        let planO = plannerO.plan(fecha: fecha, targets: mealsNormal, fijadas: [:])
+        var delDia: [String: String] = [:]
+        for m in planO { delDia[m.slot.rawValue] = m.recipe.id }
+        historiaOmni[Fechas.clave(fecha)] = delDia
+        if planO.contains(where: { $0.recipe.dietaMin != .vegano }) { aparecioNoVegana = true }
+    }
+    check(aparecioNoVegana,
+          "tras pasar a omnívoro, en 3 días no apareció ni un plato del recetario ampliado")
+
     // 7. Calendario de carreras
     let maraton = Carrera(id: "m", nombre: "Maratón de Lima", fecha: "2026-10-18", distanciaKm: 42.2)
     let diezK = Carrera(id: "d", nombre: "10K del trabajo", fecha: "2026-08-09", distanciaKm: 10)
