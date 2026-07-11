@@ -24,7 +24,12 @@ final class MealPlanner {
     // MARK: Plan del día
 
     /// `fijadas`: recetas ya elegidas hoy (swaps del usuario) que se respetan.
-    func plan(fecha: Date, targets: [MealTarget], fijadas: [String: String]) -> [PlannedMeal] {
+    /// `preferir`: recetas recién desbloqueadas (cambio de dieta) con bono de
+    /// estreno, para que el cambio se note el mismo día.
+    func plan(
+        fecha: Date, targets: [MealTarget], fijadas: [String: String],
+        preferir: Set<String> = []
+    ) -> [PlannedMeal] {
         var rng = LCG(state: semilla(fecha))
         let antiguedad = recienteAntiguedad(fecha: fecha)
         var usadasHoy = Set<String>()
@@ -39,7 +44,8 @@ final class MealPlanner {
             } else {
                 meal = elegir(
                     target: target, excluir: [], usadasHoy: usadasHoy,
-                    antiguedad: antiguedad, tieneOmega3: tieneOmega3, rng: &rng)
+                    antiguedad: antiguedad, tieneOmega3: tieneOmega3,
+                    preferir: preferir, rng: &rng)
             }
             if let m = meal {
                 usadasHoy.insert(m.recipe.id)
@@ -57,14 +63,16 @@ final class MealPlanner {
         var rng = LCG(state: semilla(fecha) ^ UInt64(abs(actual.hashValue)))
         return elegir(
             target: target, excluir: [actual], usadasHoy: otrasDeHoy,
-            antiguedad: recienteAntiguedad(fecha: fecha), tieneOmega3: true, rng: &rng)
+            antiguedad: recienteAntiguedad(fecha: fecha), tieneOmega3: true,
+            preferir: [], rng: &rng)
     }
 
     // MARK: Selección
 
     private func elegir(
         target: MealTarget, excluir: [String], usadasHoy: Set<String>,
-        antiguedad: [String: Int], tieneOmega3: Bool, rng: inout LCG
+        antiguedad: [String: Int], tieneOmega3: Bool,
+        preferir: Set<String>, rng: inout LCG
     ) -> PlannedMeal? {
         let candidatas = recetas.filter {
             $0.momentos.contains(target.slot) && !excluir.contains($0.id)
@@ -86,6 +94,7 @@ final class MealPlanner {
             }
             if target.slot == .almuerzo && r.micros.contains("hierro") { score -= 0.12 }
             if !tieneOmega3 && r.micros.contains("omega3") { score -= 0.15 }
+            if preferir.contains(r.id) { score -= 0.35 }   // estreno por cambio de dieta
             score += rng.unit() * 0.05
             if mejor == nil || score < mejor!.score {
                 mejor = (r, porcion, score)

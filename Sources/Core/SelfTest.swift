@@ -162,6 +162,20 @@ func runSelfTest() -> Int32 {
     check(aparecioNoVegana,
           "tras pasar a omnívoro, en 3 días no apareció ni un plato del recetario ampliado")
 
+    // El caso exacto del bug reportado: cambio de dieta el MISMO día. El
+    // planificador es determinista (misma fecha → mismos ganadores), así que
+    // sin el bono de estreno volvería a elegir los mismos platos veganos.
+    let nuevasIds = Set(todas.map(\.id)).subtracting(veganas.map(\.id))
+    let plannerCambio = MealPlanner(recetas: todas, history: historia)
+    let planCambio = plannerCambio.plan(
+        fecha: base, targets: mealsNormal, fijadas: [:], preferir: nuevasIds)
+    check(planCambio.contains { $0.recipe.dietaMin != .vegano },
+          "cambio de dieta el mismo día: el plan no estrenó ningún plato nuevo")
+    let idsAntes = Set(planesPorDia[0].map(\.recipe.id))
+    let idsDespues = Set(planCambio.map(\.recipe.id))
+    check(idsAntes != idsDespues,
+          "cambio de dieta el mismo día: el plan quedó idéntico al vegano")
+
     // 7. Calendario de carreras
     let maraton = Carrera(id: "m", nombre: "Maratón de Lima", fecha: "2026-10-18", distanciaKm: 42.2)
     let diezK = Carrera(id: "d", nombre: "10K del trabajo", fecha: "2026-08-09", distanciaKm: 10)

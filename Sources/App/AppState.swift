@@ -40,6 +40,9 @@ final class AppState: ObservableObject {
     private var oauthServer: OAuthCallbackServer?
     private var ultimoRefresh: Date?
     private var timerDia: Timer?
+    /// Recetas recién desbloqueadas por un cambio de dieta (bono de estreno
+    /// en el siguiente recomputar, luego se limpia).
+    private var estrenoRecetas: Set<String> = []
 
     init() {
         do {
@@ -99,12 +102,17 @@ final class AppState: ObservableObject {
     // MARK: Perfil y plantilla
 
     func guardarPerfil(_ p: UserProfile) {
-        let dietaCambio = profile != nil && profile?.dieta != p.dieta
+        let dietaVieja = profile?.dieta
+        let dietaCambio = profile != nil && dietaVieja != p.dieta
         profile = p
         store.save(p, en: Store.perfil)
-        if dietaCambio {
-            // El usuario cambió de dieta: soltar las comidas fijadas de hoy
-            // para que el día se regenere completo con el recetario nuevo.
+        if dietaCambio, let vieja = dietaVieja {
+            // Soltar las comidas fijadas de hoy y darles bono de estreno a las
+            // recetas recién desbloqueadas: sin esto, el planificador (que es
+            // determinista) volvería a elegir exactamente los mismos platos.
+            let antes = Set(recetas.filter { vieja.permite($0) }.map(\.id))
+            let ahora = Set(recetas.filter { p.dieta.permite($0) }.map(\.id))
+            estrenoRecetas = ahora.subtracting(antes)
             history[Fechas.clave(Date())] = nil
             store.save(history, en: Store.historial)
         }
@@ -194,7 +202,10 @@ final class AppState: ObservableObject {
 
         let claveHoy = Fechas.clave(hoy)
         let planner = MealPlanner(recetas: recetasParaDieta, history: history)
-        let meals = planner.plan(fecha: hoy, targets: mealTargets, fijadas: history[claveHoy] ?? [:])
+        let meals = planner.plan(
+            fecha: hoy, targets: mealTargets,
+            fijadas: history[claveHoy] ?? [:], preferir: estrenoRecetas)
+        estrenoRecetas = []
 
         var deHoy: [String: String] = [:]
         for m in meals { deHoy[m.slot.rawValue] = m.recipe.id }
