@@ -149,24 +149,28 @@ func runSelfTest() -> Int32 {
     // ayer lleno de platos veganos, el recetario ampliado debe aparecer en
     // los próximos días (simulación de 3 días).
     var historiaOmni: MealHistory = historia   // los 3 días veganos previos
-    var aparecioNoVegana = false
+    var comidasConProteinaAnimal = 0
+    var totalComidasOmni = 0
     for dia in 3..<6 {
         let fecha = cal.date(byAdding: .day, value: dia, to: base)!
-        let plannerO = MealPlanner(recetas: todas, history: historiaOmni)
+        let plannerO = MealPlanner(recetas: todas, history: historiaOmni, dieta: .omnivoro)
         let planO = plannerO.plan(fecha: fecha, targets: mealsNormal, fijadas: [:])
         var delDia: [String: String] = [:]
         for m in planO { delDia[m.slot.rawValue] = m.recipe.id }
         historiaOmni[Fechas.clave(fecha)] = delDia
-        if planO.contains(where: { $0.recipe.dietaMin != .vegano }) { aparecioNoVegana = true }
+        totalComidasOmni += planO.count
+        comidasConProteinaAnimal += planO.filter {
+            $0.recipe.dietaMin != .vegano || $0.recipe.proteinaVaria(para: .omnivoro)
+        }.count
     }
-    check(aparecioNoVegana,
-          "tras pasar a omnívoro, en 3 días no apareció ni un plato del recetario ampliado")
+    check(comidasConProteinaAnimal >= totalComidasOmni / 3,
+          "el día omnívoro no se ve omnívoro: solo \(comidasConProteinaAnimal) de \(totalComidasOmni) comidas con proteína animal")
 
     // El caso exacto del bug reportado: cambio de dieta el MISMO día. El
     // planificador es determinista (misma fecha → mismos ganadores), así que
     // sin el bono de estreno volvería a elegir los mismos platos veganos.
     let nuevasIds = Set(todas.map(\.id)).subtracting(veganas.map(\.id))
-    let plannerCambio = MealPlanner(recetas: todas, history: historia)
+    let plannerCambio = MealPlanner(recetas: todas, history: historia, dieta: .omnivoro)
     let planCambio = plannerCambio.plan(
         fecha: base, targets: mealsNormal, fijadas: [:], preferir: nuevasIds)
     check(planCambio.contains { $0.recipe.dietaMin != .vegano },
@@ -175,6 +179,30 @@ func runSelfTest() -> Int32 {
     let idsDespues = Set(planCambio.map(\.recipe.id))
     check(idsAntes != idsDespues,
           "cambio de dieta el mismo día: el plan quedó idéntico al vegano")
+
+    // 10. Platos multi-proteína: misma receta, proteína y nombre según dieta
+    if let seco = recetas.first(where: { $0.id == "seco-frejoles" }) {
+        let ingV = seco.ingredientesResueltos(para: .vegano).joined(separator: " · ")
+        let ingO = seco.ingredientesResueltos(para: .omnivoro).joined(separator: " · ")
+        check(ingV.contains("seitán"), "el seco vegano no resolvió seitán: \(ingV)")
+        check(ingO.contains("carne"), "el seco omnívoro no resolvió carne: \(ingO)")
+        check(seco.nombreResuelto(para: .omnivoro).contains("res"),
+              "el nombre del seco omnívoro no se adaptó")
+        check(seco.nombreResuelto(para: .vegano).contains("seitán"),
+              "el nombre del seco vegano no se adaptó")
+    } else {
+        fallas.append("no existe seco-frejoles multi-proteína")
+    }
+    var multiProteina = 0
+    for r in recetas where r.proteinas != nil {
+        multiProteina += 1
+        for d in Dieta.allCases {
+            check(!r.ingredientesResueltos(para: d).contains("{proteina}"),
+                  "\(r.id): marcador {proteina} sin resolver para \(d.rawValue)")
+            check(!r.ingredientesResueltos(para: d).isEmpty, "\(r.id): ingredientes vacíos")
+        }
+    }
+    check(multiProteina >= 5, "muy pocos platos multi-proteína: \(multiProteina)")
 
     // 7. Calendario de carreras
     let maraton = Carrera(id: "m", nombre: "Maratón de Lima", fecha: "2026-10-18", distanciaKm: 42.2)
@@ -215,7 +243,7 @@ func runSelfTest() -> Int32 {
     let ids2 = semana2.flatMap { $0.meals.map(\.recipe.id) }
     check(ids1 == ids2, "la proyección no es determinista")
 
-    let lista = ShoppingList.generar(dias: semana)
+    let lista = ShoppingList.generar(dias: semana, dieta: .vegano)
     let totalItems = lista.reduce(0) { $0 + $1.items.count }
     check(!lista.isEmpty, "lista de compras vacía")
     check(totalItems >= 15, "lista de compras sospechosamente corta: \(totalItems) ítems")

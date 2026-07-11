@@ -91,7 +91,7 @@ struct WeekView: View {
                                 }
                             }
                             ForEach(dia.meals) { m in
-                                Text("\(m.slot.label): \(m.recipe.nombre)\(m.porciones != 1 ? " \(Fmt.porciones(m.porciones))" : "")")
+                                Text("\(m.slot.label): \(m.recipe.nombreResuelto(para: state.profile?.dieta ?? .vegano))\(m.porciones != 1 ? " \(Fmt.porciones(m.porciones))" : "")")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
@@ -125,11 +125,12 @@ struct WeekView: View {
 
     private func calcular() {
         dias = state.proyectarSemana()
-        lista = ShoppingList.generar(dias: dias)
+        lista = ShoppingList.generar(dias: dias, dieta: state.profile?.dieta ?? .vegano)
     }
 
     private func copiar() {
-        let texto = ShoppingList.textoParaCopiar(dias: dias, lista: lista)
+        let texto = ShoppingList.textoParaCopiar(
+            dias: dias, lista: lista, dieta: state.profile?.dieta ?? .vegano)
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(texto, forType: .string)
         copiado = true

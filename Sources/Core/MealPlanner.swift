@@ -15,10 +15,12 @@ private struct LCG {
 final class MealPlanner {
     let recetas: [Recipe]
     var history: MealHistory
+    let dieta: Dieta
 
-    init(recetas: [Recipe], history: MealHistory) {
+    init(recetas: [Recipe], history: MealHistory, dieta: Dieta = .vegano) {
         self.recetas = recetas
         self.history = history
+        self.dieta = dieta
     }
 
     // MARK: Plan del día
@@ -95,6 +97,20 @@ final class MealPlanner {
             if target.slot == .almuerzo && r.micros.contains("hierro") { score -= 0.12 }
             if !tieneOmega3 && r.micros.contains("omega3") { score -= 0.15 }
             if preferir.contains(r.id) { score -= 0.35 }   // estreno por cambio de dieta
+
+            // Afinidad: quien eligió "como de todo" espera ver su proteína
+            // (carne, pescado, huevo) protagonista, no solo platos veganos.
+            switch dieta {
+            case .omnivoro:
+                if r.dietaMin == .omnivoro { score -= 0.30 }
+                else if r.dietaMin == .vegetariano { score -= 0.15 }
+                else if r.proteinaVaria(para: .omnivoro) { score -= 0.25 }
+            case .vegetariano:
+                if r.dietaMin == .vegetariano { score -= 0.15 }
+                else if r.proteinaVaria(para: .vegetariano) { score -= 0.10 }
+            case .vegano:
+                break
+            }
             score += rng.unit() * 0.05
             if mejor == nil || score < mejor!.score {
                 mejor = (r, porcion, score)

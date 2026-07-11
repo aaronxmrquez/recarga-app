@@ -201,7 +201,7 @@ final class AppState: ObservableObject {
         let mealTargets = NutritionEngine.mealTargets(day: targets, manana: tipoManana)
 
         let claveHoy = Fechas.clave(hoy)
-        let planner = MealPlanner(recetas: recetasParaDieta, history: history)
+        let planner = MealPlanner(recetas: recetasParaDieta, history: history, dieta: p.dieta)
         let meals = planner.plan(
             fecha: hoy, targets: mealTargets,
             fijadas: history[claveHoy] ?? [:], preferir: estrenoRecetas)
@@ -236,7 +236,8 @@ final class AppState: ObservableObject {
         let inicio = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
         return WeekPlanner.proyectar(
             desde: inicio, dias: dias, profile: p, template: template,
-            carreras: carreras, recetas: recetasParaDieta, historia: history, garmin: garminPlan)
+            carreras: carreras, recetas: recetasParaDieta, historia: history,
+            garmin: garminPlan, dieta: p.dieta)
     }
 
     /// Cambia la receta de una comida por otra alternativa.
@@ -247,7 +248,8 @@ final class AppState: ObservableObject {
               let actual = plan.meals.first(where: { $0.slot == slot })?.recipe.id
         else { return }
         let otras = Set(plan.meals.filter { $0.slot != slot }.map(\.recipe.id))
-        let planner = MealPlanner(recetas: recetasParaDieta, history: history)
+        let planner = MealPlanner(
+            recetas: recetasParaDieta, history: history, dieta: profile?.dieta ?? .vegano)
         guard let nueva = planner.alternativa(
             fecha: plan.fecha, target: target, actual: actual, otrasDeHoy: otras)
         else { return }

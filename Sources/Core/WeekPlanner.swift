@@ -26,7 +26,8 @@ enum WeekPlanner {
         carreras: [Carrera],
         recetas: [Recipe],
         historia: MealHistory,
-        garmin: [String: GarminWorkout] = [:]
+        garmin: [String: GarminWorkout] = [:],
+        dieta: Dieta = .vegano
     ) -> [DiaProyectado] {
         var hist = historia
         var out: [DiaProyectado] = []
@@ -68,7 +69,7 @@ enum WeekPlanner {
             let targets = NutritionEngine.dayTargets(
                 profile: profile, dayType: tipo, trainingKcal: kcal, horasEntreno: horas)
             let mealTargets = NutritionEngine.mealTargets(day: targets, manana: tipoSig)
-            let planner = MealPlanner(recetas: recetas, history: hist)
+            let planner = MealPlanner(recetas: recetas, history: hist, dieta: dieta)
             let meals = planner.plan(
                 fecha: fecha, targets: mealTargets, fijadas: hist[Fechas.clave(fecha)] ?? [:])
 
@@ -200,9 +201,11 @@ enum ShoppingList {
         Def(nombre: "Huevos", categoria: "Proteínas", claves: ["huevo duro", "huevos fritos", "huevo frito", "huevos", "huevo"]),
         Def(nombre: "Pollo", categoria: "Proteínas", claves: ["pechuga de pollo", "pollo deshilachado", "presa de pollo", "pechuga", "pollo"]),
         Def(nombre: "Pavita", categoria: "Proteínas", claves: ["pavita"]),
-        Def(nombre: "Carne de res", categoria: "Proteínas", claves: ["carne molida", "lomo o bistec", "bistec", "lomo"]),
+        Def(nombre: "Carne de res", categoria: "Proteínas", claves: ["carne molida", "carne de res", "lomo o bistec", "bistec", "lomo"]),
         Def(nombre: "Pescado", categoria: "Proteínas", claves: ["pescado fresco", "bonito o jurel", "pescado", "bonito", "jurel"]),
         Def(nombre: "Atún", categoria: "Proteínas", claves: ["atún"]),
+        Def(nombre: "Seitán", categoria: "Proteínas", claves: ["seitán"]),
+        Def(nombre: "Charqui", categoria: "Proteínas", claves: ["charqui"]),
         Def(nombre: "Queso fresco", categoria: "Proteínas", claves: ["queso fresco", "queso"]),
         Def(nombre: "Yogurt", categoria: "Proteínas", claves: ["yogurt griego", "yogurt"]),
         Def(nombre: "Leche", categoria: "Proteínas", claves: ["leche evaporada", "leche entera", "leche"]),
@@ -271,12 +274,12 @@ enum ShoppingList {
         return nil
     }
 
-    static func generar(dias: [DiaProyectado]) -> [(categoria: String, items: [ItemCompra])] {
+    static func generar(dias: [DiaProyectado], dieta: Dieta = .vegano) -> [(categoria: String, items: [ItemCompra])] {
         var items: [String: ItemCompra] = [:]
 
         for dia in dias {
             for meal in dia.meals {
-                for linea in meal.recipe.ingredientes {
+                for linea in meal.recipe.ingredientesResueltos(para: dieta) {
                     procesar(linea, porciones: meal.porciones, en: &items)
                 }
             }
@@ -355,7 +358,10 @@ enum ShoppingList {
 
     // MARK: Texto para copiar
 
-    static func textoParaCopiar(dias: [DiaProyectado], lista: [(categoria: String, items: [ItemCompra])]) -> String {
+    static func textoParaCopiar(
+        dias: [DiaProyectado], lista: [(categoria: String, items: [ItemCompra])],
+        dieta: Dieta = .vegano
+    ) -> String {
         let f = DateFormatter()
         f.locale = Locale(identifier: "es_PE")
         f.dateFormat = "EEE d MMM"
@@ -374,7 +380,7 @@ enum ShoppingList {
         for dia in dias {
             out += "\n\(f.string(from: dia.fecha).capitalized) · \(dia.tipo.label)\n"
             for m in dia.meals {
-                out += "  \(m.slot.label): \(m.recipe.nombre)\n"
+                out += "  \(m.slot.label): \(m.recipe.nombreResuelto(para: dieta))\n"
             }
         }
         return out

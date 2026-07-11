@@ -205,6 +205,8 @@ struct TodayView: View {
         }
     }
 
+    private var dietaUsuario: Dieta { state.profile?.dieta ?? .vegano }
+
     private func comidaCard(_ meal: PlannedMeal, dayType: DayType) -> some View {
         HStack(alignment: .top, spacing: 14) {
             Image(systemName: meal.slot.icono)
@@ -225,14 +227,14 @@ struct TodayView: View {
                             .background(Capsule().fill(.quaternary))
                     }
                 }
-                Text(meal.recipe.nombre).font(.title3)
+                Text(meal.recipe.nombreResuelto(para: dietaUsuario)).font(.title3)
 
                 Text("\(Fmt.kcal(meal.kcal)) kcal · C \(Fmt.g(meal.carbs)) · P \(Fmt.g(meal.prot)) · G \(Fmt.g(meal.grasa)) · \(meal.recipe.tiempoMin) min")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .monospacedDigit()
 
-                Text(meal.recipe.ingredientes.joined(separator: " · "))
+                Text(meal.recipe.ingredientesResueltos(para: dietaUsuario).joined(separator: " · "))
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

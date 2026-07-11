@@ -357,65 +357,105 @@
   },
   {
     "id": "seco-frejoles",
-    "nombre": "Seco de frejoles con arroz y yuca",
+    "nombre": "Seco norteño con frejoles y arroz",
     "momentos": ["almuerzo"],
-    "kcal": 700, "carbs": 118, "prot": 26, "grasa": 14,
+    "kcal": 695, "carbs": 110, "prot": 30, "grasa": 15,
     "tiempoMin": 45,
     "micros": ["hierro", "vitC"],
-    "ingredientes": ["250 g de frejoles", "aderezo de culantro y ají amarillo", "150 g de arroz", "1 trozo de yuca", "salsa criolla"],
+    "ingredientes": ["{proteina}", "aderezo de culantro y ají amarillo", "frejoles cocidos", "150 g de arroz", "salsa criolla"],
+    "proteinas": {
+      "vegano": "150 g de seitán en trozos (o soya texturizada gruesa)",
+      "vegetariano": "150 g de seitán en trozos (o soya texturizada gruesa)",
+      "omnivoro": "180 g de carne de res en trozos"
+    },
+    "nombrePorDieta": {
+      "vegano": "Seco norteño de seitán con frejoles",
+      "vegetariano": "Seco norteño de seitán con frejoles",
+      "omnivoro": "Seco de res con frejoles"
+    },
     "preparacion": [
-      "Licúa un atado de culantro con poca agua.",
-      "Sofríe cebolla, ajo y ají amarillo; entra el culantro licuado 3 min hasta que oscurezca.",
-      "Suma el frejol cocido y cocina 10 min a fuego bajo.",
-      "Sirve con arroz, yuca sancochada y criolla."
+      "Dora la proteína en trozos y resérvala.",
+      "Licúa un atado de culantro; sofríe cebolla, ajo y ají amarillo, y entra el culantro 3 min hasta que oscurezca.",
+      "Regresa la proteína con un poco de caldo: seitán 10 min, carne 25–30 min hasta que esté suave.",
+      "Sirve con frejoles, arroz y criolla."
     ],
-    "nota": "El seco norteño en versión de frejol: culantro licuado y punto."
+    "nota": "El mismo seco norteño de siempre — cambia la proteína según tu dieta."
   },
   {
     "id": "tallarines-rojos-soya",
-    "nombre": "Tallarines rojos con soya texturizada",
+    "nombre": "Tallarines rojos",
     "momentos": ["almuerzo", "cena"],
     "kcal": 700, "carbs": 105, "prot": 32, "grasa": 17,
     "tiempoMin": 30,
     "micros": ["hierro", "proteinaCompleta"],
-    "ingredientes": ["140 g de tallarines", "60 g de soya texturizada hidratada", "salsa de tomate con ají panca", "aceitunas"],
+    "ingredientes": ["140 g de tallarines", "{proteina}", "salsa de tomate con ají panca", "aceitunas"],
+    "proteinas": {
+      "vegano": "60 g de soya texturizada hidratada",
+      "vegetariano": "60 g de soya texturizada hidratada",
+      "omnivoro": "150 g de carne molida"
+    },
+    "nombrePorDieta": {
+      "vegano": "Tallarines rojos con soya",
+      "vegetariano": "Tallarines rojos con soya",
+      "omnivoro": "Tallarines rojos con carne"
+    },
     "preparacion": [
-      "Hidrata la soya 10 min en agua caliente; escurre y exprime bien.",
-      "Dórala con ajo; suma tomate licuado con ají panca y cocina 10 min.",
+      "Dora la proteína con ajo (la soya: hidratada 10 min, escurrida y exprimida).",
+      "Suma tomate licuado con ají panca y cocina 10 min.",
       "Mezcla con los tallarines cocidos al dente y las aceitunas."
     ],
-    "nota": "La soya texturizada del mercado es barata y tiene ~50% de proteína en seco."
+    "nota": "El domingo de tallarines rojos, en la versión de tu dieta."
   },
   {
     "id": "chaufa-tofu",
-    "nombre": "Arroz chaufa de verduras con tofu",
+    "nombre": "Arroz chaufa",
     "momentos": ["almuerzo", "cena"],
     "kcal": 665, "carbs": 96, "prot": 27, "grasa": 19,
     "tiempoMin": 25,
     "micros": ["hierro", "proteinaCompleta"],
-    "ingredientes": ["250 g de arroz cocido (mejor si es de ayer)", "150 g de tofu firme", "holantao, pimiento y cebolla china", "sillao", "kion"],
+    "ingredientes": ["250 g de arroz cocido (mejor si es de ayer)", "{proteina}", "holantao, pimiento y cebolla china", "sillao", "kion"],
+    "proteinas": {
+      "vegano": "150 g de tofu firme en cubos",
+      "vegetariano": "100 g de tofu firme + 1 huevo revuelto",
+      "omnivoro": "150 g de pollo en cubos + 1 huevo revuelto"
+    },
+    "nombrePorDieta": {
+      "vegano": "Chaufa de tofu",
+      "vegetariano": "Chaufa de tofu y huevo",
+      "omnivoro": "Chaufa de pollo"
+    },
     "preparacion": [
-      "Dora el tofu en cubos con un chorro de sillao hasta que haga costra; reserva.",
+      "Dora la proteína con un chorro de sillao hasta que haga costra; reserva.",
       "Saltea holantao y pimiento a fuego máximo 2 min.",
       "Entra el arroz frío con sillao y kion rallado; saltea 3 min sin dejar de mover.",
-      "Regresa el tofu y termina con cebolla china."
+      "Regresa la proteína y termina con cebolla china."
     ],
-    "nota": "Chifa en casa: el tofu dorado con sillao reemplaza al pollo sin drama."
+    "nota": "Chifa en casa, con la proteína de tu dieta."
   },
   {
     "id": "olluquito-soya",
-    "nombre": "Olluquito con carne de soya",
+    "nombre": "Olluquito",
     "momentos": ["almuerzo"],
     "kcal": 620, "carbs": 102, "prot": 24, "grasa": 13,
     "tiempoMin": 35,
     "micros": ["hierro", "vitC"],
-    "ingredientes": ["300 g de olluco en tiras", "50 g de soya texturizada fina", "ají panca y comino", "160 g de arroz"],
+    "ingredientes": ["300 g de olluco en tiras", "{proteina}", "ají panca y comino", "160 g de arroz"],
+    "proteinas": {
+      "vegano": "50 g de soya texturizada fina",
+      "vegetariano": "50 g de soya texturizada fina",
+      "omnivoro": "150 g de carne de res en tiras finas (o charqui deshilachado)"
+    },
+    "nombrePorDieta": {
+      "vegano": "Olluquito con soya",
+      "vegetariano": "Olluquito con soya",
+      "omnivoro": "Olluquito con carne"
+    },
     "preparacion": [
-      "Hidrata la soya fina 10 min y exprímela.",
-      "Aderezo de ají panca, ajo y comino; dora ahí la soya.",
+      "Prepara la proteína: la soya hidratada 10 min y exprimida; la carne o charqui, en tiras finas.",
+      "Aderezo de ají panca, ajo y comino; dora ahí la proteína.",
       "Entra el olluco en tiras (suelta su propio jugo): tapa y cocina 15 min a fuego medio. Con arroz."
     ],
-    "nota": "El olluco trae vitamina C propia — combo redondo con el hierro de la soya."
+    "nota": "El olluco trae vitamina C propia — combo redondo con el hierro de la proteína."
   },
   {
     "id": "causa-verduras",
@@ -693,16 +733,26 @@
   },
   {
     "id": "pastel-papa-vegano",
-    "nombre": "Pastel de papa vegano",
+    "nombre": "Pastel de papa",
     "momentos": ["cena"],
     "kcal": 595, "carbs": 88, "prot": 18, "grasa": 19,
     "tiempoMin": 50,
     "micros": ["calcio"],
-    "ingredientes": ["4 papas en láminas", "bechamel de leche de soya fortificada", "lenteja guisada entre capas", "orégano"],
+    "ingredientes": ["4 papas en láminas", "bechamel de leche de soya fortificada", "{proteina}", "orégano"],
+    "proteinas": {
+      "vegano": "lenteja guisada entre capas",
+      "vegetariano": "lenteja guisada entre capas",
+      "omnivoro": "200 g de carne molida guisada entre capas"
+    },
+    "nombrePorDieta": {
+      "vegano": "Pastel de papa con lentejas",
+      "vegetariano": "Pastel de papa con lentejas",
+      "omnivoro": "Pastel de papa con carne"
+    },
     "preparacion": [
       "Lamina las papas bien finito.",
       "Bechamel: espesa la leche de soya con 2 cdas de maicena, sal y orégano, 5 min a fuego bajo.",
-      "Arma capas en fuente: papa, lenteja guisada, bechamel; repite y termina con bechamel.",
+      "Arma capas en fuente: papa, la proteína guisada, bechamel; repite y termina con bechamel.",
       "Horno a 200 °C: 40 min tapado con papel aluminio + 10 min destapado. Rinde para dos noches."
     ],
     "nota": "Hazlo en tanda el domingo: cena lista para dos noches de semana."
@@ -1011,20 +1061,29 @@
   },
 
   {
-    "id": "lomo-saltado",
-    "nombre": "Lomo saltado con arroz",
-    "momentos": ["almuerzo"],
-    "kcal": 760, "carbs": 88, "prot": 42, "grasa": 26,
+    "id": "saltado-criollo",
+    "nombre": "Saltado criollo con arroz",
+    "momentos": ["almuerzo", "cena"],
+    "kcal": 700, "carbs": 88, "prot": 34, "grasa": 21,
     "tiempoMin": 30,
-    "micros": ["hierro", "vitC", "proteinaCompleta"],
-    "ingredientes": ["180 g de lomo o bistec en tiras", "cebolla, tomate y ají amarillo", "sillao y vinagre", "papas fritas o doradas", "150 g de arroz"],
+    "micros": ["hierro", "vitC"],
+    "ingredientes": ["{proteina}", "cebolla, tomate y ají amarillo", "sillao y vinagre", "papas doradas", "150 g de arroz"],
+    "proteinas": {
+      "vegano": "150 g de seitán en tiras (o champiñones portobello)",
+      "vegetariano": "150 g de seitán en tiras (o champiñones portobello)",
+      "omnivoro": "180 g de lomo o bistec en tiras"
+    },
+    "nombrePorDieta": {
+      "vegano": "Saltado de seitán",
+      "vegetariano": "Saltado de seitán",
+      "omnivoro": "Lomo saltado"
+    },
     "preparacion": [
-      "Sella la carne en tandas a fuego máximo, 1–2 min; reserva.",
-      "Saltea cebolla y tomate en gajos 2 min; regresa la carne con sillao y vinagre.",
-      "Junta las papas, culantro encima. Con arroz."
+      "Sella la proteína en tandas a fuego máximo, 1–2 min por lado; reserva.",
+      "Saltea cebolla y tomate en gajos 2 min; regresa la proteína con sillao y vinagre.",
+      "Junta las papas doradas, culantro encima. Con arroz."
     ],
-    "nota": "Hierro hemo + carbohidrato doble (papa y arroz): plato de recuperación seria.",
-    "dieta": "omnivoro"
+    "nota": "El saltado es técnica, no proteína: fuego máximo y jugoso. Doble carbohidrato (papa + arroz) = recuperación seria."
   },
   {
     "id": "pollo-plancha-arroz",
@@ -1104,22 +1163,6 @@
       "Sirve con la ensalada."
     ],
     "nota": "Bonito y jurel son pescado azul peruano barato: omega-3 de verdad.",
-    "dieta": "omnivoro"
-  },
-  {
-    "id": "seco-de-pollo",
-    "nombre": "Seco de pollo con frejoles y arroz",
-    "momentos": ["almuerzo"],
-    "kcal": 680, "carbs": 90, "prot": 38, "grasa": 18,
-    "tiempoMin": 45,
-    "micros": ["vitC", "hierro"],
-    "ingredientes": ["1 presa de pollo", "culantro licuado", "frejoles cocidos", "150 g de arroz", "salsa criolla"],
-    "preparacion": [
-      "Dora la presa; agrega aderezo con culantro licuado y un poco de caldo.",
-      "Cocina tapado 25 min hasta que el pollo esté suave.",
-      "Sirve con frejoles, arroz y criolla."
-    ],
-    "nota": null,
     "dieta": "omnivoro"
   },
   {

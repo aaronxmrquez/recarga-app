@@ -182,8 +182,31 @@ struct Recipe: Codable, Identifiable, Hashable {
     let nota: String?
     /// Dieta mínima que puede comerla: "vegano" (default), "vegetariano" u "omnivoro".
     let dieta: String?
+    /// Platos base multi-proteína: dieta → ingrediente proteico que reemplaza
+    /// al marcador "{proteina}" en `ingredientes` (ej. seco con seitán o con carne).
+    let proteinas: [String: String]?
+    /// Nombre por dieta (ej. "Saltado de seitán" / "Lomo saltado").
+    let nombrePorDieta: [String: String]?
 
     var dietaMin: Dieta { Dieta(rawValue: dieta ?? "") ?? .vegano }
+
+    func nombreResuelto(para dieta: Dieta) -> String {
+        nombrePorDieta?[dieta.rawValue] ?? nombre
+    }
+
+    func ingredientesResueltos(para dieta: Dieta) -> [String] {
+        ingredientes.compactMap { linea in
+            guard linea == "{proteina}" else { return linea }
+            return proteinas?[dieta.rawValue] ?? proteinas?[Dieta.vegano.rawValue]
+        }
+    }
+
+    /// ¿Esta receta usa proteína animal para la dieta dada? (para la afinidad
+    /// del planificador: el omnívoro quiere ver su carne).
+    func proteinaVaria(para dieta: Dieta) -> Bool {
+        guard let p = proteinas, let mia = p[dieta.rawValue] else { return false }
+        return mia != p[Dieta.vegano.rawValue]
+    }
 }
 
 // MARK: - Objetivos y plan del día
