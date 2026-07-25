@@ -170,6 +170,47 @@ enum NutritionEngine {
         return out
     }
 
+    // MARK: Recomendaciones (recuperación + hidratación)
+
+    struct Recomendaciones {
+        var hayEntreno: Bool
+        var recuperacionCarbs: Int
+        var recuperacionProt: Int
+        var recuperacionDetalle: String
+        var hidratacionLitros: Double
+        var hidratacionDetalle: String
+    }
+
+    static func recomendaciones(day: DayTargets, pesoKg: Double) -> Recomendaciones {
+        let hay = day.horasEntreno > 0
+        let carbsGkg = day.dayType.esDuro ? 1.1 : 0.9
+        let carbs = Int((carbsGkg * pesoKg).rounded())
+        let prot = max(25, Int((0.3 * pesoKg).rounded()))
+
+        let recuperacionDetalle: String
+        if hay {
+            recuperacionDetalle = day.dayType == .largo
+                ? "En la 1ª hora tras el fondo, con líquido para bajar rápido."
+                : "En los 60 min post-entreno: repone glucógeno y arranca la reparación."
+        } else {
+            recuperacionDetalle = "Hoy sin sesión: reparte la proteína del día para reparar."
+        }
+
+        let sodio = day.horasEntreno >= 2 ? " · suma sodio (electrolitos)" : ""
+        let hidratacionDetalle = hay
+            ? "≈500 ml antes · 400–700 ml/h corriendo\(sodio)"
+            : "Reparte a lo largo del día para llegar bien hidratado a mañana."
+
+        return Recomendaciones(
+            hayEntreno: hay,
+            recuperacionCarbs: carbs,
+            recuperacionProt: prot,
+            recuperacionDetalle: recuperacionDetalle,
+            hidratacionLitros: day.aguaLitros,
+            hidratacionDetalle: hidratacionDetalle
+        )
+    }
+
     // MARK: Checklist vegano-runner
 
     static func checklist(meals: [PlannedMeal], dieta: Dieta) -> [ChecklistItem] {

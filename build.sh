@@ -36,6 +36,8 @@ mv build/Recarga-bin "$APP/Contents/MacOS/Recarga"
 cp Support/Info.plist "$APP/Contents/Info.plist"
 cp Resources/recipes.json "$APP/Contents/Resources/recipes.json"
 cp Support/garmin_helper.py "$APP/Contents/Resources/garmin_helper.py"
+mkdir -p "$APP/Contents/Resources/Fonts"
+cp Resources/Fonts/*.ttf "$APP/Contents/Resources/Fonts/"
 
 codesign --force --sign - "$APP"
 echo "✓ Bundle listo: $APP"

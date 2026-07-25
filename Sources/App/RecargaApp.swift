@@ -15,9 +15,9 @@ struct RecargaApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(state)
-                .frame(minWidth: 660, minHeight: 700)
+                .frame(minWidth: 720, minHeight: 940)
         }
-        .defaultSize(width: 760, height: 940)
+        .defaultSize(width: 880, height: 1020)
     }
 }
 
